@@ -16,7 +16,7 @@ import utn.frc.ps.AutoCareProBE.models.Role;
 public class UserRequest {
     private String firstName;
     private String lastName;
-    private Role role;
+    private Long idRole;
     private String email;
 
 }
