@@ -20,7 +20,7 @@ public class User {
     private String lastName;
     private Role role;
     private String email;
-
+    private String address;
     //Ver si creo el campo aca o lo pongo automaticamente en la bd
     //private LocalDateTime createdAt;
 }

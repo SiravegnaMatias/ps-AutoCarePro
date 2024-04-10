@@ -8,8 +8,8 @@ import lombok.Setter;
 import utn.frc.ps.AutoCareProBE.models.Role;
 
 
-@Setter
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -19,4 +19,5 @@ public class UserResponse {
     private String lastName;
     private Role role;
     private String email;
+    private String address;
 }

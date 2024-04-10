@@ -27,6 +27,7 @@ public class UserService {
        userEntity.setEmail(user.getEmail());
        userEntity.setFirstName(user.getFirstName());
        userEntity.setLastName(user.getLastName());
+       userEntity.setAddress(user.getAddress());
       Optional<RoleEntity> roleEntity = roleJpaRepository.findById(user.getIdRole());
      
       if(roleEntity.isEmpty()){
@@ -35,7 +36,13 @@ public class UserService {
       Role role = Role.builder().id(roleEntity.get().getId()).name(roleEntity.get().getName()).build();
        userEntity.setRole(roleEntity.get());
        userEntity = userJpaRepository.save(userEntity);
-       return UserResponse.builder().id(userEntity.getId()).email(userEntity.getEmail()).firstName(userEntity.getFirstName()).lastName(userEntity.getLastName()).role(role).build();
+       return UserResponse.builder().id(userEntity.getId())
+                                    .email(userEntity.getEmail())
+                                    .firstName(userEntity.getFirstName())
+                                    .lastName(userEntity.getLastName())
+                                    .role(role)
+                                    .address(userEntity.getAddress())
+                                    .build();
       }
 
       public UserResponse findUserById(Long id) {
@@ -44,7 +51,14 @@ public class UserService {
             throw new EntityNotFoundException("User not found");
         }
         Role role = Role.builder().id(userEntity.getRole().getId()).name(userEntity.getRole().getName()).build();
-        return UserResponse.builder().id(userEntity.getId()).email(userEntity.getEmail()).firstName(userEntity.getFirstName()).lastName(userEntity.getLastName()).role(role).build();
+        return UserResponse.builder()
+                          .id(userEntity.getId())
+                          .email(userEntity.getEmail())
+                          .firstName(userEntity.getFirstName())
+                          .lastName(userEntity.getLastName())
+                          .role(role)
+                          .address(userEntity.getAddress())
+                          .build();
       }
       
 }

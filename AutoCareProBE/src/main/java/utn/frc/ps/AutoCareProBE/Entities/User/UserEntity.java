@@ -16,10 +16,11 @@ import lombok.Setter;
 
     @Table(name = "users")
     @Entity
-    @Setter
-    @Getter
+   
     @AllArgsConstructor
     @NoArgsConstructor
+    @Getter
+    @Setter
     public class UserEntity {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,4 +32,5 @@ import lombok.Setter;
         @JoinColumn(name = "id_role")
         private RoleEntity role;
         private String email;
+        private String address;
     }
