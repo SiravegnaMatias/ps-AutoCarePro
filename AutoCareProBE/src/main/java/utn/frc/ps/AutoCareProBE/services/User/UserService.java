@@ -28,6 +28,7 @@ public class UserService {
        userEntity.setFirstName(user.getFirstName());
        userEntity.setLastName(user.getLastName());
        userEntity.setAddress(user.getAddress());
+       userEntity.setPassword(user.getPassword());
       Optional<RoleEntity> roleEntity = roleJpaRepository.findById(user.getIdRole());
      
       if(roleEntity.isEmpty()){
@@ -42,6 +43,7 @@ public class UserService {
                                     .lastName(userEntity.getLastName())
                                     .role(role)
                                     .address(userEntity.getAddress())
+                                    
                                     .build();
       }
 
