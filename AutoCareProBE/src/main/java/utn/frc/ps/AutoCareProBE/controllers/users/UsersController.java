@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.validation.Valid;
 import utn.frc.ps.AutoCareProBE.dtos.user.UserRequest;
 import utn.frc.ps.AutoCareProBE.dtos.user.UserResponse;
 import utn.frc.ps.AutoCareProBE.services.User.UserService;
@@ -20,7 +21,7 @@ public class UsersController {
     private UserService userService;
 
     @PostMapping
-    public ResponseEntity<UserResponse> createUser(@RequestBody UserRequest user) {
+    public ResponseEntity<UserResponse> createUser(@RequestBody @Valid UserRequest user) {
        return ResponseEntity.ok(userService.newUser(user));
     }
 
