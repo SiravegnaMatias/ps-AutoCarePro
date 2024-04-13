@@ -1,21 +1,28 @@
 <section>
+  <form [formGroup]="registerForm">
     <div class="card m-auto" style="width: 28rem;" >
         <div class="card-body">
           <h5 class="card-title">Registro</h5>
 
           <label class="form-label">Nombre</label>
-          <input type="text" class="form-control">
+          <input type="text" class="form-control" formControlName = "firstName">
 
           <label class="form-label">Apellido</label>
-          <input type="text" class="form-control">
+          <input type="text" class="form-control" formControlName = "lastName">
 
-          <label class="form-label">Mail</label>
-          <input type="text" class="form-control">
           
           <label class="form-label">Direccion</label>
-          <input type="text" class="form-control">
-
-          <button class="btn btn-primary mt-2">Registrarme</button>
+          <input type="text" class="form-control" formControlName = "address">
+          
+          <label class="form-label">eMail</label>
+          <input type="text" class="form-control" formControlName = "email">
+         
+          <label class="form-label">Contraseña</label>
+          <input type="password" class="form-control" formControlName = "password">
+         
+         
+          <button class="btn btn-primary mt-2" (click)="sumbitForm()">Registrarme</button>
         </div>
       </div>
+  </form>
 </section>

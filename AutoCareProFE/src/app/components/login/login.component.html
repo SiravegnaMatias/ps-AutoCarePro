@@ -1,0 +1,17 @@
+<section>
+    <form [formGroup]="loginForm">
+      <div class="card m-auto" style="width: 28rem;" >
+          <div class="card-body">
+            <h5 class="card-title">Login</h5>
+  
+            <label class="form-label">eMail</label>
+            <input type="text" class="form-control" formControlName = "email">
+  
+            <label class="form-label">Contraseña</label>
+            <input type="password" class="form-control" formControlName = "password">
+
+            <button class="btn btn-primary mt-2" (click)="sumbitForm()">Ingresar</button>
+          </div>
+        </div>
+    </form>
+  </section>

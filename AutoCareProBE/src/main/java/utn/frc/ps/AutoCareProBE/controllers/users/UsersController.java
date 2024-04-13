@@ -2,6 +2,7 @@ package utn.frc.ps.AutoCareProBE.controllers.users;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +16,7 @@ import utn.frc.ps.AutoCareProBE.services.User.UserService;
 
 @RestController
 @RequestMapping("/users")
+@CrossOrigin(origins = "*")
 public class UsersController {
 
     @Autowired
