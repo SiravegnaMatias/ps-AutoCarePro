@@ -14,6 +14,7 @@ import utn.frc.ps.AutoCareProBE.dtos.user.UserResponse;
 import utn.frc.ps.AutoCareProBE.models.Role;
 import utn.frc.ps.AutoCareProBE.repositories.User.RoleJpaRepository;
 import utn.frc.ps.AutoCareProBE.repositories.User.UserJpaRepository;
+import utn.frc.ps.AutoCareProBE.services.email.EmailSenderService;
 
 @Service
 public class UserService {
@@ -21,6 +22,8 @@ public class UserService {
     private RoleJpaRepository roleJpaRepository;
     @Autowired
     private UserJpaRepository userJpaRepository;
+    @Autowired
+    private EmailSenderService emailSenderService;
 
     public UserResponse newUser(UserRequest user) {
        UserEntity userEntity = new UserEntity();
@@ -37,6 +40,7 @@ public class UserService {
       Role role = Role.builder().id(roleEntity.get().getId()).name(roleEntity.get().getName()).build();
        userEntity.setRole(roleEntity.get());
        userEntity = userJpaRepository.save(userEntity);
+      emailSenderService.sendRegistrationEmail(userEntity.getEmail());
        return UserResponse.builder().id(userEntity.getId())
                                     .email(userEntity.getEmail())
                                     .firstName(userEntity.getFirstName())
