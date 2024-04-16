@@ -2,10 +2,24 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
+import { HomeComponent } from './components/home/home.component';
+import { ServicesComponent } from './components/services/services.component';
 
 const routes: Routes = [
-  {path: 'register', component: RegisterComponent},
-  {path: 'login', component: LoginComponent}
+  {
+    path: 'home',
+    component: HomeComponent,
+    children: [
+      { path: '', redirectTo: 'services', pathMatch: 'full' }, // Redirige a servicios por defecto
+      { path: 'services', component: ServicesComponent },
+      // Agrega otras rutas para los diferentes componentes del contenido principal aquí
+    ]
+  },
+  // Agrega rutas para el registro y el inicio de sesión si es necesario
+  { path: 'register', component: RegisterComponent },
+  { path: 'login', component: LoginComponent },
+  // Puedes tener rutas adicionales aquí si es necesario
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
 ];
 
 @NgModule({
