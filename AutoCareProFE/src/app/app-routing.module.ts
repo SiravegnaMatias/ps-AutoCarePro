@@ -12,11 +12,12 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'services', pathMatch: 'full' }, // Redirige a servicios por defecto
       { path: 'services', component: ServicesComponent },
+      {path: 'register-detailer', component: RegisterComponent, data: {role: 'detailer'}},
       // Agrega otras rutas para los diferentes componentes del contenido principal aquí
     ]
   },
   // Agrega rutas para el registro y el inicio de sesión si es necesario
-  { path: 'register', component: RegisterComponent },
+  { path: 'register', component: RegisterComponent, data: {role: 'client'}},
   { path: 'login', component: LoginComponent },
   // Puedes tener rutas adicionales aquí si es necesario
   { path: '', redirectTo: 'home', pathMatch: 'full' },

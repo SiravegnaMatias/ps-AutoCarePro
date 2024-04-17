@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { UserRequestRegistration } from 'src/app/models/UserRequestRegistration';
 import { UserService } from 'src/app/services/user.service';
 
@@ -8,9 +9,18 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
 
-  constructor(private fb: FormBuilder,private userService: UserService) { }
+  constructor(private fb: FormBuilder,private userService: UserService, private route: ActivatedRoute) { }
+
+  private role!:string;
+
+  ngOnInit(): void {
+   this.route.data.subscribe( data => {
+      this.role = data['role'];
+   })
+  }
+
 
   registerForm = this.fb.group({
     firstName: [''],
@@ -46,7 +56,7 @@ export class RegisterComponent {
         password: this.registerForm.value.password || '',
         address: this.registerForm.value.address || ''
         ,
-        idRole: 3
+        idRole: this.role === 'client' ? 3 : 2
       }
 
       this.userService.registerUser(user).subscribe(
