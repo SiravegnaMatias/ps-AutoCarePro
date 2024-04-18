@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import utn.frc.ps.AutoCareProBE.Entities.User.UserEntity;
-import java.util.List;
 
 
 @Repository
