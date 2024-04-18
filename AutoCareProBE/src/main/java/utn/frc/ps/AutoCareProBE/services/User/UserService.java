@@ -47,7 +47,7 @@ public class UserService {
         .build();
   }
 
-  public UserResponse findUserById(Long id) {
+  public UserResponse findUserById(Long id)  {
     UserEntity userEntity = userJpaRepository.findById(id).orElse(null);
     if (userEntity == null) {
       throw new EntityNotFoundException("User not found");
