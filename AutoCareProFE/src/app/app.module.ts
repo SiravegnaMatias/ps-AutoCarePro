@@ -10,6 +10,8 @@ import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { ServicesComponent } from './components/services/services.component';
 import { AddServicesComponent } from './components/add-services/add-services.component';
+import { NgxDropzoneModule } from 'ngx-dropzone';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,13 +19,15 @@ import { AddServicesComponent } from './components/add-services/add-services.com
     LoginComponent,
     HomeComponent,
     ServicesComponent,
-    AddServicesComponent
+    AddServicesComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxDropzoneModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]
