@@ -3,6 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { Observable, catchError, map, throwError } from 'rxjs';
 import { Service } from 'src/app/models/Service';
 import { ServiceManagmentService } from 'src/app/services/service-managment.service';
+import { ServiceUpdateService } from 'src/app/services/service-update.service';
 import { UploadImgService } from 'src/app/services/upload-img.service';
 
 @Component({
@@ -12,7 +13,13 @@ import { UploadImgService } from 'src/app/services/upload-img.service';
 })
 export class AddServicesComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private uploadService: UploadImgService, private srv:ServiceManagmentService) { }
+  constructor(
+                private fb: FormBuilder, 
+                private uploadService: UploadImgService, 
+                private srv:ServiceManagmentService,
+                private srvUpd:ServiceUpdateService
+
+  ) { }
   files: File[] = [];
 
   ngOnInit(): void {
@@ -35,6 +42,7 @@ export class AddServicesComponent implements OnInit {
         this.srv.addService(service).subscribe({
           next: (res) => {
             alert('Service added successfully');
+            this.srvUpd.serviceAdded();
           },
           error: (err) => {
             console.error('Error adding service:', err);
