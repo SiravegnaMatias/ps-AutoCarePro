@@ -1,19 +1,20 @@
 <h1>Servicios</h1>
 <hr>
 <app-add-services></app-add-services>
-
-<div class="d-flex p-2">
-    <ng-container *ngFor="let service of services">
-
-        <div class="card" style="width: 18rem;">
-            <img src="{{service.image}}" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">{{service.name}}</h5>
-                <p class="card-text">{{service.description}}</p>
+<div class="container mt-2">
+    <div class="row">
+        <div class="col-md-4" *ngFor="let service of services">
+            <div class="card mb-2 " >
+                <img src="{{service.image}}" class="card-img-top fixed-size-img
+                " alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{service.name}}</h5>
+                    <p class="card-text">{{service.description}}</p>
+                </div>
+                <div class="card-footer">
+                    ${{service.price}}
+                </div>
             </div>
-            <div class="card-footer">
-                ${{service.price}}
-              </div>
         </div>
-    </ng-container>
+    </div>
 </div>

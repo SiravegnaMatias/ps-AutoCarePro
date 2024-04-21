@@ -13,13 +13,14 @@ export class ServicesComponent implements OnInit{
   constructor(private service:ServiceManagmentService) { }
  
   ngOnInit(): void {
-   this.service.getServices().subscribe({
-    next: (res:Service[]) => {
-      this.services = res;
-   },
-   error: (err) => {
-     console.error('Error getting services:', err);
-   }
-  });
+  //  this.service.getServices().subscribe({
+  //   next: (res:Service[]) => {
+  //     this.services = res;
+  //  },
+  //  error: (err) => {
+  //    console.error('Error getting services:', err);
+  //  }
+  // });
+  this.services = this.service.getServicesOff();
   }
 }
