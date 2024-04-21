@@ -4,6 +4,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { ServicesComponent } from './components/services/services.component';
+import { CarsComponent } from './components/cars/cars.component';
 
 const routes: Routes = [
   {
@@ -13,6 +14,7 @@ const routes: Routes = [
       { path: '', redirectTo: 'services', pathMatch: 'full' }, // Redirige a servicios por defecto
       { path: 'services', component: ServicesComponent },
       {path: 'register-detailer', component: RegisterComponent, data: {role: 'detailer'}},
+      {path: 'my-cars', component:CarsComponent}
       // Agrega otras rutas para los diferentes componentes del contenido principal aquí
     ]
   },

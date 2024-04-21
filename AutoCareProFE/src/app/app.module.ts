@@ -11,6 +11,7 @@ import { HomeComponent } from './components/home/home.component';
 import { ServicesComponent } from './components/services/services.component';
 import { AddServicesComponent } from './components/add-services/add-services.component';
 import { NgxDropzoneModule } from 'ngx-dropzone';
+import { CarsComponent } from './components/cars/cars.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
     HomeComponent,
     ServicesComponent,
     AddServicesComponent,
+    CarsComponent,
   ],
   imports: [
     BrowserModule,

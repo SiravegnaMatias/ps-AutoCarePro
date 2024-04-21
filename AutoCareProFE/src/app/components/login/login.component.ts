@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { Route, Router } from '@angular/router';
 import { userLogin } from 'src/app/models/UserLogin';
 import { UserService } from 'src/app/services/user.service';
 
@@ -9,7 +10,11 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  constructor(private fb: FormBuilder, private userService:UserService) { }
+  constructor(
+    private fb: FormBuilder,
+    private userService: UserService,
+    private route: Router
+  ) { }
 
 
   loginForm = this.fb.group({
@@ -18,18 +23,25 @@ export class LoginComponent {
   });
 
   sumbitForm() {
-    const userLogin:userLogin = {
+    const userLogin: userLogin = {
       email: this.loginForm.value.email || '',
       password: this.loginForm.value.password || ''
     }
-    this.userService.loginUser(userLogin).subscribe(
-      response => {
-        alert('User logged in successfully!');
-        this.loginForm.reset();
+    this.userService.loginUser(userLogin).subscribe({
+      next: (response: boolean) => {
+        if (response) {
+          alert('Login Successfull');
+          this.route.navigate(['/home']);
+        } else {
+          alert('Login Failed');
+        }
       },
-      error => {
-        console.log(error);
+      error: (err) => {
+        console.error('Error logging in:', err);
+        alert('Failed to login');
       }
-    )
+
+    }
+    );
   }
 }
