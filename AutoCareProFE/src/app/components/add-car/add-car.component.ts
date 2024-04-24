@@ -1,14 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { CarService } from 'src/app/services/car.service';
 
 @Component({
   selector: 'app-add-car',
   templateUrl: './add-car.component.html',
   styleUrls: ['./add-car.component.css']
 })
-export class AddCarComponent {
-  
-  constructor(private fb:FormBuilder){}
+export class AddCarComponent implements OnInit {
+
+
+  constructor(private fb:FormBuilder,
+    private carService: CarService
+  ){}
+  carTypes: String[] = [];
+  ngOnInit(): void {
+    this.carTypes = this.carService.getCarTypes();
+  }
 
   files: File[] = [];
   carForm = this.fb.group({
@@ -28,7 +36,7 @@ export class AddCarComponent {
     this.files.splice(this.files.indexOf(event), 1);
   }
 
-  onSumbit(){
+  sumbit(){
     console.log(this.carForm.value);
   }
 }

@@ -1,6 +1,6 @@
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-    Agregar Servicio
+    Agregar vehiculo
   </button>
   
  
@@ -12,24 +12,26 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <form >
-                <label class="form-label">Nombre</label>
-                <input type="text" class="form-control" >
-                <label class="form-label">Descripcion</label>
-                <textarea class="form-control" id="floatingTextarea" ></textarea>
+            <form [formGroup]="carForm">
+                <label class="form-label">Marca</label>
+                <input type="text" class="form-control" formControlName="brand" >
+                
 
-                <label class="form-label">Precio</label>
-                <input type="number" class="form-control" >
-                <label class="form-label">Imagen</label>
-                <ngx-dropzone (change)="onSelect($event)">
-                  <ngx-dropzone-label>Drop it!</ngx-dropzone-label>
-                  <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
-                    <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
-                  </ngx-dropzone-preview>
-                </ngx-dropzone>
-                <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f">
-                  <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
-                </ngx-dropzone-image-preview>
+                <label class="form-label">Modelo</label>
+                <input type="text" class="form-control" formControlName="model">
+
+                <label class="form-label">Año</label>
+                <input type="number" class="form-control" formControlName="year">
+
+                <label class="form-label">Patente</label>
+                <input type="text" class="form-control" formControlName="plate" >
+
+                <label class="form-label">Tipo</label>
+                <select class="form-select" formControlName="carType" >
+                    <option selected disabled>Seleccione un tipo</option>
+                    <option *ngFor="let car of carTypes" value="{{car}}">{{car}}</option>
+                </select>
+
   
             </form>
         </div>
