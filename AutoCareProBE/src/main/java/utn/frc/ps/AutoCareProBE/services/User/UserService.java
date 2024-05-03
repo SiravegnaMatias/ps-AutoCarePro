@@ -3,6 +3,7 @@ package utn.frc.ps.AutoCareProBE.services.User;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -27,6 +28,8 @@ public class UserService {
   private EmailSenderService emailSenderService;
   @Autowired
   private JwtService jwtService;
+  @Autowired
+  private PasswordEncoder passwordEncoder;
 
   // VALIDAR SI YA EXISTE EL EMAIL
 
@@ -40,7 +43,7 @@ public class UserService {
     Role role = Role.builder().id(roleEntity.get().getId()).name(roleEntity.get().getName()).build();
     userEntity.setRole(roleEntity.get());
     userEntity = userJpaRepository.save(userEntity);
-    emailSenderService.sendRegistrationEmail(userEntity.getEmail());
+  //  emailSenderService.sendRegistrationEmail(userEntity.getEmail());
     // return UserResponse.builder().id(userEntity.getId())
     //     .email(userEntity.getEmail())
     //     .firstName(userEntity.getFirstName())
@@ -80,7 +83,7 @@ public class UserService {
     userEntity.setFirstName(user.getFirstName());
     userEntity.setLastName(user.getLastName());
     userEntity.setAddress(user.getAddress());
-    userEntity.setPassword(user.getPassword());
+    userEntity.setPassword(passwordEncoder.encode(user.getPassword()));
     return userEntity;
   }
 
