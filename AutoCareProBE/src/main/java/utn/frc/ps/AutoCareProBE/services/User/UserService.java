@@ -8,12 +8,14 @@ import org.springframework.stereotype.Service;
 import jakarta.persistence.EntityNotFoundException;
 import utn.frc.ps.AutoCareProBE.Entities.User.RoleEntity;
 import utn.frc.ps.AutoCareProBE.Entities.User.UserEntity;
+import utn.frc.ps.AutoCareProBE.dtos.user.AuthResponse;
 import utn.frc.ps.AutoCareProBE.dtos.user.UserRequest;
 import utn.frc.ps.AutoCareProBE.dtos.user.UserResponse;
 import utn.frc.ps.AutoCareProBE.models.Role;
 import utn.frc.ps.AutoCareProBE.repositories.User.RoleJpaRepository;
 import utn.frc.ps.AutoCareProBE.repositories.User.UserJpaRepository;
 import utn.frc.ps.AutoCareProBE.services.email.EmailSenderService;
+import utn.frc.ps.AutoCareProBE.services.jwt.JwtService;
 
 @Service
 public class UserService {
@@ -23,10 +25,12 @@ public class UserService {
   private UserJpaRepository userJpaRepository;
   @Autowired
   private EmailSenderService emailSenderService;
+  @Autowired
+  private JwtService jwtService;
 
   // VALIDAR SI YA EXISTE EL EMAIL
 
-  public UserResponse newUser(UserRequest user) {
+  public AuthResponse newUser(UserRequest user) {
     UserEntity userEntity = getEntity(user);
     Optional<RoleEntity> roleEntity = roleJpaRepository.findById(user.getIdRole());
 
@@ -37,14 +41,16 @@ public class UserService {
     userEntity.setRole(roleEntity.get());
     userEntity = userJpaRepository.save(userEntity);
     emailSenderService.sendRegistrationEmail(userEntity.getEmail());
-    return UserResponse.builder().id(userEntity.getId())
-        .email(userEntity.getEmail())
-        .firstName(userEntity.getFirstName())
-        .lastName(userEntity.getLastName())
-        .role(role)
-        .address(userEntity.getAddress())
+    // return UserResponse.builder().id(userEntity.getId())
+    //     .email(userEntity.getEmail())
+    //     .firstName(userEntity.getFirstName())
+    //     .lastName(userEntity.getLastName())
+    //     .role(role)
+    //     .address(userEntity.getAddress())
 
-        .build();
+    //     .build();
+
+    return AuthResponse.builder().token(JwtService.getToken(userEntity)).build();
   }
 
   public UserResponse findUserById(Long id)  {
