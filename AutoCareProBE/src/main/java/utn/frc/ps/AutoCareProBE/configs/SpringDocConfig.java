@@ -11,13 +11,18 @@ import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.security.SecurityRequirement;
+import io.swagger.v3.oas.models.security.SecurityScheme;
 import io.swagger.v3.oas.models.servers.Server;
 
 @Configuration
 public class SpringDocConfig {
-    @Value("${app.url}") private String url;
-    @Value("${app.dev-name}")private String devName;
-    @Value("${app.dev-email}")private String devEmail;
+        @Value("${app.url}")
+        private String url;
+        @Value("${app.dev-name}")
+        private String devName;
+        @Value("${app.dev-email}")
+        private String devEmail;
 
     @Bean
     public OpenAPI openApi (
@@ -39,13 +44,23 @@ public class SpringDocConfig {
                 .description(appDescription);
 
         return new OpenAPI()
-                .components(new Components())
+                .components(new Components()
+                .addSecuritySchemes("bearerAuth", createAPIKeyScheme()
+                ))
                 .info(info)
-                .addServersItem(server);
+                .addServersItem(server)
+                .addSecurityItem(new SecurityRequirement().addList("bearerAuth"))
+                ;
     }
 
-    @Bean
-    public ModelResolver modelResolver(ObjectMapper objectMapper) {
-        return new ModelResolver(objectMapper);
-    }
+        @Bean
+        public ModelResolver modelResolver(ObjectMapper objectMapper) {
+                return new ModelResolver(objectMapper);
+        }
+
+        private SecurityScheme createAPIKeyScheme() {
+                return new SecurityScheme().type(SecurityScheme.Type.HTTP)
+                                .bearerFormat("JWT")
+                                .scheme("bearer");
+        }
 }

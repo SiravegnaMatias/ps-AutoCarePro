@@ -1,20 +1,24 @@
 package utn.frc.ps.AutoCareProBE.services.jwt;
 
-import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
 
 import javax.crypto.SecretKey;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.security.Keys;
 
 @Service
 public class JwtService {
 
+    private static final String SECRET_KEY = "476744F687SAD5689B86879U0T87W788999M77S6S43577F6";
     public static String getToken(UserDetails userDetails) {
         return getToken(new HashMap<>(), userDetails);
     }
@@ -29,13 +33,39 @@ public class JwtService {
             .compact();
     }
 
-    private static Key getKey() {
-        SecretKey key = Jwts.SIG.HS256.key().build();
-        return key;
+    private static SecretKey getKey() {
+       byte[] keyBytes =  Decoders.BASE64.decode(SECRET_KEY);
+       return Keys.hmacShaKeyFor(keyBytes);
     }
 
-    
+    public String getUsernameFromToken(String token) {
+        Claims claims = getAllClaimsFromToken(token);
+        return claims.getSubject();
+    }
 
-  
-    
+    public boolean isTokenValid(String token, UserDetails userDetails) {
+        String username = getUsernameFromToken(token);
+        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
+    }
+
+    private Claims getAllClaimsFromToken(String token) {
+        return Jwts
+            .parser()
+            .verifyWith(getKey())
+            .build().parseSignedClaims(token)
+            .getPayload();
+    }
+
+    private boolean isTokenExpired(String token) {
+      return getExporationDateFromToken(token).before(new Date());
+    }
+
+    public <T> T getClaims(String token, Function<Claims, T> claimsResolver) {
+        Claims claims = getAllClaimsFromToken(token);
+        return claimsResolver.apply(claims);
+    }
+
+    private Date getExporationDateFromToken(String token) {
+        return getClaims(token, Claims::getExpiration);
+    }
 }
