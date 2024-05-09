@@ -53,7 +53,7 @@ public class UserService {
 
     //     .build();
 
-    return AuthResponse.builder().token(JwtService.getToken(userEntity)).build();
+    return AuthResponse.builder().token(JwtService.getToken(userEntity)).id(userEntity.getId()).build();
   }
 
   public UserResponse findUserById(Long id)  {

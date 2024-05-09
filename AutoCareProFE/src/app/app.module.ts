@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { ServicesComponent } from './components/services/services.component';
@@ -13,6 +13,8 @@ import { AddServicesComponent } from './components/add-services/add-services.com
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { CarsComponent } from './components/cars/cars.component';
 import { AddCarComponent } from './components/add-car/add-car.component';
+import { JwtInterceptorService } from './services/interceptor/jwt-interceptor.service';
+import { ErrorInterceptorService } from './services/interceptor/error-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,10 @@ import { AddCarComponent } from './components/add-car/add-car.component';
     NgxDropzoneModule,
 
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true
+  },
+  {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorService, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

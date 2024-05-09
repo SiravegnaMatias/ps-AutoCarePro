@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Route, Router } from '@angular/router';
 import { userLogin } from 'src/app/models/UserLogin';
+import { LoginService } from 'src/app/services/login.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -12,7 +13,7 @@ import { UserService } from 'src/app/services/user.service';
 export class LoginComponent {
   constructor(
     private fb: FormBuilder,
-    private userService: UserService,
+    private loginService: LoginService,
     private route: Router
   ) { }
 
@@ -27,8 +28,8 @@ export class LoginComponent {
       email: this.loginForm.value.email || '',
       password: this.loginForm.value.password || ''
     }
-    this.userService.loginUser(userLogin).subscribe({
-      next: (response: boolean) => {
+    this.loginService.login(userLogin).subscribe({
+      next: (response) => {
         if (response) {
           alert('Login Successfull');
           this.route.navigate(['/home']);

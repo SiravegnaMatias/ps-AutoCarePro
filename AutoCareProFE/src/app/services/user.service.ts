@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { UserRequestRegistration } from '../models/UserRequestRegistration';
 import { Observable } from 'rxjs';
 import { userLogin } from '../models/UserLogin';
+import { User } from '../models/User';
 
 @Injectable({
   providedIn: 'root'
@@ -10,12 +11,10 @@ import { userLogin } from '../models/UserLogin';
 export class UserService {
 
   constructor(private http:HttpClient) { }
+  private url:string = 'http://localhost:8080/users/';
 
-  public registerUser(user: UserRequestRegistration):Observable<any>{
-    return this.http.post('http://localhost:8080/users', user);
+  getUserById(id:number):Observable<User>{
+    return this.http.get<User>(this.url+id);
   }
-
-  public loginUser(user: userLogin):Observable<boolean>{
-    return this.http.post<boolean>('http://localhost:8080/login', user);
-  }
+ 
 }

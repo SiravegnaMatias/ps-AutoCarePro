@@ -13,7 +13,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-
+import utn.frc.ps.AutoCareProBE.Entities.User.UserEntity;
 import utn.frc.ps.AutoCareProBE.dtos.user.AuthResponse;
 import utn.frc.ps.AutoCareProBE.dtos.user.LoginDto;
 import utn.frc.ps.AutoCareProBE.repositories.User.UserJpaRepository;
@@ -35,7 +35,8 @@ public class AuthService {
     public AuthResponse login(LoginDto login) {
         authenticationManager.authenticate((new UsernamePasswordAuthenticationToken(login.getEmail(), login.getPassword())));
         UserDetails userDetails = userJpaRepository.findByEmail(login.getEmail()).get();
+        UserEntity user = userJpaRepository.findByEmail(login.getEmail()).orElseThrow(() -> new BadCredentialsException("User not found"));
         String token = JwtService.getToken(userDetails);
-        return AuthResponse.builder().token(token).build();
+        return AuthResponse.builder().token(token).id(user.getId()).build();
     }
 }

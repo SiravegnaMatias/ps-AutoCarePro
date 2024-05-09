@@ -59,15 +59,15 @@ export class RegisterComponent implements OnInit {
         idRole: this.role === 'client' ? 3 : 2
       }
 
-      this.userService.registerUser(user).subscribe(
-        response => {
-          alert('User registered successfully!');
-          this.registerForm.reset();
-        },
-        error => {
-          console.log(error);
-        }
-      )
+      // this.userService.registerUser(user).subscribe(
+      //   response => {
+      //     alert('User registered successfully!');
+      //     this.registerForm.reset();
+      //   },
+      //   error => {
+      //     console.log(error);
+      //   }
+      // )
     }
   }
 }
