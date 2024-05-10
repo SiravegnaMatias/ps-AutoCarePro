@@ -1,0 +1,19 @@
+.sidebar-custom {
+    background-color: var(--white);
+    color: var(--black);
+}
+
+.sidebar-custom a {
+    color: var(--black);
+
+}
+
+.sidebar-custom a:hover,
+.sidebar-custom a:focus{
+    color: #000000;
+}
+
+.content {
+    background-color: var(--black);
+
+}

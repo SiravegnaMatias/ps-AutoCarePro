@@ -1,1 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+* {
+    font-family: 'Lato', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+}
+
+:root {
+    --black: #101820;
+    --white: #DBDCDE;
+}

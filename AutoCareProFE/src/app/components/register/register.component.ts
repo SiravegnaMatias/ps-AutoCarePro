@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserRequestRegistration } from 'src/app/models/UserRequestRegistration';
 import { UserService } from 'src/app/services/user.service';
 
@@ -11,7 +11,11 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private fb: FormBuilder,private userService: UserService, private route: ActivatedRoute) { }
+  constructor(private fb: FormBuilder,
+              private userService: UserService, 
+                private route: ActivatedRoute,
+                private router:Router
+              ) { }
 
   private role!:string;
 
@@ -68,6 +72,18 @@ export class RegisterComponent implements OnInit {
       //     console.log(error);
       //   }
       // )
+      this.userService.registerUser(user).subscribe({
+        next: (response) => {
+          alert('User registered successfully!');
+          this.registerForm.reset();
+          this.router.navigate(['/login']);
+        },
+        error: (err) => {
+          console.error('Error registering user:', err);
+          alert('Failed to register user');
+          
+        }
+      });
     }
   }
 }
