@@ -1,17 +1,24 @@
-<section>
-    <form [formGroup]="loginForm">
-      <div class="card m-auto" style="width: 28rem;" >
-          <div class="card-body">
-            <h5 class="card-title">Login</h5>
-  
-            <label class="form-label">eMail</label>
-            <input type="text" class="form-control" formControlName = "email">
-  
-            <label class="form-label">Contraseña</label>
-            <input type="password" class="form-control" formControlName = "password">
 
-            <button class="btn btn-primary mt-2" (click)="sumbitForm()">Ingresar</button>
+<div class="vh-100 div-container" style="background-color: var(--black);" >
+  <section >
+    <div class="card m-auto card-login" style="width: 28rem; height: 20rem;"  >
+      <form [formGroup]="loginForm">
+            <div class="card-body">
+              <h5 class="card-title text-center">Bienvenido a AutoCarePro</h5>
+    
+              <label class="form-label">email</label>
+              <input type="text" class="form-control" formControlName = "email">
+    
+              <label class="form-label">Contraseña</label>
+              <input type="password" class="form-control" formControlName = "password">
+  
+              <div class="d-grid gap-2 mt-4">
+                <button class="btn btn-primary mt-2 " (click)="sumbitForm()">Ingresar</button>
+                <h6 class="card-subtitle mb-2 text-body-secondary ">No sos cliente? <a routerLink="/register">Registrate</a></h6>
+
+              </div>
+            </div>
+          </form>
           </div>
-        </div>
-    </form>
-  </section>
+    </section>
+</div>

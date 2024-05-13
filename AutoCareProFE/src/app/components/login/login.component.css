@@ -1,0 +1,14 @@
+html {
+    background-color: var(--black);
+}
+
+.card-login {
+    background-color: var(--white);
+    color: var(--black);
+}
+
+.div-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

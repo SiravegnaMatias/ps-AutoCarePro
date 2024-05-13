@@ -1,0 +1,10 @@
+input{
+    background-color: var(--black);
+    color: var(--white);
+}
+
+input:focus{
+    background-color: var(--black);
+    color: var(--white);
+    box-shadow: 0 0 10px blue;
+}
