@@ -20,5 +20,9 @@ export class UserService {
   registerUser(user:UserRequestRegistration):Observable<void>{
     return this.http.post<void>(this.urlRegisterUser,user);
   }
+
+  getCarsById(id:number):any{
+    return this.http.get<any>(this.url+id+'/cars');
+  }
  
 }

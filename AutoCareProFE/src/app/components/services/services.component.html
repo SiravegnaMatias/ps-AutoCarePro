@@ -1,20 +1,95 @@
 <h1>Servicios</h1>
 <hr>
 <app-add-services></app-add-services>
+
+
+
 <div class="container mt-2">
     <div class="row">
-        <div class="col-md-4" *ngFor="let service of services">
-            <div class="card mb-2 " >
+        <div class="col-md-4 col-lg-4 col-sm-4" *ngFor="let service of services">
+
+            <div class="card mb-2"  >
                 <img src="{{service.image}}" class="card-img-top fixed-size-img
                 " alt="...">
                 <div class="card-body">
                     <h5 class="card-title">{{service.name}}</h5>
                     <p class="card-text">{{service.description}}</p>
                 </div>
-                <div class="card-footer">
-                    ${{service.price}}
+                <div class="card-footer d-flex justify-content-between">
+                    <div>
+                        ${{service.price}}
+                    </div>
+                    <div>
+                        <button class="btn btn-primary btn-sm" (click)="addService(service)">Reservar</button>
+                    </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
+
+<ng-container *ngIf="servicesSelcted.length > 0">
+    <div class="widget-container" data-bs-toggle="modal" data-bs-target="#staticBackdropServicesSelected">
+        <div class="widget">
+            <span class="widget-icon">
+                <span class="icon-badget">
+                    <div>{{servicesSelcted.length}}</div>
+                </span>
+            </span>
+        </div>
+    </div>
+</ng-container>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdropServicesSelected" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content" style="background-color: var(--black);">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="background-color: var(--white);"></button>
+        </div>
+        <div class="modal-body" >
+            <ng-container *ngFor="let item of servicesSelcted; let i = index">
+                
+                    <div class="card mb-3" style="max-width: 540px;">
+                        <div class="row g-0">
+                          <div class="col-md-8">
+                            <div class="card-body">
+                              <h5 class="card-title">{{item.name}}</h5>
+                              <p class="card-text">{{item.description}}</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="close-btn " (click)="deleteService(i)">
+                            <i class="bi bi-x-lg"></i>
+                        </div>
+                      </div>
+                     
+            </ng-container>
+        </div>
+        <div class="m-3" >
+            <form style="display: block;" [formGroup]="formServices">
+                <label class="form-label">Vehiculo</label>
+                <select class="form-select" formControlName="carType" formControlName="vehicle">
+                    <option selected disabled>Seleccione su vehiculo</option>
+                    <option>Auto 1</option>
+                </select>       
+
+                <label class="form-label">Fecha</label>
+                <input type="text" id="datepicker" class="datepicker mt-3 mx-2" placeholder="seleccione fecha y hora" formControlName="date">
+                
+                <label class="form-label">Nota</label>
+                <textarea class="form-control" id="floatingTextarea" formControlName="additionalNotes"></textarea>
+        </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" (click)="sumbit()">Understood</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

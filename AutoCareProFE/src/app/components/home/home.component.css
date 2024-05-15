@@ -2,6 +2,7 @@
 .sidebar-custom {
     background-color: var(--white);
     color: var(--black);
+    width: 15%;
 }
 
 .sidebar-custom a {
@@ -19,3 +20,16 @@
 
 }
 
+.container-custom {
+    max-height: 100vh; /* Utiliza toda la altura de la ventana */
+    overflow-y: auto;
+    /* padding-right: 15px; Ajusta según el ancho de tu scrollbar */
+    /* margin-left:10px; Ajusta según el ancho de tu sidebar */
+}
+.home-container{
+    overflow-y: none;
+}
+
+.nav-pills li a:hover {
+    background-color: rgb(127, 134, 134);
+}

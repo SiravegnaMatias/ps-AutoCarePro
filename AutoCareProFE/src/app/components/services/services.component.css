@@ -5,3 +5,58 @@
 }
 
 
+
+.widget-container{
+    position: fixed;
+    right: 45px;
+    bottom: 15px;
+    z-index: 1030;
+    cursor: pointer;
+}
+
+.widget-icon {
+    position: relative;
+    display: inline-block;
+    width: 5rem;
+    height: 5rem;
+    background-color: #fff;
+    border-radius: 25%;
+    border: 2px solid #fff;
+    text-align: center;
+}
+.icon-badget {
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    background-color: red;
+    color: #fff;
+    font-size: 1.25rem;
+    font-weight: bold;
+    width: 2.5rem;
+    height: 2.5rem;
+    line-height: 18px;
+    border-radius: 50%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.close-btn {
+   position: absolute;
+   top: 5px;
+   right: 5px;
+   cursor: pointer;
+}
+
+select {
+    background-color: var(--black);
+    color: var(--white);
+}
+
+.datepicker {
+    background-color: var(--black);
+    color: var(--white);
+}
