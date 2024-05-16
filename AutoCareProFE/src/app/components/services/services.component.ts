@@ -6,8 +6,10 @@ import flatpickr from 'flatpickr';
 import { FormBuilder } from '@angular/forms';
 
 import { LoginService } from 'src/app/services/login.service';
-import { CarRequest } from 'src/app/models/CarRequest';
+import { CarRequest, CarResponse } from 'src/app/models/CarRequest';
 import { UserService } from 'src/app/services/user.service';
+import { CarService } from 'src/app/services/car.service';
+import { BookingRequest } from 'src/app/models/BookingRequest';
 
 
 @Component({
@@ -19,14 +21,15 @@ export class ServicesComponent implements OnInit {
   services: Service[] = [];
   servicesSelcted: Service[] = [];
   userId: number = 0;
-  cars:CarRequest[] = [];
-
+  cars: CarResponse[] = [];
+  booking!:BookingRequest;
   constructor(
     private service: ServiceManagmentService,
     private srvUpd: ServiceUpdateService,
-    private fb:FormBuilder,
-    private logService:LoginService,
-    private userService:UserService
+    private fb: FormBuilder,
+    private logService: LoginService,
+    private userService: UserService,
+    private carService: CarService
   ) {
     // srvUpd.serviceAdded$.subscribe({
     //   next: () => {
@@ -38,23 +41,30 @@ export class ServicesComponent implements OnInit {
   }
 
   formServices: any = this.fb.group({
-    date:[''],
+    date: [''],
     vehicle: [''],
     additionalNotes: [''],
   });
 
- ngAfterViewInit() {
-    flatpickr('#datepicker',{
+  ngAfterViewInit() {
+    flatpickr('#datepicker', {
       enableTime: true,
       dateFormat: "Y-m-d H:i",
-     });
-  
- }
+    });
+
+  }
   ngOnInit(): void {
     // this.refreshServices();
     this.services = this.service.getServicesOff();
     this.userId = this.logService.currentUserData.value.id;
-    this.cars = userService.getCarsById(this.userId);
+    this.carService.getCarsById(this.userId).subscribe({
+      next: (res: CarResponse[]) => {
+        this.cars = res;
+      },
+      error: (err) => {
+        console.error('Error getting cars:', err);
+      }
+    });
   }
 
   addService(service: Service) {
@@ -73,9 +83,19 @@ export class ServicesComponent implements OnInit {
       }
     });
   }
- 
-  sumbit(){
-    console.log(this.formServices.value);
+
+  sumbit() {
+
+    //ATENTO CON EL VALUE DE VEHICLE QUE ES STRING Y TIENE QUE SER NUMBER
+    this.booking = {
+      userId: this.userId,
+      date: this.formServices.value.date,
+      vehicleId: this.formServices.value.vehicle,
+      additionalNotes: this.formServices.value.additionalNotes,
+      services: this.servicesSelcted
+    }
+
+    console.log(this.booking);
   }
 
-  }
+}

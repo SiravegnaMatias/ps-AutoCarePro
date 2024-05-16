@@ -75,7 +75,10 @@
                 <label class="form-label">Vehiculo</label>
                 <select class="form-select" formControlName="carType" formControlName="vehicle">
                     <option selected disabled>Seleccione su vehiculo</option>
-                    <option>Auto 1</option>
+                    <ng-container *ngFor="let car of cars">
+
+                        <option value="{{car.id}}" >{{car.brand}} - {{car.model}} - {{car.plate}}</option>
+                    </ng-container>
                 </select>       
 
                 <label class="form-label">Fecha</label>

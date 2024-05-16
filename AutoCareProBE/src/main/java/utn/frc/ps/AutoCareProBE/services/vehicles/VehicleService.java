@@ -10,6 +10,7 @@ import utn.frc.ps.AutoCareProBE.Entities.User.UserEntity;
 import utn.frc.ps.AutoCareProBE.Entities.vehicles.VehicleEntity;
 import utn.frc.ps.AutoCareProBE.dtos.user.UserResponse;
 import utn.frc.ps.AutoCareProBE.dtos.vehicle.VehicleRequestDTO;
+import utn.frc.ps.AutoCareProBE.dtos.vehicle.VehicleResponseDTO;
 import utn.frc.ps.AutoCareProBE.models.User;
 import utn.frc.ps.AutoCareProBE.models.Vehicle;
 import utn.frc.ps.AutoCareProBE.repositories.VehicleJpaRepository;
@@ -38,7 +39,21 @@ public class VehicleService {
         
     }
 
-  
+    public List<VehicleResponseDTO> findByUserId(Integer id) {
+        List<VehicleEntity> vehicleEntities = vehicleJpaRepository.findByUserId(id);
+        return vehicleEntities.stream().map(vehicleEntity -> VehicleResponseDTO.builder().id(vehicleEntity.getId())
+                .brand(vehicleEntity.getBrand())
+                .carType(vehicleEntity.getCarType())
+                .model(vehicleEntity.getModel())
+                .plate(vehicleEntity.getPlate())
+                .year(vehicleEntity.getYear())
+                .userId(vehicleEntity.getUser().getId())
+                .build()).toList();
+    }
+
+//get autos supuestamente implementado, ahota habria que testear si funciona para luego hacer la conexion con el front
+// despues de eso habria que hacer las validaciones de las dechas que capaz las deje para mas tarde y seguir con otros 
+//componentes como la lista de usuarios, reservas hechas(detailers) y editarlas, pulir el front y ver que diije en el jira  
 
     private Vehicle getVehicle(VehicleEntity vehicleEntity, User user) {
         return Vehicle.builder().brand(vehicleEntity.getBrand())
