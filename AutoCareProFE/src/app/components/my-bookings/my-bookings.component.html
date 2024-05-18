@@ -1,0 +1,21 @@
+<h1>Mis Reservas</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <ng-container *ngFor="let booking of bookings">
+                <div class="card m-2 border-info">
+                    <div class="card-header" style="background-color: var(--black); color: var(--white);">
+                        #{{booking.id}} - {{booking.date}}
+                    </div>
+                    <div class="card-body" style="background-color: var(--black); color: var(--white);">
+                       <p class="card-text">{{getServices(booking.services)}}</p>
+                       <p>Vehiculo: {{booking.vehicle}}</p>
+                    </div>
+                    <div class="card-footer text-end" style="background-color: var(--black); color: var(--white);">
+                        Estado: {{ booking.status }}
+                        <span class="status-dot" [ngClass]="{ 'required': booking.status === 'Solicitada', 'accepted': booking.status === 'Aceptada', 'in-proccess': booking.status === 'En proceso', 'completed': booking.status === 'Completada' }"></span>
+                      </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>

@@ -1,0 +1,28 @@
+.card-footer, .card-header {
+    border-color: rgb(0, 119, 119);
+}
+
+.status-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-left: 5px;
+    background-color: gray;
+  }
+
+  .required{
+    background-color: yellow;
+  }
+
+  .accepted{
+background-color: rgb(15, 231, 15);
+  }
+
+  .in-proccess{
+background-color: orangered;
+  }
+
+  .completed{
+    background-color: rgb(14, 226, 173);
+  }

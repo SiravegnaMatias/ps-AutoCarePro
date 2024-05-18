@@ -15,6 +15,7 @@ import { CarsComponent } from './components/cars/cars.component';
 import { AddCarComponent } from './components/add-car/add-car.component';
 import { JwtInterceptorService } from './services/interceptor/jwt-interceptor.service';
 import { ErrorInterceptorService } from './services/interceptor/error-interceptor.service';
+import { MyBookingsComponent } from './components/my-bookings/my-bookings.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { ErrorInterceptorService } from './services/interceptor/error-intercepto
     AddServicesComponent,
     CarsComponent,
     AddCarComponent,
+    MyBookingsComponent,
 
   ],
   imports: [
