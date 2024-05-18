@@ -1,10 +1,12 @@
 package utn.frc.ps.AutoCareProBE.services.vehicles;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import jakarta.persistence.EntityNotFoundException;
 import utn.frc.ps.AutoCareProBE.Entities.User.RoleEntity;
 import utn.frc.ps.AutoCareProBE.Entities.User.UserEntity;
 import utn.frc.ps.AutoCareProBE.Entities.vehicles.VehicleEntity;
@@ -94,5 +96,14 @@ public class VehicleService {
                 .lastName(user.getLastName())
                 .role(user.getRole())
                 .build();
+    }
+
+    public VehicleEntity getVehicleByEntity(Long id) {
+      Optional<VehicleEntity> vehicleEntity = vehicleJpaRepository.findById(id);
+        if (vehicleEntity.isEmpty()) {
+            throw new EntityNotFoundException("Vehicle not found");
+        }
+
+        return vehicleEntity.get();
     }
 }

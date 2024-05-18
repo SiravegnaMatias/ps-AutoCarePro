@@ -2,6 +2,7 @@ package utn.frc.ps.AutoCareProBE.services.service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,8 +46,8 @@ public class ServiceService {
     }
     private ServiceEntity getEntity(ServiceModel service) {
         //VALIDAR SI EXISTE 
-        ServiceEntity serviceEty = serviceJpaRepository.findByName(service.getName());
-        if(serviceEty != null){
+        Optional<ServiceEntity> serviceEty = serviceJpaRepository.findByName(service.getName());
+        if(serviceEty.isPresent()){
             throw new EntityExistsException("Service already exists");
         }
           ServiceEntity serviceEntity = new ServiceEntity();

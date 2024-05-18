@@ -10,6 +10,7 @@ import { CarRequest, CarResponse } from 'src/app/models/CarRequest';
 import { UserService } from 'src/app/services/user.service';
 import { CarService } from 'src/app/services/car.service';
 import { BookingRequest } from 'src/app/models/BookingRequest';
+import { BookingServiceService } from 'src/app/services/booking-service.service';
 
 
 @Component({
@@ -29,13 +30,14 @@ export class ServicesComponent implements OnInit {
     private fb: FormBuilder,
     private logService: LoginService,
     private userService: UserService,
-    private carService: CarService
+    private carService: CarService,
+    private bookingService: BookingServiceService 
   ) {
-    // srvUpd.serviceAdded$.subscribe({
-    //   next: () => {
-    //     this.refreshServices();
-    //   }
-    // })
+     srvUpd.serviceAdded$.subscribe({
+       next: () => {
+         this.refreshServices();
+       }
+     })
 
 
   }
@@ -54,8 +56,8 @@ export class ServicesComponent implements OnInit {
 
   }
   ngOnInit(): void {
-    // this.refreshServices();
-    this.services = this.service.getServicesOff();
+     this.refreshServices();
+   // this.services = this.service.getServicesOff();
     this.userId = this.logService.currentUserData.value.id;
     this.carService.getCarsById(this.userId).subscribe({
       next: (res: CarResponse[]) => {
@@ -90,12 +92,20 @@ export class ServicesComponent implements OnInit {
     this.booking = {
       userId: this.userId,
       date: this.formServices.value.date,
-      vehicleId: this.formServices.value.vehicle,
+      vehicleId: Number(this.formServices.value.vehicle),
       additionalNotes: this.formServices.value.additionalNotes,
       services: this.servicesSelcted
     }
-
     console.log(this.booking);
+
+    this.bookingService.addBooking(this.booking).subscribe({
+      next: (res: boolean) => {
+        alert('Booking added');
+      },
+      error: (err) => {
+        console.error('Error adding booking:', err);
+      }
+    });
   }
 
 }

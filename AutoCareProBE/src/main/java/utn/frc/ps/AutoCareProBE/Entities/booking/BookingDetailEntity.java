@@ -1,6 +1,4 @@
-package utn.frc.ps.AutoCareProBE.Entities;
-
-import java.math.BigDecimal;
+package utn.frc.ps.AutoCareProBE.Entities.booking;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,22 +12,28 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import utn.frc.ps.AutoCareProBE.Entities.User.UserEntity;
+import utn.frc.ps.AutoCareProBE.Entities.ServiceEntity;
+
 
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@Table(name = "booking_details")
 @Entity
-@Table(name =  "services")
-public class ServiceEntity {
+@Builder
+public class BookingDetailEntity {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String name;
-    private String description;
-    private String image;
-    private BigDecimal price;
- 
+    private Integer id;
+
+    @ManyToOne
+    @JoinColumn(name = "booking_id")
+    private BookingEntity booking;
+
+    @ManyToOne
+    @JoinColumn(name = "service_id")
+    private ServiceEntity service;
+
 }

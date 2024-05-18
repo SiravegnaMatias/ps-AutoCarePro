@@ -87,4 +87,12 @@ public class UserService {
     return userEntity;
   }
 
+  public UserEntity findUserEntityById(Long id) {
+    Optional<UserEntity> user =  userJpaRepository.findById(id);
+    if (user.isEmpty()) {
+      throw new EntityNotFoundException("User not found");
+    }
+    return user.get();
+  }
+
 }
