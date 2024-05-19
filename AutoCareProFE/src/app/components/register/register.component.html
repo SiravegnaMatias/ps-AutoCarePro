@@ -1,29 +1,35 @@
-<section>
-  <form [formGroup]="registerForm">
-    <div class="card m-auto border-light" style="width: 28rem; background-color: var(--black); color: var(--white);" 
-    >
-        <div class="card-body">
-          <h5 class="card-title">Registro</h5>
+<div class="div-container vh-100">
 
-          <label class="form-label">Nombre</label>
-          <input type="text" class="form-control" formControlName = "firstName">
+  <section>
+    <form [formGroup]="registerForm">
+      <div class="card m-auto border-light card-register" >
+          <div class="card-body ">
+            <h5 class="card-title text-center">Registrarse en AutoCarePro</h5>
+  
+            <label class="form-label">Nombre</label>
+            <input type="text" class="form-control" formControlName = "firstName">
+  
+            <label class="form-label">Apellido</label>
+            <input type="text" class="form-control" formControlName = "lastName">
+  
+            
+            <label class="form-label">Direccion</label>
+            <input type="text" class="form-control" formControlName = "address">
+            
+            <label class="form-label">Email</label>
+            <input type="text" class="form-control" formControlName = "email">
+           
+            <label class="form-label">Contraseña</label>
+            <input type="password" class="form-control" formControlName = "password">
+           
+           
 
-          <label class="form-label">Apellido</label>
-          <input type="text" class="form-control" formControlName = "lastName">
-
-          
-          <label class="form-label">Direccion</label>
-          <input type="text" class="form-control" formControlName = "address">
-          
-          <label class="form-label">eMail</label>
-          <input type="text" class="form-control" formControlName = "email">
-         
-          <label class="form-label">Contraseña</label>
-          <input type="password" class="form-control" formControlName = "password">
-         
-         
-          <button class="btn btn-primary mt-2" (click)="sumbitForm()">Registrarme</button>
+            <div class="d-grid gap-2 mt-4">
+              <button class="btn btn-primary mt-2 " (click)="sumbitForm()">Registrarme</button>
+              <h6 class="card-subtitle mb-2 text-body-secondary ">Ya sos cliente? <a routerLink="/login">Ingresa aqui</a></h6>
+            </div>
+          </div>
         </div>
-      </div>
-  </form>
-</section>
+    </form>
+  </section>
+</div>

@@ -1,10 +1,14 @@
-input{
-    background-color: var(--black);
-    color: var(--white);
+
+
+.card-register{
+    background-color: var(--white);
+    color: var(--black);
+    width: 28rem;
 }
 
-input:focus{
+.div-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: var(--black);
-    color: var(--white);
-    box-shadow: 0 0 10px blue;
 }
