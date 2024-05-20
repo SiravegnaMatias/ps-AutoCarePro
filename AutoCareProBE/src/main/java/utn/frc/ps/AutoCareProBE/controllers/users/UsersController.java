@@ -1,5 +1,7 @@
 package utn.frc.ps.AutoCareProBE.controllers.users;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -23,5 +25,10 @@ public class UsersController {
     @GetMapping("/{id}")
     public ResponseEntity<UserResponse> findUserById(@PathVariable Long id) {
         return ResponseEntity.ok(userService.findUserById(id));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<UserResponse>> findAllUsers() {
+        return ResponseEntity.ok(userService.findAll());
     }
 }

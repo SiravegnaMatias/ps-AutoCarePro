@@ -1,0 +1,41 @@
+<h1>Reserva #{{booking.id}}</h1>
+<hr>
+<div class="container row" style="height: 26rem; " >
+    <div class="card" style="background-color: var(--white);" >
+        <div class="card-header text-center">
+            <h3 class="card-title">Vehiculo {{booking.vehicle}}</h3>
+            <h5 class="card-subtitle mb-2 text-body-secondary">Fecha {{booking.date}}</h5>
+        </div>
+        <div class="card-body d-flex justify-content-around">
+            <div>
+                <div class="row">
+                    <div>
+                        <h3>Servicios</h3>
+                        <ul *ngFor="let service of booking.services">
+                            <li>{{service.name}}</li>
+                        </ul>
+        
+                    </div>
+                </div>
+                <div>
+                    <p><strong>Total a pagar:</strong> ${{getTotal()}}</p>
+                </div>
+            </div>
+          
+            <div>   
+                <label for="status-select" class="form-laber"><strong>Estado</strong></label>
+                <select class="form-select" id="status-select" style="width: 18rem;" [(ngModel)]="selectedStatus">
+                    <option [value]="booking.status">{{ booking.status }}</option> 
+                    <option *ngFor="let status of availableStatuses" [value]="status" [selected]="status === selectedStatus">{{ status }}</option>
+                    
+                </select>
+            </div>
+
+        </div>
+        <div class="card-footer text-end">
+            <button class="btn btn-secondary m-1">Volver</button>
+            <button class="btn btn-primary m-1">Confirmar</button>
+        </div>
+    </div>
+</div>
+

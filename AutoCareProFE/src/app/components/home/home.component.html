@@ -1,13 +1,13 @@
- <div class="container-fluid home-container" >
-    <div class="row flex-nowrap" >
+<div class="container-fluid home-container">
+    <div class="row flex-nowrap">
         <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 sidebar-custom
         d-flex flex-column  align-items-sm-start px-3 pt-2 text min-vh-100 sidebar-custom justify-content-between
         ">
-           
-            <div class="" >
-            
-             
-                
+
+            <div class="">
+
+
+
                 <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                     <span class="fs-5 d-none d-sm-inline">Menu</span>
                 </a>
@@ -18,52 +18,58 @@
                             <i class="fs-4 bi bi-stars"></i> <span class="ms-1 d-none d-sm-inline">Servicios</span>
                         </a>
                     </li>
-                    
+
                     <li>
-                                <a routerLink="my-bookings" class="nav-link px-2 align-middle">
-                            <i class="fs-4 bi bi-card-heading"></i> <span class="ms-1 d-none d-sm-inline">Mis Reservas</span></a>
+                        <a routerLink="my-bookings" class="nav-link px-2 align-middle">
+                            <i class="fs-4 bi bi-card-heading"></i> <span class="ms-1 d-none d-sm-inline">Mis
+                                Reservas</span></a>
                     </li>
-                    
+                    <li>
+                        <a routerLink="bookings" class="nav-link px-2 align-middle">
+                            <i class="fs-4 bi bi-card-heading"></i> <span class="ms-1 d-none d-sm-inline">Reservas</span></a>
+                    </li>
+
                     <li>
                         <a routerLink="my-cars" class="nav-link px-2 align-middle">
-                                <i class="fs-4 bi bi-car-front-fill"></i> <span class="ms-1 d-none d-sm-inline">Mis Vehiculos</span></a>
+                            <i class="fs-4 bi bi-car-front-fill"></i> <span class="ms-1 d-none d-sm-inline">Mis
+                                Vehiculos</span></a>
                     </li>
-               
+
                     <li>
-                        <a href="#" class="nav-link px-2 align-middle">
+                        <a routerLink="shop" class="nav-link px-2 align-middle">
                             <i class="fs-4 bi bi-shop"></i> <span class="ms-1 d-none d-sm-inline">Tienda</span> </a>
                     </li>
 
                     <li>
-                        <a routerLink="register-detailer" class="nav-link px-2 align-middle">
-                            <i class="fs-4 bi bi-tools"></i> <span class="ms-1 d-none d-sm-inline">Detailers</span> </a>
+                        <a routerLink="users" class="nav-link px-2 align-middle">
+                            <i class="fs-4 bi bi-tools"></i> <span class="ms-1 d-none d-sm-inline">Usuarios</span> </a>
                     </li>
                 </ul>
-                 
-                
-                
+
+
+
             </div>
-            <div class="dropdown p-2 " style="color: var(--black);">
-                <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+            <div class="dropdown p-2 " style="color: var(--white);">
+                <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+                    id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                     <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
                     <span class="d-none d-sm-inline mx-1">{{userLogged.firstName +' '+ userLogged.lastName}}</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                    <li><a class="dropdown-item" href="#">New project...</a></li>
-                    <li><a class="dropdown-item" href="#">Settings</a></li>
-                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                    <li><a class="dropdown-item" routerLink="frequent-questions">Preguntas Frecuentes</a></li>
+                    <li><a class="dropdown-item" href="#">Configuracion</a></li>
+                    <li><a class="dropdown-item" href="#">Perfil</a></li>
                     <li>
                         <hr class="dropdown-divider">
                     </li>
                     <li><a class="dropdown-item" (click)="signOut()">Sign out</a></li>
                 </ul>
-            </div> 
+            </div>
         </div>
         <div class="col py-3 container-custom" style="background-color: var(--black); color: var(--white);">
 
             <router-outlet></router-outlet>
-           
+
         </div>
     </div>
 </div>´
-

@@ -77,4 +77,8 @@ export class BookingServiceService {
   getBookingsOff():Booking[]{
     return this.bookings;
   }
+
+  getBookingByiDOff(id:number):Booking{
+    return this.bookings.find(booking => booking.id === id)!;
+  }
 }

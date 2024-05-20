@@ -1,0 +1,36 @@
+<h1>Reservas</h1>
+<hr>
+    <div class="row">
+        <div class="col-md-12">
+            <ng-container *ngFor="let booking of bookings">
+                <div class="card m-3 ">
+                    <div class="card-header" style="background-color: var(--white); color: var(--black);">
+                        #{{booking.id}} - {{booking.date}}
+                    </div>
+                    <div class="card-body" style="background-color: var(--white); color: var(--black);">
+                      <div class="d-flex justify-content-between">
+                        <div>
+
+                            <p>Vehiculo: {{booking.vehicle}}</p>
+                        </div>
+                        <div>
+                            <ul *ngFor="let service of booking.services">
+                                
+                                <li>{{service.name}}</li>
+                                 
+                                </ul>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between" style="background-color: var(--white); color: var(--black);">
+                        <div>
+                            <span class="status-dot" [ngClass]="{ 'required': booking.status === 'Solicitada', 'accepted': booking.status === 'Aceptada', 'in-proccess': booking.status === 'En proceso', 'completed': booking.status === 'Completada' }"></span>
+                            Estado: {{ booking.status }}
+                        </div>
+                        <div>
+                            <button class="btn btn-primary" (click)="editBooking(booking.id)">Editar</button>
+                        </div>
+                      </div>
+                </div>
+            </ng-container>
+        </div>

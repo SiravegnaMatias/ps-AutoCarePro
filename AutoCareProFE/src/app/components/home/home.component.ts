@@ -12,7 +12,7 @@ import { UserService } from 'src/app/services/user.service';
 export class HomeComponent implements OnInit {
   isLoggedIn: boolean = false;
   idUser!: number;
-  userLogged: User = {  firstName: '', email: '',lastName:'', address: '', role: []};
+  userLogged: User = {  firstName: '', email: '',lastName:'', address: '', role: {id:0, name:''}};
   constructor(private loginService: LoginService, private userService: UserService,private router:Router) {
   }
   ngOnInit(): void {

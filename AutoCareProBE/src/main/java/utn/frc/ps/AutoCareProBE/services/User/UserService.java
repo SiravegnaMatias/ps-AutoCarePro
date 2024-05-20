@@ -1,5 +1,7 @@
 package utn.frc.ps.AutoCareProBE.services.User;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,6 +72,23 @@ public class UserService {
         .role(role)
         .address(userEntity.getAddress())
         .build();
+  }
+
+  public List<UserResponse> findAll() {
+    List<UserEntity> users = userJpaRepository.findAll();
+    List<UserResponse> userResponses = new ArrayList<>();
+    users.forEach(userEntity -> {
+      Role role = Role.builder().id(userEntity.getRole().getId()).name(userEntity.getRole().getName()).build();
+      userResponses.add(UserResponse.builder()
+          .id(userEntity.getId())
+          .email(userEntity.getEmail())
+          .firstName(userEntity.getFirstName())
+          .lastName(userEntity.getLastName())
+          .role(role)
+          .address(userEntity.getAddress())
+          .build());
+    });
+    return userResponses;
   }
 
   private UserEntity getEntity(UserRequest user) {

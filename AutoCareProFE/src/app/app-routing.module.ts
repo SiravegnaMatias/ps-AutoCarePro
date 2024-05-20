@@ -6,6 +6,11 @@ import { HomeComponent } from './components/home/home.component';
 import { ServicesComponent } from './components/services/services.component';
 import { CarsComponent } from './components/cars/cars.component';
 import { MyBookingsComponent } from './components/my-bookings/my-bookings.component';
+import { BookingsComponent } from './components/bookings/bookings.component';
+import { EditBookingComponent } from './components/edit-booking/edit-booking.component';
+import { UsersComponent } from './components/users/users.component';
+import { EcommerceComponent } from './components/ecommerce/ecommerce.component';
+import { FrequentQuestionsComponent } from './components/frequent-questions/frequent-questions.component';
 
 const routes: Routes = [
   {
@@ -14,9 +19,14 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'services', pathMatch: 'full' }, // Redirige a servicios por defecto
       { path: 'services', component: ServicesComponent },
-      {path: 'register-detailer', component: RegisterComponent, data: {role: 'detailer'}},
+      {path: 'users/register-detailer', component: RegisterComponent, data: {role: 'detailer'}},
       {path: 'my-cars', component:CarsComponent},
-      {path: 'my-bookings', component:MyBookingsComponent}
+      {path: 'my-bookings', component:MyBookingsComponent},
+      {path: 'bookings', component:BookingsComponent},
+      {path: 'bookings/edit/:id', component:EditBookingComponent},
+      {path: 'users', component:UsersComponent},
+      {path: 'shop', component: EcommerceComponent},
+      {path: 'frequent-questions', component: FrequentQuestionsComponent}
       // Agrega otras rutas para los diferentes componentes del contenido principal aquí
     ]
   },

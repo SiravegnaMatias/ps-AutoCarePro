@@ -14,6 +14,7 @@ import utn.frc.ps.AutoCareProBE.Entities.booking.BookingDetailEntity;
 import utn.frc.ps.AutoCareProBE.Entities.booking.BookingEntity;
 import utn.frc.ps.AutoCareProBE.Entities.vehicles.VehicleEntity;
 import utn.frc.ps.AutoCareProBE.dtos.booking.BookingRequestDTO;
+import utn.frc.ps.AutoCareProBE.dtos.booking.BookingResponseDTO;
 import utn.frc.ps.AutoCareProBE.dtos.booking.DTOService;
 import utn.frc.ps.AutoCareProBE.repositories.ServiceJpaRepository;
 import utn.frc.ps.AutoCareProBE.repositories.booking.BookingDetailJpaRepository;
@@ -48,15 +49,6 @@ private UserService userService;
 
         bookingJpaRepository.save(bookingEntity);
 
-    //    List<BookingDetailEntity> bookingDetails = booking.getServices().stream().map(serviceDto -> {
-    //         ServiceEntity service = serviceJpaRepository.findByName(serviceDto.getName())
-    //             .orElseThrow(() -> new ResourceNotFoundException("Service not found with ID: " + serviceDto.getId()));
-
-    //         BookingDetailEntity bookingDetail = new BookingDetailEntity();
-    //         bookingDetail.setBooking(bookingEntity);
-    //         bookingDetail.setService(service);
-    //         return bookingDetail;
-    //     }).collect(Collectors.toList());
     List<ServiceEntity> serviceEntities = getServices(booking.getServices());
     for(ServiceEntity service : serviceEntities){
         BookingDetailEntity bookingDetail = new BookingDetailEntity();
@@ -70,6 +62,22 @@ private UserService userService;
         return true;
     }
 
+    public List<BookingResponseDTO> findAll() {
+        List<BookingEntity> bookings = bookingJpaRepository.findAll();
+        List<BookingResponseDTO> bookingResponseDTOs = new ArrayList<>();
+        for(BookingEntity booking : bookings){
+            BookingResponseDTO bookingResponseDTO = BookingResponseDTO.builder()
+            .id(booking.getId())
+            .date(booking.getDate())
+            .vehicle(booking.getVehicle().getBrand() + " " + booking.getVehicle().getModel())
+            //.status(booking.getStatus().toString())
+            //Faltan los services
+            //agregar la tabla status
+            .build();
+            bookingResponseDTOs.add(bookingResponseDTO);
+        }
+        return bookingResponseDTOs;
+    }
     private List<ServiceEntity> getServices(List<DTOService> services){
         List<ServiceEntity> serviceEntities = new ArrayList<>();
         for(DTOService service : services){
