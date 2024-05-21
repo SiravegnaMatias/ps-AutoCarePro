@@ -33,11 +33,11 @@ export class ServicesComponent implements OnInit {
     private carService: CarService,
     private bookingService: BookingServiceService 
   ) {
-     srvUpd.serviceAdded$.subscribe({
-       next: () => {
-         this.refreshServices();
-       }
-     })
+    //  srvUpd.serviceAdded$.subscribe({
+    //    next: () => {
+    //      this.refreshServices();
+    //    }
+    //  })
 
 
   }
@@ -56,17 +56,17 @@ export class ServicesComponent implements OnInit {
 
   }
   ngOnInit(): void {
-     this.refreshServices();
-   // this.services = this.service.getServicesOff();
-    this.userId = this.logService.currentUserData.value.id;
-    this.carService.getCarsById(this.userId).subscribe({
-      next: (res: CarResponse[]) => {
-        this.cars = res;
-      },
-      error: (err) => {
-        console.error('Error getting cars:', err);
-      }
-    });
+    //  this.refreshServices();
+   this.services = this.service.getServicesOff();
+    // this.userId = this.logService.currentUserData.value.id;
+    // this.carService.getCarsById(this.userId).subscribe({
+    //   next: (res: CarResponse[]) => {
+    //     this.cars = res;
+    //   },
+    //   error: (err) => {
+    //     console.error('Error getting cars:', err);
+    //   }
+    // });
   }
 
   addService(service: Service) {

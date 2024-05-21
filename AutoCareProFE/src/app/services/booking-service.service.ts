@@ -40,7 +40,7 @@ export class BookingServiceService {
   },
   {
     id: 2,
-    date: "13-05-2024",
+    date: "13-05-2024 10:00am",
     vehicle: "Honda Civic",
     services: [
       {
@@ -54,7 +54,7 @@ export class BookingServiceService {
   },
   {
     id: 3,
-    date: "16-05-2024",
+    date: "16-05-2024 16:00pm",
     vehicle: "BMW M3",
     services: [
       {

@@ -11,3 +11,7 @@
     --white: #DBDCDE;
 }
 
+body {
+    overflow-y: auto;
+}
+

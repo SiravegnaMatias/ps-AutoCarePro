@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Booking } from 'src/app/models/Booking';
 import { BookingServiceService } from 'src/app/services/booking-service.service';
 
@@ -14,7 +14,7 @@ export class EditBookingComponent implements OnInit {
   selectedStatus: string = ' - ';
   availableStatuses: string[] = ['solicitada', 'aceptada', 'en proceso', 'listo para retirar']; // Define availableStatuses array
 
-  constructor(private route: ActivatedRoute, private bookingService: BookingServiceService) { }
+  constructor(private route: ActivatedRoute, private bookingService: BookingServiceService,private router:Router) { }
   
   ngOnInit(): void {
     const bookingId = this.route.snapshot.paramMap.get('id');
@@ -34,5 +34,9 @@ export class EditBookingComponent implements OnInit {
   sumbit() {
     this.booking.status = this.selectedStatus;
     console.log(this.booking);
+  }
+
+  back(){
+    this.router.navigate(['/home/bookings']);
   }
 }
