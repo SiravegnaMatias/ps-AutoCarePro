@@ -1,5 +1,7 @@
 package utn.frc.ps.AutoCareProBE.dtos.booking;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,6 +17,6 @@ public class BookingResponseDTO {
     private Long id;
     private String date;
     private String  vehicle;
-    private DTOService[] services;
+    private List<DTOService> services;
     private String status;
 }

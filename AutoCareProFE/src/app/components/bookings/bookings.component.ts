@@ -11,8 +11,14 @@ import { BookingServiceService } from 'src/app/services/booking-service.service'
 export class BookingsComponent implements OnInit {
 constructor(private bookingService:BookingServiceService, private router:Router){}  
   bookings:Booking[] = [];
+
+
   ngOnInit(): void {
-    this.bookings = this.bookingService.getBookingsOff();
+    this.bookingService.getBookings().subscribe({
+      next: (res) => {
+        this.bookings = res;
+      }
+    })
   }
 
   editBooking(id:number){

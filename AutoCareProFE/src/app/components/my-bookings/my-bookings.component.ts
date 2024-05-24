@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Booking } from 'src/app/models/Booking';
+import { BookingResponse } from 'src/app/models/BookingRequest';
 import { Service } from 'src/app/models/Service';
 import { BookingServiceService } from 'src/app/services/booking-service.service';
+import { LoginService } from 'src/app/services/login.service';
+import { BookingsComponent } from '../bookings/bookings.component';
 
 @Component({
   selector: 'app-my-bookings',
@@ -9,11 +12,16 @@ import { BookingServiceService } from 'src/app/services/booking-service.service'
   styleUrls: ['./my-bookings.component.css']
 })
 export class MyBookingsComponent implements OnInit {
- 
+ userId!:number;
   bookings: Booking[] = [];
-  constructor(private bookingService:BookingServiceService) { }
+  constructor(private bookingService:BookingServiceService, private loginService:LoginService) { }
   ngOnInit(): void {
-    this.bookings = this.bookingService.bookings;
+    this.userId = this.loginService.currentUserData.value.id;
+    this.bookingService.getBookingsById(this.userId).subscribe({
+      next: (res) => {
+        this.bookings = res;
+      }
+    })
   }
 
   getServices(services:Service[]):string{

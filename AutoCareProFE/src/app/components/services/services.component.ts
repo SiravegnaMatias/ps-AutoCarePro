@@ -11,6 +11,7 @@ import { UserService } from 'src/app/services/user.service';
 import { CarService } from 'src/app/services/car.service';
 import { BookingRequest } from 'src/app/models/BookingRequest';
 import { BookingServiceService } from 'src/app/services/booking-service.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -31,13 +32,14 @@ export class ServicesComponent implements OnInit {
     private logService: LoginService,
     private userService: UserService,
     private carService: CarService,
-    private bookingService: BookingServiceService 
+    private bookingService: BookingServiceService,
+    private router:Router 
   ) {
-    //  srvUpd.serviceAdded$.subscribe({
-    //    next: () => {
-    //      this.refreshServices();
-    //    }
-    //  })
+     srvUpd.serviceAdded$.subscribe({
+       next: () => {
+         this.refreshServices();
+       }
+     })
 
 
   }
@@ -56,17 +58,16 @@ export class ServicesComponent implements OnInit {
 
   }
   ngOnInit(): void {
-    //  this.refreshServices();
-   this.services = this.service.getServicesOff();
-    // this.userId = this.logService.currentUserData.value.id;
-    // this.carService.getCarsById(this.userId).subscribe({
-    //   next: (res: CarResponse[]) => {
-    //     this.cars = res;
-    //   },
-    //   error: (err) => {
-    //     console.error('Error getting cars:', err);
-    //   }
-    // });
+     this.refreshServices();
+    this.userId = this.logService.currentUserData.value.id;
+    this.carService.getCarsById(this.userId).subscribe({
+      next: (res: CarResponse[]) => {
+        this.cars = res;
+      },
+      error: (err) => {
+        console.error('Error getting cars:', err);
+      }
+    });
   }
 
   addService(service: Service) {
@@ -88,7 +89,6 @@ export class ServicesComponent implements OnInit {
 
   sumbit() {
 
-    //ATENTO CON EL VALUE DE VEHICLE QUE ES STRING Y TIENE QUE SER NUMBER
     this.booking = {
       userId: this.userId,
       date: this.formServices.value.date,
@@ -96,16 +96,26 @@ export class ServicesComponent implements OnInit {
       additionalNotes: this.formServices.value.additionalNotes,
       services: this.servicesSelcted
     }
-    console.log(this.booking);
 
     this.bookingService.addBooking(this.booking).subscribe({
-      next: (res: boolean) => {
+      next: (res) => {
         alert('Booking added');
+        this.formServices.reset();
+        this.servicesSelcted = [];
+        this.router.navigate(['/my-bookings']);
       },
       error: (err) => {
         console.error('Error adding booking:', err);
       }
     });
+  }
+
+  getTotal():string {
+    let total:number = 0;
+    this.servicesSelcted.forEach((service) => {
+      total += service.price;
+    });
+    return total.toString();
   }
 
 }

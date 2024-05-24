@@ -10,11 +10,13 @@ export class JwtInterceptorService implements HttpInterceptor {
 
   constructor(private loginService: LoginService) { }
 
-
+  private readonly WHITELIST = [
+    'https://api.cloudinary.com',
+  ];
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     let token: string = this.loginService.getToken();
-
-    if (token != "") {
+    const isWhitelisted = this.WHITELIST.some((url) => req.url.includes(url));
+    if (token != "" && !isWhitelisted) {
       req = req.clone({
         setHeaders: {
           'Content-Type': 'application/json;charset=utf-8',

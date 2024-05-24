@@ -1,7 +1,10 @@
 package utn.frc.ps.AutoCareProBE.controllers.booking;
 
 import utn.frc.ps.AutoCareProBE.dtos.booking.BookingRequestDTO;
+import utn.frc.ps.AutoCareProBE.dtos.booking.BookingResponseDTO;
 import utn.frc.ps.AutoCareProBE.services.booking.BookingService;
+
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,13 +21,14 @@ public class BookingController {
 
 
     @GetMapping()
-    public ResponseEntity<?> findAll() {
-        try {
-            //TODO Implement Your Logic To Get Data From Service Layer Or Directly From Repository Layer
-            return new ResponseEntity<>("GetAll Results", HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    public ResponseEntity<List<BookingResponseDTO>  > findAll() {
+       return ResponseEntity.ok(bookingService.findAllBookings()); 
+    }
+
+    
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<BookingResponseDTO>  > findAllByUserId(@PathVariable Long userId) {
+       return ResponseEntity.ok(bookingService.findAllBookingsByUserId(userId)); 
     }
 
     @GetMapping("/{id}")
@@ -38,7 +42,7 @@ public class BookingController {
     }
 
     @PostMapping()
-    public ResponseEntity<Boolean> create(@RequestBody BookingRequestDTO booking) {
+    public ResponseEntity<BookingResponseDTO> create(@RequestBody BookingRequestDTO booking) {
         return ResponseEntity.ok(bookingService.newBooking(booking));
     }
 

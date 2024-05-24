@@ -47,6 +47,7 @@ export class AddCarComponent implements OnInit {
       next: (response) => {
         console.log(response);
         alert('Car added successfully');
+      this.carService.carAdded(); 
 
       },
       error: (err) => {
@@ -55,4 +56,6 @@ export class AddCarComponent implements OnInit {
       }
     });
   }
+
+ 
 }

@@ -1,5 +1,6 @@
 package utn.frc.ps.AutoCareProBE.Entities.booking;
 
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -26,7 +27,7 @@ public class BookingDetailEntity {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "booking_id")
@@ -35,5 +36,7 @@ public class BookingDetailEntity {
     @ManyToOne
     @JoinColumn(name = "service_id")
     private ServiceEntity service;
+
+   
 
 }

@@ -8,7 +8,7 @@
     <div class="row">
         <div class="col-md-4 col-lg-4 col-sm-4" *ngFor="let service of services">
 
-            <div class="card mb-2"  >
+            <div class="card mb-2" style="height: 29rem;" >
                 <img src="{{service.image}}" class="card-img-top fixed-size-img
                 " alt="...">
                 <div class="card-body">
@@ -58,7 +58,7 @@
                         <div class="row g-0">
                           <div class="col-md-8">
                             <div class="card-body">
-                              <h5 class="card-title">{{item.name}}</h5>
+                              <h5 class="card-title">{{item.name}} - ${{item.price}}</h5>
                               <p class="card-text">{{item.description}}</p>
                             </div>
                           </div>
@@ -72,6 +72,10 @@
         </div>
         <div class="m-3" >
             <form style="display: block;" [formGroup]="formServices">
+                <div>
+                    <label class="form-label">Total</label>
+                    <label class="form-label ">{{getTotal()}}</label>
+                </div>
                 <label class="form-label">Vehiculo</label>
                 <select class="form-select" formControlName="carType" formControlName="vehicle">
                     <option selected disabled>Seleccione su vehiculo</option>
@@ -81,11 +85,15 @@
                     </ng-container>
                 </select>       
 
-                <label class="form-label">Fecha</label>
-                <input type="text" id="datepicker" class="datepicker mt-3 mx-2" placeholder="seleccione fecha y hora" formControlName="date">
-                
-                <label class="form-label">Nota</label>
-                <textarea class="form-control" id="floatingTextarea" formControlName="additionalNotes"></textarea>
+                <div>
+
+                    <label class="form-label">Fecha</label>
+                    <input type="text" id="datepicker" class="datepicker mt-3 mx-2" placeholder="seleccione fecha y hora" formControlName="date">
+                </div>
+                <div>
+                    <label class="form-label">Nota</label>
+                    <textarea class="form-control" id="floatingTextarea" formControlName="additionalNotes"></textarea>
+                </div>
         </form>
         </div>
         <div class="modal-footer">

@@ -42,6 +42,7 @@ export class AddServicesComponent implements OnInit {
         this.srv.addService(service).subscribe({
           next: (res) => {
             alert('Service added successfully');
+            this.serviceForm.reset();
             this.srvUpd.serviceAdded();
           },
           error: (err) => {

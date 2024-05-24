@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CarRequest, CarResponse } from '../models/CarRequest';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +11,14 @@ export class CarService {
   constructor(private http:HttpClient) { }
 
   carTypes: String[] = ['Sedan', 'SUV', 'Hatchback', 'Coupe', 'Pick Up', 'Convertible', 'Van'];
+
+
+  private carAddedSource = new Subject<void>();
+  carAdded$ = this.carAddedSource.asObservable();
+  
+  carAdded(){
+    this.carAddedSource.next();
+  }
 
   cars:CarRequest[] = [
     {
@@ -31,7 +39,7 @@ export class CarService {
     }
   ];
 
-  private url:string = 'http://localhost:8080/vehicles/';
+  private url:string = 'http://localhost:8080/vehicles';
 
 
   getCarTypes(): String[] {
@@ -46,6 +54,6 @@ export class CarService {
   }
 
   getCarsById(userId:number):Observable<CarResponse[]>{
-    return this.http.get<CarResponse[]>(this.url+ userId);
+    return this.http.get<CarResponse[]>(this.url+ '/'+userId);
   }
 }
