@@ -11,22 +11,70 @@ import { EditBookingComponent } from './components/edit-booking/edit-booking.com
 import { UsersComponent } from './components/users/users.component';
 import { EcommerceComponent } from './components/ecommerce/ecommerce.component';
 import { FrequentQuestionsComponent } from './components/frequent-questions/frequent-questions.component';
+import { isLoggedInGuard } from './guards/is-logged-in.guard';
+import { authGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
+    canActivate: [isLoggedInGuard],
     children: [
-      { path: '', redirectTo: 'services', pathMatch: 'full' }, // Redirige a servicios por defecto
-      { path: 'services', component: ServicesComponent },
-      {path: 'users/register-detailer', component: RegisterComponent, data: {role: 'detailer'}},
-      {path: 'my-cars', component:CarsComponent},
-      {path: 'my-bookings', component:MyBookingsComponent},
-      {path: 'bookings', component:BookingsComponent},
-      {path: 'bookings/edit/:id', component:EditBookingComponent},
-      {path: 'users', component:UsersComponent},
-      {path: 'shop', component: EcommerceComponent},
-      {path: 'frequent-questions', component: FrequentQuestionsComponent}
+      { 
+        path: '', 
+        redirectTo: 'services', 
+        pathMatch: 'full' 
+      }, // Redirige a servicios por defecto
+      { 
+        path: 'services', 
+        component: ServicesComponent ,
+        data: {allowedRoles: ['ADMIN', 'CLIENT', 'DETAILER']}
+
+      },
+      {
+        path: 'users/register-detailer',
+         component: RegisterComponent, 
+         data: {role: 'detailer' ,allowedRoles: ['ADMIN']}
+      },
+      {
+        path: 'my-cars', 
+        component:CarsComponent,
+        data: {allowedRoles: ['CLIENT','ADMIN']}
+      },
+      {
+        path: 'my-bookings', 
+        component:MyBookingsComponent,
+        data: {allowedRoles: ['CLIENT','ADMIN']}
+      },
+      {
+        path: 'bookings', 
+        component:BookingsComponent,
+        data: {allowedRoles: ['ADMIN','DETAILER']}
+      },
+      {
+        path: 'bookings/edit/:id', 
+        component:EditBookingComponent,
+        data: {allowedRoles: ['ADMIN','DETAILER']}
+
+      },
+      {
+        path: 'users', 
+        component:UsersComponent,
+        canActivate: [authGuard],
+        data: {allowedRoles: ['ADMIN']},
+        
+      },
+      {
+        path: 'shop', 
+        component: EcommerceComponent,
+        data: {allowedRoles: ['CLIENT','ADMIN','DETAILER']}
+      },
+      {
+        path: 'frequent-questions', 
+        component: FrequentQuestionsComponent,
+        data: {allowedRoles: ['CLIENT','ADMIN','DETAILER']}
+
+      }
       // Agrega otras rutas para los diferentes componentes del contenido principal aquí
     ]
   },

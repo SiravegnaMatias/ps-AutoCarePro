@@ -34,6 +34,10 @@ export class HomeComponent implements OnInit {
     this.loginService.logOut();
     this.router.navigate(['/login']);
   }
+
+  isAuthorized(roles: string[]): boolean {
+    return roles.includes(this.userLogged.role.name);
+  }
 }
 
 

@@ -33,7 +33,7 @@ export class UserService {
   }
 ];
   constructor(private http:HttpClient) { }
-  private url:string = 'http://localhost:8080/users/';
+  private url:string = 'http://localhost:8080/users';
   private urlRegisterUser = 'http://localhost:8080/auth/register';
   
   
@@ -41,7 +41,7 @@ export class UserService {
     return this.http.get<User[]>(this.url);
   }
   getUserById(id:number):Observable<User>{
-    return this.http.get<User>(this.url+id);
+    return this.http.get<User>(this.url +'/' +id);
   }
 
   registerUser(user:UserRequestRegistration):Observable<void>{

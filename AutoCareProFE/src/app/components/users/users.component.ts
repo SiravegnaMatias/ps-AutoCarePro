@@ -11,9 +11,9 @@ export class UsersComponent {
   users:User[] = [];
   constructor(private userService:UserService){}
   ngOnInit(): void {
-    // this.userService.getUsers().subscribe(data => {
-    //   this.users = data;
-    // });
-    this.users = this.userService.getUsersOff();
+    this.userService.getUsers().subscribe(data => {
+      this.users = data;
+    });
+    // this.users = this.userService.getUsersOff();
   }
 }

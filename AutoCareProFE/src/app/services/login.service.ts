@@ -11,7 +11,7 @@ export class LoginService {
 
   currentUserLoginOn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   currentUserData: BehaviorSubject<CurrentUser> = new BehaviorSubject<CurrentUser>({token:'',id:0}); 
-
+  
   constructor(private http:HttpClient) {
     let user = sessionStorage.getItem('currentUser');
     if(user){
@@ -51,6 +51,10 @@ export class LoginService {
 
   getToken():string{
     return this.currentUserData.value.token;
+  }
+
+  isLogged():boolean{
+    return this.currentUserLoginOn.value;
   }
   
 }

@@ -13,34 +13,34 @@
                 </a>
 
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-                    <li class="nav-item">
+                    <li class="nav-item" *ngIf="isAuthorized(['ADMIN','CLIENTE', 'DETAILER'])">
                         <a routerLink="services" class="nav-link align-middle px-2">
                             <i class="fs-4 bi bi-stars"></i> <span class="ms-1 d-none d-sm-inline">Servicios</span>
                         </a>
                     </li>
 
-                    <li>
+                    <li *ngIf="isAuthorized(['CLIENTE','ADMIN'])">
                         <a routerLink="my-bookings" class="nav-link px-2 align-middle">
                             <i class="fs-4 bi bi-card-heading"></i> <span class="ms-1 d-none d-sm-inline">Mis
                                 Reservas</span></a>
-                    </li>
-                    <li>
+                    </li >
+                    <li *ngIf="isAuthorized(['DETAILER','ADMIN'])">
                         <a routerLink="bookings" class="nav-link px-2 align-middle">
                             <i class="fs-4 bi bi-card-heading"></i> <span class="ms-1 d-none d-sm-inline">Reservas</span></a>
                     </li>
 
-                    <li>
+                    <li *ngIf="['CLIENTE', 'ADMIN']">
                         <a routerLink="my-cars" class="nav-link px-2 align-middle">
                             <i class="fs-4 bi bi-car-front-fill"></i> <span class="ms-1 d-none d-sm-inline">Mis
                                 Vehiculos</span></a>
                     </li>
 
-                    <li>
+                    <li *ngIf="isAuthorized(['DETAILER','ADMIN', 'CLIENTE'])">
                         <a routerLink="shop" class="nav-link px-2 align-middle">
                             <i class="fs-4 bi bi-shop"></i> <span class="ms-1 d-none d-sm-inline">Tienda</span> </a>
                     </li>
 
-                    <li>
+                    <li *ngIf="isAuthorized(['ADMIN'])">
                         <a routerLink="users" class="nav-link px-2 align-middle">
                             <i class="fs-4 bi bi-tools"></i> <span class="ms-1 d-none d-sm-inline">Usuarios</span> </a>
                     </li>
