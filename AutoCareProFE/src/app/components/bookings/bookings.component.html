@@ -24,7 +24,7 @@
                     </div>
                     <div class="card-footer d-flex justify-content-between" style="background-color: var(--white); color: var(--black);">
                         <div>
-                            <span class="status-dot" [ngClass]="{ 'required': booking.status === 'Solicitada', 'accepted': booking.status === 'Aceptada', 'in-proccess': booking.status === 'En proceso', 'completed': booking.status === 'Completada' }"></span>
+                            <span class="status-dot" [ngClass]="{ 'required': booking.status === 'Solicitado', 'accepted': booking.status === 'Aceptado', 'in-proccess': booking.status === 'En proceso', 'completed': booking.status === 'Terminado' }"></span>
                             Estado: {{ booking.status }}
                         </div>
                         <div>

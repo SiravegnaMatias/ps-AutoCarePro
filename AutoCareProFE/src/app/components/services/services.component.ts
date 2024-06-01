@@ -13,6 +13,7 @@ import { BookingRequest } from 'src/app/models/BookingRequest';
 import { BookingServiceService } from 'src/app/services/booking-service.service';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/User';
+import { AlertService } from 'src/app/services/alert.service';
 
 
 @Component({
@@ -35,7 +36,8 @@ export class ServicesComponent implements OnInit {
     private userService: UserService,
     private carService: CarService,
     private bookingService: BookingServiceService,
-    private router:Router 
+    private router:Router ,
+    private notification:AlertService
   ) {
      srvUpd.serviceAdded$.subscribe({
        next: () => {
@@ -46,6 +48,7 @@ export class ServicesComponent implements OnInit {
 
   }
 
+  
   formServices: any = this.fb.group({
     date: [''],
     vehicle: [''],
@@ -128,7 +131,4 @@ export class ServicesComponent implements OnInit {
     return total.toString();
   }
 
-  isAdmin(): boolean {
-    return this.currentUser.role.name === 'ADMIN';
-  }
 }

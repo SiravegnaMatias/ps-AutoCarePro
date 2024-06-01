@@ -1,20 +1,42 @@
 <h1>Mis Reservas</h1>
 <hr>
-    <div class="row">
-        <div class="col-md-12">
-            <ng-container *ngFor="let booking of bookings">
-                <div class="card m-3 ">
-                    <div class="card-header" style="background-color: var(--white); color: var(--black);">
-                        #{{booking.id}} - {{booking.date}}
-                    </div>
-                    <div class="card-body" style="background-color: var(--white); color: var(--black);">
-                       <p class="card-text">{{getServices(booking.services)}}</p>
-                       <p>Vehiculo: {{booking.vehicle}}</p>
-                    </div>
-                    <div class="card-footer text-end" style="background-color: var(--white); color: var(--black);">
-                        Estado: {{ booking.status }}
-                        <span class="status-dot" [ngClass]="{ 'required': booking.status === 'Solicitada', 'accepted': booking.status === 'Aceptada', 'in-proccess': booking.status === 'En proceso', 'completed': booking.status === 'Completada' }"></span>
-                      </div>
+<div class="row">
+    <div class="col-md-12">
+        <ng-container *ngFor="let booking of bookings">
+            <div class="card m-3 ">
+                <div class="card-header d-flex justify-content-between" style="background-color: var(--white); color: var(--black);">
+                    <h5 class="card-text"> #{{booking.id}} - {{booking.date}}</h5>
+                    <button class="btn btn-secondary" (click)="showAlert()">
+                        <i class="bi bi-x-octagon"></i>
+                    </button>
                 </div>
-            </ng-container>
-        </div>
+                <div class="card-body" style="background-color: var(--white); color: var(--black);">
+                    <div class="d-flex justify-content-around">
+                        <div>
+
+                            <p>Vehiculo: {{booking.vehicle}}</p>
+                        </div>
+                        <div>
+                            <ul *ngFor="let service of booking.services">
+
+                                <li>{{service.name}}</li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer d-flex justify-content-between"
+                    style="background-color: var(--white); color: var(--black);">
+                    <div>
+                        Total: ${{ getTotal(booking) }}
+                    </div>
+
+                    <div>
+                        Estado: {{ booking.status }}
+                        <span class="status-dot"
+                            [ngClass]="{ 'required': booking.status === 'Solicitado', 'accepted': booking.status === 'Aceptado', 'in-proccess': booking.status === 'En proceso', 'completed': booking.status === 'Terminado' }"></span>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </div>

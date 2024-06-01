@@ -13,6 +13,7 @@ import { EcommerceComponent } from './components/ecommerce/ecommerce.component';
 import { FrequentQuestionsComponent } from './components/frequent-questions/frequent-questions.component';
 import { isLoggedInGuard } from './guards/is-logged-in.guard';
 import { authGuard } from './guards/auth.guard';
+import { AdminComponent } from './components/admin/admin.component';
 
 const routes: Routes = [
   {
@@ -60,7 +61,6 @@ const routes: Routes = [
       {
         path: 'users', 
         component:UsersComponent,
-        canActivate: [authGuard],
         data: {allowedRoles: ['ADMIN']},
         
       },
@@ -74,6 +74,11 @@ const routes: Routes = [
         component: FrequentQuestionsComponent,
         data: {allowedRoles: ['CLIENT','ADMIN','DETAILER']}
 
+      },
+      {
+        path: 'admin',
+        component: AdminComponent,
+        data: {allowedRoles: ['ADMIN']}
       }
       // Agrega otras rutas para los diferentes componentes del contenido principal aquí
     ]

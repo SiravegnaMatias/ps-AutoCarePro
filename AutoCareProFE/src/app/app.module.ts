@@ -21,6 +21,7 @@ import { EditBookingComponent } from './components/edit-booking/edit-booking.com
 import { UsersComponent } from './components/users/users.component';
 import { EcommerceComponent } from './components/ecommerce/ecommerce.component';
 import { FrequentQuestionsComponent } from './components/frequent-questions/frequent-questions.component';
+import { AdminComponent } from './components/admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { FrequentQuestionsComponent } from './components/frequent-questions/freq
     UsersComponent,
     EcommerceComponent,
     FrequentQuestionsComponent,
+    AdminComponent,
 
   ],
   imports: [

@@ -26,9 +26,13 @@
             ],
             "styles": [
               "src/styles.css",
-              "node_modules/flatpickr/dist/flatpickr.css"
+              "node_modules/flatpickr/dist/flatpickr.css",
+              "node_modules/alertifyjs/build/css/alertify.min.css",
+              "node_modules/alertifyjs/build/css/themes/bootstrap.rtl.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "/node_modules/alertifyjs/build/alertify.min.js"
+            ]
           },
           "configurations": {
             "production": {

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Route, Router } from '@angular/router';
 import { userLogin } from 'src/app/models/UserLogin';
+import { AlertService } from 'src/app/services/alert.service';
 import { LoginService } from 'src/app/services/login.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -14,7 +15,8 @@ export class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private loginService: LoginService,
-    private route: Router
+    private route: Router,
+    private notification:AlertService
   ) { }
 
 
@@ -22,6 +24,9 @@ export class LoginComponent {
     email: [''],
     password: ['']
   });
+  seeNoti(){
+    this.notification.success('Andan papa');
+  }
 
   sumbitForm() {
     const userLogin: userLogin = {

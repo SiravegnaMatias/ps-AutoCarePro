@@ -6,4 +6,5 @@ export interface Booking {
     vehicle: String;
     services: Service[];
     status: string;
+    statusId: number;
 }

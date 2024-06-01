@@ -87,6 +87,7 @@ private StatusJpaRepository statusJpaRepository;
             .vehicle(booking.getVehicle().getBrand() + " " + booking.getVehicle().getModel())
             .status(booking.getStatus().getName())
             .services(services)
+            .statusId(booking.getStatus().getId())
             .build();
             bookingResponseDTOs.add(bookingResponseDTO);
         }
@@ -106,6 +107,7 @@ private StatusJpaRepository statusJpaRepository;
             .date(booking.getDate())
             .vehicle(booking.getVehicle().getBrand() + " " + booking.getVehicle().getModel())
             .status(booking.getStatus().getName())
+            .statusId(booking.getStatus().getId())
             .services(services)
             .build();
             bookingResponseDTOs.add(bookingResponseDTO);
@@ -113,6 +115,46 @@ private StatusJpaRepository statusJpaRepository;
         return bookingResponseDTOs;
     }
     
+    public BookingResponseDTO findBookingById(Long id) {
+        Optional<BookingEntity> booking = bookingJpaRepository.findById(id);
+        if(booking.isEmpty()){
+            throw new RuntimeException("Booking not found");
+        }
+        List<BookingDetailEntity> bookingDetailEntities =  getBookingDetails(booking.get());
+        List<DTOService> services = getServicesDTOs(bookingDetailEntities);
+        return BookingResponseDTO.builder()
+        .id(booking.get().getId())
+        .date(booking.get().getDate())
+        .vehicle(booking.get().getVehicle().getBrand() + " " + booking.get().getVehicle().getModel())
+        .status(booking.get().getStatus().getName())
+        .statusId(booking.get().getStatus().getId())
+        .services(services)
+        .build();
+    }
+
+    public BookingResponseDTO updateBookingStatus(Long id, Long status) {
+        Optional<BookingEntity> booking = bookingJpaRepository.findById(id);
+        if(booking.isEmpty()){
+            throw new RuntimeException("Booking not found");
+        }
+        Optional<StatusEntity> statusEntity = statusJpaRepository.findById(status);
+        if(statusEntity.isEmpty()){
+            throw new RuntimeException("Status not found");
+        }
+        booking.get().setStatus(statusEntity.get());
+        bookingJpaRepository.save(booking.get());
+
+        List<BookingDetailEntity> bookingDetailEntities =  getBookingDetails(booking.get());
+        List<DTOService> services = getServicesDTOs(bookingDetailEntities);
+        return BookingResponseDTO.builder()
+        .id(booking.get().getId())
+        .date(booking.get().getDate())
+        .vehicle(booking.get().getVehicle().getBrand() + " " + booking.get().getVehicle().getModel())
+        .status(booking.get().getStatus().getName())
+        .statusId(booking.get().getStatus().getId())
+        .services(services)
+        .build();
+    }
     
     
     //METODOS DE APOYO
@@ -154,4 +196,6 @@ private StatusJpaRepository statusJpaRepository;
     private List<BookingDetailEntity> getBookingDetails(BookingEntity booking) {
         return booking.getBookingDetails();
     }
+
+   
 }

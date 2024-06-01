@@ -1,4 +1,6 @@
-<h1>Reserva #{{booking.id}}</h1>
+<ng-container >
+    <h1>Reserva #{{bookingId}}</h1>
+</ng-container>
 <hr>
 <div class="container row" style="height: 26rem; " >
     <div class="card" style="background-color: var(--white);" >
@@ -24,9 +26,9 @@
           
             <div>   
                 <label for="status-select" class="form-laber"><strong>Estado</strong></label>
-                <select class="form-select" id="status-select" style="width: 18rem;" [(ngModel)]="selectedStatus">
-                    <option [value]="booking.status">{{ booking.status }}</option> 
-                    <option *ngFor="let status of availableStatuses" [value]="status" [selected]="status === selectedStatus">{{ status }}</option>
+                <select class="form-select" id="status-select" style="width: 18rem;" >
+                   <option *ngFor="let status of statusList" value="{{status.id}}" 
+                   [selected]= "status.id === booking.statusId">{{status.name}}</option>
                     
                 </select>
             </div>
@@ -34,7 +36,7 @@
         </div>
         <div class="card-footer text-end">
             <button class="btn btn-secondary m-1" (click)="back()">Volver</button>
-            <button class="btn btn-primary m-1">Confirmar</button>
+            <button class="btn btn-primary m-1" (click)="sumbit()">Confirmar</button>
         </div>
     </div>
 </div>

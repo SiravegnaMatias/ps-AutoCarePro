@@ -19,4 +19,5 @@ public class BookingResponseDTO {
     private String  vehicle;
     private List<DTOService> services;
     private String status;
+    private Long statusId;
 }

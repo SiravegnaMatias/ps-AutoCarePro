@@ -44,6 +44,11 @@
                         <a routerLink="users" class="nav-link px-2 align-middle">
                             <i class="fs-4 bi bi-tools"></i> <span class="ms-1 d-none d-sm-inline">Usuarios</span> </a>
                     </li>
+
+                    <li *ngIf="isAuthorized(['ADMIN'])">
+                        <a routerLink="admin" class="nav-link px-2 align-middle">
+                            <i class="fs-4 bi bi-person-gear"></i> <span class="ms-1 d-none d-sm-inline">Admin</span> </a>
+                    </li>
                 </ul>
 
 
@@ -52,10 +57,10 @@
             <div class="dropdown p-2 " style="color: var(--white);">
                 <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
                     id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
-                    <span class="d-none d-sm-inline mx-1">{{userLogged.firstName +' '+ userLogged.lastName}}</span>
+                    <i class="bi bi-person-circle profile-icon"  style="color: var(--black);"></i>
+                    <span class="d-none d-sm-inline mx-1" style="color: var(--black);">{{userLogged.firstName +' '+ userLogged.lastName}}</span>
                 </a>
-                <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+                <ul class="dropdown-menu dropdown-menu-dark text-small shadow" >
                     <li><a class="dropdown-item" routerLink="frequent-questions">Preguntas Frecuentes</a></li>
                     <li><a class="dropdown-item" href="#">Configuracion</a></li>
                     <li><a class="dropdown-item" href="#">Perfil</a></li>
