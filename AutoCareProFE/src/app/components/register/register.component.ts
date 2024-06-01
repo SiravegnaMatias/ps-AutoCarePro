@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserRequestRegistration } from 'src/app/models/UserRequestRegistration';
 import { UserService } from 'src/app/services/user.service';
@@ -31,7 +31,8 @@ export class RegisterComponent implements OnInit {
     lastName: [''],
     address: [''],
     email: [''],
-    password: ['']
+    password: [''],
+    termsAndConditions: [false ,[Validators.requiredTrue]]
   });
 
   get address() {
@@ -50,7 +51,9 @@ export class RegisterComponent implements OnInit {
   get lastName() {
     return this.registerForm.get('lastName');
   }
-
+  get termsAndConditions() {
+    return this.registerForm.get('termsAndConditions');
+  }
   sumbitForm() {
     if (this.registerForm.valid) {
       const user: UserRequestRegistration = {
@@ -84,6 +87,8 @@ export class RegisterComponent implements OnInit {
           
         }
       });
+    }else {
+      this.registerForm.markAllAsTouched();
     }
   }
 }

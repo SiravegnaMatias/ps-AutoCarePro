@@ -8,10 +8,13 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import utn.frc.ps.AutoCareProBE.dtos.user.UserResponse;
+import utn.frc.ps.AutoCareProBE.dtos.user.UserUpdateRequest;
 import utn.frc.ps.AutoCareProBE.services.User.UserService;
 
 @RestController
@@ -28,9 +31,13 @@ public class UsersController {
         return ResponseEntity.ok(userService.findUserById(id));
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping
     public ResponseEntity<List<UserResponse>> findAllUsers() {
         return ResponseEntity.ok(userService.findAll());
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<UserResponse> update(@PathVariable Long id, @RequestBody UserUpdateRequest user) {
+        return ResponseEntity.ok(userService.updateUser(id,user));
     }
 }

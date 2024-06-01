@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { UserRequestRegistration } from '../models/UserRequestRegistration';
 import { Observable } from 'rxjs';
 import { userLogin } from '../models/UserLogin';
-import { User } from '../models/User';
+import { User, UserUpdate } from '../models/User';
 
 @Injectable({
   providedIn: 'root'
@@ -44,6 +44,9 @@ export class UserService {
     return this.http.get<User>(this.url +'/' +id);
   }
 
+  updateUser(user:UserUpdate, id:number):Observable<User>{
+    return this.http.put<User>(this.url + '/' + id, user);
+  }
   registerUser(user:UserRequestRegistration):Observable<void>{
     return this.http.post<void>(this.urlRegisterUser,user);
   }

@@ -24,8 +24,9 @@ export class LoginComponent {
     email: [''],
     password: ['']
   });
-  seeNoti(){
-    this.notification.success('Andan papa');
+
+  succesfulLogin(){
+    this.notification.success('Loggeo exitoso');
   }
 
   sumbitForm() {
@@ -36,7 +37,7 @@ export class LoginComponent {
     this.loginService.login(userLogin).subscribe({
       next: (response) => {
         if (response) {
-          alert('Login Successfull');
+          this.succesfulLogin();
           this.route.navigate(['/home']);
         } else {
           alert('Login Failed');

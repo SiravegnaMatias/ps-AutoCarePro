@@ -10,3 +10,10 @@ export interface Role {
     id: number;
     name: string;
 }
+
+export interface UserUpdate {
+    firstName: string;
+    lastName: string;
+    address: string;
+    phone: string;
+}

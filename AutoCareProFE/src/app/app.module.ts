@@ -22,6 +22,7 @@ import { UsersComponent } from './components/users/users.component';
 import { EcommerceComponent } from './components/ecommerce/ecommerce.component';
 import { FrequentQuestionsComponent } from './components/frequent-questions/frequent-questions.component';
 import { AdminComponent } from './components/admin/admin.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { AdminComponent } from './components/admin/admin.component';
     EcommerceComponent,
     FrequentQuestionsComponent,
     AdminComponent,
+    ProfileComponent,
 
   ],
   imports: [

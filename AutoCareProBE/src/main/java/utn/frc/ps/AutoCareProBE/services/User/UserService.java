@@ -14,6 +14,7 @@ import utn.frc.ps.AutoCareProBE.Entities.User.UserEntity;
 import utn.frc.ps.AutoCareProBE.dtos.user.AuthResponse;
 import utn.frc.ps.AutoCareProBE.dtos.user.UserRequest;
 import utn.frc.ps.AutoCareProBE.dtos.user.UserResponse;
+import utn.frc.ps.AutoCareProBE.dtos.user.UserUpdateRequest;
 import utn.frc.ps.AutoCareProBE.models.Role;
 import utn.frc.ps.AutoCareProBE.repositories.User.RoleJpaRepository;
 import utn.frc.ps.AutoCareProBE.repositories.User.UserJpaRepository;
@@ -112,6 +113,35 @@ public class UserService {
       throw new EntityNotFoundException("User not found");
     }
     return user.get();
+  }
+
+  public UserResponse updateUser(Long id, UserUpdateRequest user) {
+   Optional< UserEntity> userEntity = userJpaRepository.findById(id);
+    if (userEntity.isEmpty()) {
+      throw new EntityNotFoundException("User not found");
+    }
+
+    UserEntity userToUpdate = userEntity.get();
+    
+    userToUpdate.setFirstName(user.getFirstName());
+    userToUpdate.setLastName(user.getLastName());
+    userToUpdate.setAddress(user.getAddress());
+
+    if(user.getPhone() != null){
+      //userToUpdate.setPhone(user.getPhone());
+    }
+
+    userJpaRepository.save(userToUpdate);
+
+    return UserResponse.builder() 
+                    .address(userToUpdate.getAddress())
+                    .email(userToUpdate.getEmail())
+                    .role(Role.builder().id(userToUpdate.getRole().getId()).name(userToUpdate.getRole().getName()).build())
+                    .firstName(userToUpdate.getFirstName())
+                    .lastName(userToUpdate.getLastName())
+                    .id(userToUpdate.getId())
+                  .build();
+  
   }
 
 }

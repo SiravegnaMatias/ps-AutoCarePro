@@ -10,6 +10,7 @@
             <div class="card mb-2" style="height: 29rem;" >
                 <img src="{{service.image}}" class="card-img-top fixed-size-img
                 " alt="...">
+                
                 <div class="card-body">
                     <h5 class="card-title">{{service.name}}</h5>
                     <p class="card-text">{{service.description}}</p>
@@ -19,7 +20,9 @@
                         ${{service.price}}
                     </div>
                     <div>
-                        <button class="btn btn-primary btn-sm" (click)="addService(service)">Reservar</button>
+                        <button class="btn btn-primary btn-sm mx-1" (click)="addService(service)">Reservar</button>
+                        <button class="btn btn-warning btn-sm">Editar</button>
+
                     </div>
                 </div>
             </div>

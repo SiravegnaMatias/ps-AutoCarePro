@@ -12,3 +12,10 @@
     justify-content: center;
     background-color: var(--black);
 }
+
+#terms{
+    text-decoration: underline #2596be; 
+    color: #2596be;
+    cursor: pointer;
+    
+}
