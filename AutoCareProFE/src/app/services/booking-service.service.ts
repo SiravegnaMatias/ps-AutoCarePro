@@ -35,4 +35,8 @@ export class BookingServiceService {
     return this.http.patch<Booking>(`${this.url}/${id}/status`, { status: status });
   }
   
+  public cancelBooking(id:number):Observable<Booking>{
+    return this.http.get<Booking>(`${this.url}/cancel/${id}`);
+
+  }
 }

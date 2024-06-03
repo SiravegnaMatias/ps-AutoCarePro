@@ -155,6 +155,30 @@ private StatusJpaRepository statusJpaRepository;
         .services(services)
         .build();
     }
+
+    
+    public BookingResponseDTO setCancelledStatus(Long id) {
+       Optional<BookingEntity> bookingEntityOptional = bookingJpaRepository.findById(id);
+       if (bookingEntityOptional.isEmpty()) {
+           throw new RuntimeException("Booking not found");
+       }
+       BookingEntity bookingEntity = bookingEntityOptional.get();
+       StatusEntity statusEntity = statusJpaRepository.findById(5L).get();
+       bookingEntity.setStatus(statusEntity);
+
+         bookingJpaRepository.save(bookingEntity);
+
+        List<BookingDetailEntity> bookingDetailEntities =  getBookingDetails(bookingEntity);
+        List<DTOService> services = getServicesDTOs(bookingDetailEntities);
+        return BookingResponseDTO.builder()
+        .id(bookingEntity.getId())
+        .date(bookingEntity.getDate())
+        .vehicle(bookingEntity.getVehicle().getBrand() + " " + bookingEntity.getVehicle().getModel())
+        .status(bookingEntity.getStatus().getName())
+        .statusId(bookingEntity.getStatus().getId())
+        .services(services)
+        .build();
+    }
     
     
     //METODOS DE APOYO
@@ -196,6 +220,7 @@ private StatusJpaRepository statusJpaRepository;
     private List<BookingDetailEntity> getBookingDetails(BookingEntity booking) {
         return booking.getBookingDetails();
     }
+
 
    
 }

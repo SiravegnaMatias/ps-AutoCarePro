@@ -23,6 +23,7 @@ import { EcommerceComponent } from './components/ecommerce/ecommerce.component';
 import { FrequentQuestionsComponent } from './components/frequent-questions/frequent-questions.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { EditServiceComponent } from './components/edit-service/edit-service.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { ProfileComponent } from './components/profile/profile.component';
     FrequentQuestionsComponent,
     AdminComponent,
     ProfileComponent,
+    EditServiceComponent,
 
   ],
   imports: [

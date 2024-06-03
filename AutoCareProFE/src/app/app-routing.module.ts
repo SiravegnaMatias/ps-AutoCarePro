@@ -15,6 +15,7 @@ import { isLoggedInGuard } from './guards/is-logged-in.guard';
 import { authGuard } from './guards/auth.guard';
 import { AdminComponent } from './components/admin/admin.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { EditServiceComponent } from './components/edit-service/edit-service.component';
 
 const routes: Routes = [
   {
@@ -32,6 +33,10 @@ const routes: Routes = [
         component: ServicesComponent ,
         data: {allowedRoles: ['ADMIN', 'CLIENT', 'DETAILER']}
 
+      },{
+        path: 'services/edit/:name',
+        component: EditServiceComponent,
+        data: {allowedRoles: ['ADMIN']}
       },
       {
         path: 'users/register-detailer',

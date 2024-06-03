@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Service } from '../models/Service';
+import { Service, ServiceUpdate } from '../models/Service';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -16,6 +16,14 @@ export class ServiceManagmentService {
 
   public getServices():Observable<Service[]> {
     return this.http.get<Service[]>('http://localhost:8080/services');
+  }
+
+  getServiceByName(name: string): Observable<Service> {
+    return this.http.get<Service>(`http://localhost:8080/services/name/${name}`);
+  }
+
+  updateService(service: ServiceUpdate): Observable<Service> {
+    return this.http.put<Service>(`http://localhost:8080/services`,service);
   }
 
   public getServicesOff():Service[] {

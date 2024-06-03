@@ -6,6 +6,7 @@ import { BookingServiceService } from 'src/app/services/booking-service.service'
 import { LoginService } from 'src/app/services/login.service';
 import { BookingsComponent } from '../bookings/bookings.component';
 import { AlertService } from 'src/app/services/alert.service';
+import * as alertify from 'alertifyjs';
 
 @Component({
   selector: 'app-my-bookings',
@@ -19,11 +20,15 @@ export class MyBookingsComponent implements OnInit {
   constructor(private bookingService:BookingServiceService, private loginService:LoginService,private alert:AlertService) { }
   ngOnInit(): void {
     this.userId = this.loginService.currentUserData.value.id;
+    this.refreshBookings();
+  }
+
+  refreshBookings(){
     this.bookingService.getBookingsById(this.userId).subscribe({
       next: (res) => {
         this.bookings = res;
       }
-    })
+    });
   }
 
   getServices(services:Service[]):string{
@@ -42,7 +47,16 @@ export class MyBookingsComponent implements OnInit {
     });
     return total.toFixed(2);
   }
-  showAlert(){
-    this.alert.message('Booking Cancelled Successfully');
+  cancelBooking(id:number){
+    alertify.confirm('Are you sure you want to cancel this booking?',()=>{
+      this.bookingService.cancelBooking(id).subscribe({
+        next: (res) => {
+          this.alert.success('Booking canceled successfully');
+          this.refreshBookings();
+        }
+      })
+    })
   }
+
+ 
 }

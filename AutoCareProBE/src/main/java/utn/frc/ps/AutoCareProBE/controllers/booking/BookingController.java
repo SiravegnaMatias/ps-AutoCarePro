@@ -37,6 +37,10 @@ public class BookingController {
     public ResponseEntity<BookingResponseDTO> find(@PathVariable Long id) {
       return ResponseEntity.ok(bookingService.findBookingById(id));
     }
+    @GetMapping("/cancel/{id}")
+    public ResponseEntity<BookingResponseDTO> setStatus(@PathVariable Long id) {
+      return ResponseEntity.ok(bookingService.setCancelledStatus(id));
+    }
 
     @PostMapping()
     public ResponseEntity<BookingResponseDTO> create(@RequestBody BookingRequestDTO booking) {

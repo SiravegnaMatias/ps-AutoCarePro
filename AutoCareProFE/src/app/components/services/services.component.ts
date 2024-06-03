@@ -89,6 +89,7 @@ export class ServicesComponent implements OnInit {
   deleteService(index: number) {
     this.servicesSelcted.splice(index, 1);
   }
+
   refreshServices() {
     this.service.getServices().subscribe({
       next: (res: Service[]) => {
@@ -101,7 +102,6 @@ export class ServicesComponent implements OnInit {
   }
 
   sumbit() {
-
     this.booking = {
       userId: this.userId,
       date: this.formServices.value.date,
@@ -109,7 +109,6 @@ export class ServicesComponent implements OnInit {
       additionalNotes: this.formServices.value.additionalNotes,
       services: this.servicesSelcted
     }
-
     this.bookingService.addBooking(this.booking).subscribe({
       next: (res) => {
         alert('Booking added');
@@ -130,5 +129,11 @@ export class ServicesComponent implements OnInit {
     });
     return total.toString();
   }
+
+  editService(name:string){
+    this.router.navigate(['/home/services/edit',name]);
+  }
+
+
 
 }

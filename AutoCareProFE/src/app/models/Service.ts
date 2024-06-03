@@ -4,3 +4,9 @@ export interface Service {
     price: number;
     image: string;
 }
+
+export interface ServiceUpdate {
+    name: string;
+    description: string;
+    price: number;
+}

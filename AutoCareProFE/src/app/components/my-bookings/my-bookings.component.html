@@ -6,7 +6,7 @@
             <div class="card m-3 ">
                 <div class="card-header d-flex justify-content-between" style="background-color: var(--white); color: var(--black);">
                     <h5 class="card-text"> #{{booking.id}} - {{booking.date}}</h5>
-                    <button class="btn btn-secondary" (click)="showAlert()">
+                    <button class="btn btn-secondary" (click)="cancelBooking(booking.id)">
                         <i class="bi bi-x-octagon"></i>
                     </button>
                 </div>
