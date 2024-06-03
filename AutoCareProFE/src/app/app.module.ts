@@ -19,11 +19,17 @@ import { MyBookingsComponent } from './components/my-bookings/my-bookings.compon
 import { BookingsComponent } from './components/bookings/bookings.component';
 import { EditBookingComponent } from './components/edit-booking/edit-booking.component';
 import { UsersComponent } from './components/users/users.component';
-import { EcommerceComponent } from './components/ecommerce/ecommerce.component';
+import { EcommerceComponent } from './components/ecommerceComponents/ecommerce/ecommerce.component';
 import { FrequentQuestionsComponent } from './components/frequent-questions/frequent-questions.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { EditServiceComponent } from './components/edit-service/edit-service.component';
+import { ProductDetailComponent } from './components/ecommerceComponents/product-detail/product-detail.component';
+import { ShoppingCartComponent } from './components/ecommerceComponents/shopping-cart/shopping-cart.component';
+import { AdminProductsComponent } from './components/ecommerceComponents/admin-products/admin-products.component';
+import { AdminSalesComponent } from './components/ecommerceComponents/admin-sales/admin-sales.component';
+import { EditProductComponent } from './components/ecommerceComponents/edit-product/edit-product.component';
+import { AdminEcommerceComponent } from './components/ecommerceComponents/admin-ecommerce/admin-ecommerce.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +50,12 @@ import { EditServiceComponent } from './components/edit-service/edit-service.com
     AdminComponent,
     ProfileComponent,
     EditServiceComponent,
+    ProductDetailComponent,
+    ShoppingCartComponent,
+    AdminProductsComponent,
+    AdminSalesComponent,
+    EditProductComponent,
+    AdminEcommerceComponent,
 
   ],
   imports: [
