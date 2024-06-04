@@ -5,6 +5,14 @@
     width: 15%;
 }
 
+.logo {
+    width: 100%; /* Ajustar ancho de la imagen al 100% del contenedor */
+    max-width: 150px; /* Máximo ancho de la imagen */
+    height: auto; /* Mantener proporción de la imagen */
+    display: block; /* Mostrar imagen como bloque */
+    margin: 0 auto 1rem; /* Centrar la imagen y agregar margen inferior */
+}
+
 .sidebar-custom a {
     color: var(--black);
 

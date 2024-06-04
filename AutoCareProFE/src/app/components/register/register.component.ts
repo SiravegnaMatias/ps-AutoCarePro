@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserRequestRegistration } from 'src/app/models/UserRequestRegistration';
+import { AlertService } from 'src/app/services/alert.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -14,7 +15,8 @@ export class RegisterComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private userService: UserService, 
                 private route: ActivatedRoute,
-                private router:Router
+                private router:Router,
+                private alertService:AlertService
               ) { }
 
   private role!:string;
@@ -32,7 +34,7 @@ export class RegisterComponent implements OnInit {
     address: [''],
     email: [''],
     password: [''],
-    termsAndConditions: [false ,[Validators.requiredTrue]]
+    termsAndConditions: [false,Validators.requiredTrue]
   });
 
   get address() {
@@ -45,7 +47,7 @@ export class RegisterComponent implements OnInit {
   get email() {
     return this.registerForm.get('email');
   }
-  get firsName() {
+  get firstName() {
     return this.registerForm.get('firstName');
   }
   get lastName() {
@@ -66,15 +68,6 @@ export class RegisterComponent implements OnInit {
         idRole: this.role === 'client' ? 3 : 2
       }
 
-      // this.userService.registerUser(user).subscribe(
-      //   response => {
-      //     alert('User registered successfully!');
-      //     this.registerForm.reset();
-      //   },
-      //   error => {
-      //     console.log(error);
-      //   }
-      // )
       this.userService.registerUser(user).subscribe({
         next: (response) => {
           alert('User registered successfully!');
@@ -89,6 +82,7 @@ export class RegisterComponent implements OnInit {
       });
     }else {
       this.registerForm.markAllAsTouched();
+      this.alertService.error('Please fill all the fields');
     }
   }
 }

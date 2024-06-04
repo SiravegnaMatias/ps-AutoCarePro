@@ -27,7 +27,7 @@ export class ServicesComponent implements OnInit {
   userId: number = 0;
   currentUser!: User;
   cars: CarResponse[] = [];
-  booking!:BookingRequest;
+  booking!: BookingRequest;
   constructor(
     private service: ServiceManagmentService,
     private srvUpd: ServiceUpdateService,
@@ -36,19 +36,19 @@ export class ServicesComponent implements OnInit {
     private userService: UserService,
     private carService: CarService,
     private bookingService: BookingServiceService,
-    private router:Router ,
-    private notification:AlertService
+    private router: Router,
+    private notification: AlertService
   ) {
-     srvUpd.serviceAdded$.subscribe({
-       next: () => {
-         this.refreshServices();
-       }
-     })
+    srvUpd.serviceAdded$.subscribe({
+      next: () => {
+        this.refreshServices();
+      }
+    })
 
 
   }
 
-  
+
   formServices: any = this.fb.group({
     date: [''],
     vehicle: [''],
@@ -58,12 +58,22 @@ export class ServicesComponent implements OnInit {
   ngAfterViewInit() {
     flatpickr('#datepicker', {
       enableTime: true,
-      dateFormat: "Y-m-d H:i",
+      dateFormat: "d-m-Y H:i",
+      minDate: "today",
+      "disable": [
+        function (date) {
+          // return true to disable
+          return date.getDay() === 0;
+            //agregar funcion para desabilitar cuando haya mas de 3 reservas en esa hora
+        }
+      ],
+      minTime: "09:00",
+      maxTime: "19:00"
     });
 
   }
   ngOnInit(): void {
-     this.refreshServices();
+    this.refreshServices();
     this.userId = this.logService.currentUserData.value.id;
     this.userService.getUserById(this.userId).subscribe({
       next: (res: User) => {
@@ -122,16 +132,16 @@ export class ServicesComponent implements OnInit {
     });
   }
 
-  getTotal():string {
-    let total:number = 0;
+  getTotal(): string {
+    let total: number = 0;
     this.servicesSelcted.forEach((service) => {
       total += service.price;
     });
     return total.toString();
   }
 
-  editService(name:string){
-    this.router.navigate(['/home/services/edit',name]);
+  editService(name: string) {
+    this.router.navigate(['/home/services/edit', name]);
   }
 
 

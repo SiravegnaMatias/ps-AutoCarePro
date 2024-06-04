@@ -21,15 +21,13 @@
 
           <label class="form-label">Contraseña</label>
           <input type="password" class="form-control" formControlName="password">
-          <div *ngIf="password?.touched && password?.hasError">
-            hola
-          </div>
+          
 
 
 
           <div class="d-grid gap-2 mt-4">
             <div class="mb-2 form-check">
-              <input type="checkbox" class="form-check-input" id="termsNConditionsCheck">
+              <input type="checkbox" class="form-check-input" id="termsNConditionsCheck" formControlName= "termsAndConditions">
               <label class="form-check-label" for="termsNConditionsCheck">He leído y acepto <a data-bs-toggle="modal"
                   data-bs-target="#exampleModal" id="terms">Terminos y condiciones</a></label>
             </div>
