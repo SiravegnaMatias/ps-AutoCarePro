@@ -8,29 +8,50 @@
     <div class="modal-dialog modal-dialog-scrollable">
       <div class="modal-content" style="background-color: var(--black);">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="staticBackdropLabel">Agregar Servicio</h1>
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Agregar Vehiculo</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="background-color: var(--white);"></button>
         </div>
         <div class="modal-body">
             <form [formGroup]="carForm">
                 <label class="form-label">Marca</label>
-                <input type="text" class="form-control" formControlName="brand" >
-                
+                <input type="text" class="form-control" formControlName="brand" [ngClass]="{ 'is-invalid': brand?.invalid && brand?.touched }" >
+                <div *ngIf="brand?.touched && brand?.hasError" class="danger text-danger">
+                  <span *ngIf="brand?.getError('required')"> La marca del vehiculo es requerida</span>
+                  <span *ngIf="brand?.getError('maxlength')"> La marca no debe tener un nombre mayor a 35 caracteres</span>
+                  <span *ngIf="brand?.getError('minlength')"> La marca debe tener un nombre de al menos 1 caracter</span>
+                </div>
 
                 <label class="form-label">Modelo</label>
-                <input type="text" class="form-control" formControlName="model">
+                <input type="text" class="form-control" formControlName="model" [ngClass]="{ 'is-invalid': model?.invalid && model?.touched }">
+                <div *ngIf="model?.touched && model?.hasError" class="danger text-danger">
+                  <span *ngIf="model?.getError('required')"> El modelo del vehiculo es requerida</span>
+                  <span *ngIf="model?.getError('maxlength')"> El modelo no puede tener un nombre mayor a 35 caracteres</span>
+                  <span *ngIf="model?.getError('minlength')"> El modelo debe tener un nombre de al menos 4 caracteres</span>
+                </div>
 
                 <label class="form-label">Año</label>
-                <input type="number" class="form-control" formControlName="year">
+                <input type="number" class="form-control" formControlName="year" [ngClass]="{ 'is-invalid': year?.invalid && year?.touched }">
+                <div *ngIf="year?.touched && year?.hasError" class="danger text-danger">
+                  <span *ngIf="year?.getError('required')"> El año del vehiculo es requerido</span>
+                  <span *ngIf="year?.getError('min')"> El año minimo es 1900</span>
+                </div>
 
                 <label class="form-label">Patente</label>
-                <input type="text" class="form-control" formControlName="plate" >
+                <input type="text" class="form-control" formControlName="plate" [ngClass]="{ 'is-invalid': plate?.invalid && plate?.touched }">
+                <div *ngIf="plate?.touched && plate?.hasError" class="danger text-danger">
+                  <span *ngIf="plate?.getError('required')"> La patente del vehiculo es requerida</span>
+                  <span *ngIf="plate?.getError('maxlength')"> La patente no debe ser mayor a 7 caracteres</span>
+                  <span *ngIf="plate?.getError('minlength')"> La patente debe tener minimo 6 caracters</span>
+                </div>
 
                 <label class="form-label">Tipo</label>
-                <select class="form-select" formControlName="carType" >
+                <select class="form-select" formControlName="carType" [ngClass]="{ 'is-invalid': carType?.invalid && carType?.touched }">
                     <option selected disabled>Seleccione un tipo</option>
                     <option *ngFor="let car of carTypes" value="{{car}}">{{car}}</option>
                 </select>
+                <div *ngIf="carType?.touched && carType?.hasError" class="danger text-danger">
+                  <span *ngIf="carType?.getError('required')"> Seleccion un tipo de vehiculo</span>
+                </div>
 
   
             </form>

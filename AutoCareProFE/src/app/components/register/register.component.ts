@@ -29,11 +29,11 @@ export class RegisterComponent implements OnInit {
 
 
   registerForm = this.fb.group({
-    firstName: [''],
-    lastName: [''],
-    address: [''],
-    email: [''],
-    password: [''],
+    firstName: ['',[Validators.required, Validators.maxLength(35), Validators.minLength(4)]],
+    lastName: ['',[Validators.required, Validators.maxLength(35), Validators.minLength(4)]],
+    address: ['',[Validators.required, Validators.maxLength(65), Validators.minLength(4)]],
+    email: ['',[ Validators.required, Validators.email]],
+    password: ['',[Validators.required, Validators.minLength(8)]],
     termsAndConditions: [false,Validators.requiredTrue]
   });
 
@@ -70,19 +70,18 @@ export class RegisterComponent implements OnInit {
 
       this.userService.registerUser(user).subscribe({
         next: (response) => {
-          alert('User registered successfully!');
+          this.alertService.succesfullLogin('Usuario registrado correctamente');
           this.registerForm.reset();
           this.router.navigate(['/login']);
         },
         error: (err) => {
           console.error('Error registering user:', err);
-          alert('Failed to register user');
+          this.alertService.somethingWentWrong('Error registrando el usuario', 'No se ha podido registrar el usuario, por favor intente de nuevo');
           
         }
       });
     }else {
       this.registerForm.markAllAsTouched();
-      this.alertService.error('Please fill all the fields');
     }
   }
 }

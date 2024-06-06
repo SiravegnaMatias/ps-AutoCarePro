@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { CarRequest } from 'src/app/models/CarRequest';
+import { AlertService } from 'src/app/services/alert.service';
 import { CarService } from 'src/app/services/car.service';
 import { LoginService } from 'src/app/services/login.service';
 
@@ -15,7 +16,8 @@ export class AddCarComponent implements OnInit {
   car!:CarRequest;
   constructor(private fb:FormBuilder,
     private carService: CarService,
-    private loginService:LoginService
+    private loginService:LoginService,
+    private alertService:AlertService
   ){}
 
   carTypes: String[] = [];
@@ -25,11 +27,11 @@ export class AddCarComponent implements OnInit {
   }
 
   carForm = this.fb.group({
-    model: [''],
-    brand:[''],
-    year: [null],
-    plate: [''],
-    carType: [''],
+    model: ['',[Validators.required, Validators.maxLength(35),Validators.minLength(4)]],
+    brand:['',[Validators.required, Validators.maxLength(35),Validators.minLength(1)]],
+    year: [null,[Validators.required, Validators.min(1900)]],
+    plate: ['',[Validators.required, Validators.maxLength(7),Validators.minLength(6)]],
+    carType: ['',Validators.required],
   });
  
 
@@ -46,16 +48,21 @@ export class AddCarComponent implements OnInit {
     this.carService.addCar(this.car).subscribe({
       next: (response) => {
         console.log(response);
-        alert('Car added successfully');
+        this.alertService.succesfullLogin('Vehiculo añadido correctamente');
       this.carService.carAdded(); 
 
       },
       error: (err) => {
         console.error('Error adding car:', err);
-        alert('Failed to add car');
+        this.alertService.somethingWentWrong('Error añadiendo el vehiculo', 'No se ha podido agregar el vehiculo, por favor intente de nuevo');
       }
     });
   }
 
+  get brand() { return this.carForm.get('brand'); }
+  get model() { return this.carForm.get('model'); }
+  get year() { return this.carForm.get('year'); }
+  get plate() { return this.carForm.get('plate'); }
+  get carType() { return this.carForm.get('carType'); }
  
 }

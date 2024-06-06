@@ -1,23 +1,33 @@
+<div class="vh-100 div-container" style="background-color: var(--black);">
+  <section>
+    <div class="card m-auto card-login" style="width: 28rem; height: 20rem;">
+      <form [formGroup]="loginForm">
+        <div class="card-body">
+          <h5 class="card-title text-center">Bienvenido a AutoCarePro</h5>
 
-<div class="vh-100 div-container" style="background-color: var(--black);" >
-  <section >
-    <div class="card m-auto card-login" style="width: 28rem; height: 20rem;"  >
-      <form [formGroup]="loginForm">  
-            <div class="card-body">
-              <h5 class="card-title text-center">Bienvenido a AutoCarePro</h5>
-    
-              <label class="form-label">Email</label>
-              <input type="text" class="form-control" formControlName = "email">
-    
-              <label class="form-label">Contraseña</label>
-              <input type="password" class="form-control" formControlName = "password">
-  
-              <div class="d-grid gap-2 mt-4">
-                <button class="btn btn-primary mt-2 " (click)="sumbitForm()">Ingresar</button>
-                <h6 class="card-subtitle mb-2 text-body-secondary ">No sos cliente? <a routerLink="/register">Registrate</a></h6>
-              </div>
-            </div>
-          </form>
+          <label class="form-label">Email</label>
+          <input type="text" class="form-control" formControlName="email"
+            [ngClass]="{ 'is-invalid': email?.invalid && email?.touched }">
+          <div *ngIf="email?.touched && email?.hasError" class="danger text-danger">
+            <span *ngIf="email?.getError('required')">Ingrese su email</span>
+            <span *ngIf="email?.getError('email')">Formato no válido</span>
           </div>
-    </section>
+
+
+          <label class="form-label">Contraseña</label>
+          <input type="password" class="form-control" formControlName="password"  [ngClass]="{ 'is-invalid': password?.invalid && password?.touched }">
+
+          <div *ngIf="password?.touched && password?.hasError" class="danger text-danger">
+            <span *ngIf="password?.getError('required')">Ingrese su contraseña</span>
+          </div>
+
+          <div class="d-grid gap-2 mt-4">
+            <button class="btn btn-primary mt-2 " (click)="sumbitForm()">Ingresar</button>
+            <h6 class="card-subtitle mb-2 text-body-secondary ">No sos cliente? <a routerLink="/register">Registrate</a>
+            </h6>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
 </div>

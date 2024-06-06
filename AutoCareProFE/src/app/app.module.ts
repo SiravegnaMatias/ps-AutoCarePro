@@ -30,6 +30,7 @@ import { AdminProductsComponent } from './components/ecommerceComponents/admin-p
 import { AdminSalesComponent } from './components/ecommerceComponents/admin-sales/admin-sales.component';
 import { EditProductComponent } from './components/ecommerceComponents/edit-product/edit-product.component';
 import { AdminEcommerceComponent } from './components/ecommerceComponents/admin-ecommerce/admin-ecommerce.component';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { AdminEcommerceComponent } from './components/ecommerceComponents/admin-
     ReactiveFormsModule,
     HttpClientModule,
     NgxDropzoneModule,
-    FormsModule
+    FormsModule,
+    SweetAlert2Module.forRoot()
 
   ],
   providers: [{

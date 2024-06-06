@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Booking } from 'src/app/models/Booking';
 import { Status } from 'src/app/models/Status';
+import { AlertService } from 'src/app/services/alert.service';
 import { BookingServiceService } from 'src/app/services/booking-service.service';
 import { StatusService } from 'src/app/services/status.service';
 
@@ -18,7 +19,8 @@ export class EditBookingComponent implements OnInit {
   constructor(private route: ActivatedRoute,
     private bookingService: BookingServiceService,
     private router: Router,
-    private statusService: StatusService
+    private statusService: StatusService,
+    private alertService:AlertService
   ) { }
 
   ngOnInit(): void {
@@ -28,7 +30,7 @@ export class EditBookingComponent implements OnInit {
         this.booking = res;
       }, error: (err) => {
         console.error('Error getting booking:', err);
-        alert('Failed to get booking');
+        this.alertService.somethingWentWrong('Error obteniendo la reserva', 'No se ha podido obtener la reserva, por favor intente de nuevo');
       }
     });
     this.statusService.getStatuses().subscribe({
@@ -37,7 +39,7 @@ export class EditBookingComponent implements OnInit {
       },
       error: (err) => {
         console.error('Error getting statuses:', err);
-        alert('Failed to get statuses');
+        this.alertService.somethingWentWrong('Error obteniendo los estados', 'No se ha podido obtener los estados, por favor intente de nuevo');
       }
     });
 
@@ -55,12 +57,12 @@ export class EditBookingComponent implements OnInit {
     const selectedStatusId = this.getSelectedStatusName();
     this.bookingService.updateBookingStatus(Number(this.bookingId), Number(selectedStatusId)).subscribe({
       next: (res) => {
-        alert('Booking updated successfully');
+        this.alertService.succesfullLogin('Reserva actualizada correctamente');
         this.router.navigate(['/home/bookings']);
       },
       error: (err) => {
         console.error('Error updating booking:', err);
-        alert('Failed to update booking');
+        this.alertService.somethingWentWrong('Error actualizando la reserva', 'No se ha podido actualizar la reserva, por favor intente de nuevo');
       }
     });
   }

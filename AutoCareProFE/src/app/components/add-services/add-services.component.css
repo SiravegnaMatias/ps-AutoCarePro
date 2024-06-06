@@ -2,6 +2,7 @@ input,
 textarea,
 ngx-dropzone {
     background-color: var(--black);
+    color: var(--white);
 }
 
 input:focus,

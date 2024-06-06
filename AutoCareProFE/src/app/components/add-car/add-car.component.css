@@ -1,7 +1,7 @@
 input,
 textarea,select{
     background-color: var(--black);
-
+    color: var(--white);
 }
 
 input:focus,

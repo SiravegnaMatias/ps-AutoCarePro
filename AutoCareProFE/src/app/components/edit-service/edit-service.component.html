@@ -6,27 +6,38 @@
             <div class="col-md-6">
                 <div class="mb-3">
                     <label class="form-label">Nombre</label>
-                    <input type="text" class="form-control" formControlName = "name" [disabled]="disabled">
+                    <input type="text" class="form-control" formControlName = "name" [disabled]="disabled" [ngClass]="{ 'is-invalid': name?.invalid && name?.touched }">
+                    <div *ngIf="name?.touched && name?.hasError" class="danger text-danger">
+                        <span *ngIf="name?.getError('required')"> El servicio debe tener un nombre</span>
+                        <span *ngIf="name?.getError('maxlength')"> El servicio no debe tener un nombre mayor a 35 caracteres</span>
+                        <span *ngIf="name?.getError('minlength')"> El servicio debe tener un nombre de al menos 4 caracteres</span>
+                      </div>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Precio</label>
-                    <input type="number" class="form-control" formControlName="price" [disabled]="isDisabled">
-
+                    <input type="number" class="form-control" formControlName="price" [disabled]="isDisabled" [ngClass]="{ 'is-invalid': price?.invalid && price?.touched }">
+                    <div *ngIf="price?.touched && price?.hasError" class="danger text-danger">
+                        <span *ngIf="price?.getError('required')"> El servicio debe tener un precio</span>
+                        <span *ngIf="price?.getError('min')"> El precio debe ser mayor a $0</span>
+                      </div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="mb-3">
                     <label class="form-label">Descripción</label>
-                    <textarea class="form-control" name="" id="" formControlName="description" [disabled]="isDisabled"></textarea>
-
+                    <textarea class="form-control" name="" id="" formControlName="description" [disabled]="isDisabled" [ngClass]="{ 'is-invalid': description?.invalid && description?.touched }"></textarea>
+                    <div *ngIf="description?.touched && description?.hasError" class="danger text-danger" [ngClass]="{ 'is-invalid': description?.invalid && description?.touched }">
+                        <span *ngIf="description?.getError('required')"> El servicio debe tener una descripcion</span>
+                        <span *ngIf="description?.getError('maxlength')"> El servicio no puede tener una descripcion mayor a 250 caracteres</span>
+                        <span *ngIf="description?.getError('minlength')"> El servicio no puede tener una descripcion menor a 5 caracteres</span>
+                      </div>
                 </div>
             </div>
 
         </div>
         <div class="mt-3">
-            <button type="button" class="btn btn-primary mx-2" (click)="toggleEdit()">{{ isDisabled ? 'Editar servicio' :
-                'Cancelar' }}
-            </button>
+            <!-- <button type="button" class="btn btn-primary mx-2" (click)="  toggleEdit()">{{ isDisabled ? 'Editar servicio' : 'Cancelar' }}</button> -->
+            <button type="button" class="btn btn-primary mx-2" (click)=" !isDisabled ? cancelChanges(): toggleEdit()">{{ isDisabled ? 'Editar servicio' : 'Cancelar' }}</button>
             <button  *ngIf="!isDisabled" type="submit" class="btn btn-primary mx-2" (click)="confirmChanges()">Confirmar</button>
         </div>
 

@@ -4,9 +4,7 @@
   </button>
   
  
-  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
-  
-  >
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" >
     <div class="modal-dialog modal-dialog-scrollable" >
       <div class="modal-content" style="background-color: var(--black);">
         <div class="modal-header">
@@ -15,13 +13,31 @@
         </div>
         <div class="modal-body">
             <form [formGroup]="serviceForm">
+
                 <label class="form-label">Nombre</label>
-                <input type="text" class="form-control" formControlName ="name">
+                <input type="text" class="form-control" formControlName ="name" [ngClass]="{ 'is-invalid': name?.invalid && name?.touched }">
+                <div *ngIf="name?.touched && name?.hasError" class="danger text-danger">
+                  <span *ngIf="name?.getError('required')"> El servicio debe tener un nombre</span>
+                  <span *ngIf="name?.getError('maxlength')"> El servicio no debe tener un nombre mayor a 35 caracteres</span>
+                  <span *ngIf="name?.getError('minlength')"> El servicio debe tener un nombre de al menos 4 caracteres</span>
+                </div>
+
                 <label class="form-label">Descripcion</label>
                 <textarea class="form-control" id="floatingTextarea" formControlName = "description"></textarea>
+                <div *ngIf="description?.touched && description?.hasError" class="danger text-danger" [ngClass]="{ 'is-invalid': description?.invalid && description?.touched }">
+                  <span *ngIf="description?.getError('required')"> El servicio debe tener una descripcion</span>
+                  <span *ngIf="description?.getError('maxlength')"> El servicio no puede tener una descripcion mayor a 250 caracteres</span>
+                  <span *ngIf="description?.getError('minlength')"> El servicio no puede tener una descripcion menor a 5 caracteres</span>
+                </div>
 
                 <label class="form-label">Precio</label>
-                <input type="number" class="form-control" formControlName="price">
+                <input type="number" class="form-control" formControlName="price"  [ngClass]="{ 'is-invalid': price?.invalid && price?.touched }">
+                <div *ngIf="price?.touched && price?.hasError" class="danger text-danger">
+                  <span *ngIf="price?.getError('required')"> El servicio debe tener un precio</span>
+                  <span *ngIf="price?.getError('min')"> El precio debe ser mayor a $0</span>
+                </div>
+
+
                 <label class="form-label">Imagen</label>
                 <ngx-dropzone (change)="onSelect($event)">
                   <ngx-dropzone-label>Drop it!</ngx-dropzone-label>

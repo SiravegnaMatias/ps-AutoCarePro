@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Observable, catchError, map, throwError } from 'rxjs';
 import { Service } from 'src/app/models/Service';
+import { AlertService } from 'src/app/services/alert.service';
 import { ServiceManagmentService } from 'src/app/services/service-managment.service';
 import { ServiceUpdateService } from 'src/app/services/service-update.service';
 import { UploadImgService } from 'src/app/services/upload-img.service';
-
 @Component({
   selector: 'app-add-services',
   templateUrl: './add-services.component.html',
@@ -17,7 +17,8 @@ export class AddServicesComponent implements OnInit {
                 private fb: FormBuilder, 
                 private uploadService: UploadImgService, 
                 private srv:ServiceManagmentService,
-                private srvUpd:ServiceUpdateService
+                private srvUpd:ServiceUpdateService,
+                private alertService:AlertService
 
   ) { }
   files: File[] = [];
@@ -26,35 +27,42 @@ export class AddServicesComponent implements OnInit {
   }
 
   serviceForm = this.fb.group({
-    name: [''],
-    description: [''],
-    price: [null],
+    name: ['',[Validators.required, Validators.maxLength(35),Validators.minLength(4)]],
+    description: ['', [Validators.required, Validators.maxLength(250),Validators.minLength(5)]],
+    price: [null, [Validators.required, Validators.min(1)]],
     image: ['']
   });
 
-  async sumbit() {
+   sumbit() {
     const service: Service = this.createService(this.serviceForm.value);
     
-    this.uploadAndGetUrl().subscribe({
-      next: (url) => {
-        service.image = url;
-       
-        this.srv.addService(service).subscribe({
-          next: (res) => {
-            alert('Service added successfully');
-            this.serviceForm.reset();
-            this.srvUpd.serviceAdded();
-          },
-          error: (err) => {
-            console.error('Error adding service:', err);
-            alert('Failed to add service');
+    if(this.serviceForm.valid) {
+
+      if(this.files.length === 0){
+        this.alertService.warning('Imagen no seleccionada', 'Por favor seleccione una imagen para el servicio');
+        return;
+      }
+
+      this.uploadAndGetUrl().subscribe({
+        next: (url) => {
+          service.image = url;
+          this.srv.addService(service).subscribe({
+            next: (res) => {
+              this.alertService.succesfullLogin('Servicio añadido correctamente');
+              this.serviceForm.reset();
+              this.srvUpd.serviceAdded();
+            },
+            error: (err) => {
+              console.error('Error adding service:', err);
+              this.alertService.somethingWentWrong('Error añadiendo el servicio', 'No se ha podido agregar el servicio, por favor intente de nuevo');
+            }
+          });
           }
-        });
-        }
-    });
-
+      });
+    } else{
+      this.serviceForm.markAllAsTouched();
+    }
   
-
     
   }
 
@@ -68,7 +76,7 @@ export class AddServicesComponent implements OnInit {
     console.log(event);
     this.files.splice(this.files.indexOf(event), 1);
   }
- 
+  
 
   uploadAndGetUrl(): Observable<string> {
     if (this.files.length === 0) {
@@ -83,29 +91,17 @@ export class AddServicesComponent implements OnInit {
   
     return this.uploadService.uploadImg(data).pipe(
       map(res => {
-        alert('Image uploaded successfully');
+      
         return res.url;
       }),
       catchError((err) => {
         console.error('Error uploading image:', err);
-        alert('Failed to upload image');
+        this.alertService.somethingWentWrong('Error subiendo la imagen', 'El servicio ha fallado al subir la imagen');
         return throwError(err);
       })
     );
   
-    // return this.uploadService.uploadImg(data).pipe(
-    //   map(res => {
-    //     console.log(res);
-    //     console.log(res.url);
-    //     alert('Image uploaded successfully');
-    //     return res.url;
-    //   }),
-    //   catchError((err) => {
-    //     console.error(err);
-    //     // Handle the error here
-    //     return throwError(err);
-    //   })
-    // );
+  
 
   }
 
@@ -117,5 +113,18 @@ export class AddServicesComponent implements OnInit {
       price: value.price || 0,
       image: value.image || ''
     }
+  }
+
+
+  get name(){
+    return this.serviceForm.get('name');
+  }
+
+  get description(){
+    return this.serviceForm.get('description');
+  }
+
+  get price(){
+    return this.serviceForm.get('price');
   }
 }

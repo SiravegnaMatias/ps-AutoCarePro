@@ -4,30 +4,48 @@
 <div class="container mt-5">
   <form [formGroup]="formUser">
     <div class="row">
-      <!-- Primera columna -->
       <div class="col-md-6">
         <div class="mb-3">
           <label for="nombre" class="form-label">Nombre</label>
-          <input type="text" class="form-control" id="nombre" placeholder="Ingrese su nombre" formControlName="firstName" [disabled]="isDisabled">
+          <input type="text" class="form-control" id="nombre" placeholder="Ingrese su nombre" formControlName="firstName" [disabled]="isDisabled" [ngClass]="{ 'is-invalid': firstName?.invalid && firstName?.touched }">
+          <div *ngIf="firstName?.touched && firstName?.hasError" class="danger text-danger">
+            <span *ngIf="firstName?.getError('required')">Ingrese su nombre</span>
+            <span *ngIf="firstName?.getError('minlength')">Su nombre debe tener al menos 4 caracteres</span>
+            <span *ngIf="firstName?.getError('maxlength')">Su nombre no puede tener mas de 35 caracteres</span>
+          </div>
         </div>
         <div class="mb-3">
           <label for="apellido" class="form-label">Apellido</label>
-          <input type="text" class="form-control" id="apellido" placeholder="Ingrese su apellido" formControlName="lastName" [disabled]="isDisabled">
+          <input type="text" class="form-control" id="apellido" placeholder="Ingrese su apellido" formControlName="lastName" [disabled]="isDisabled" [ngClass]="{ 'is-invalid': lastName?.invalid && lastName?.touched }">
+          <div *ngIf="lastName?.touched && lastName?.hasError" class="danger text-danger">
+            <span *ngIf="lastName?.getError('required')">Ingrese su apellido</span>
+            <span *ngIf="lastName?.getError('minlength')">Su apellido debe tener al menos 4 caracteres</span>
+            <span *ngIf="lastName?.getError('maxlength')">Su apellido no puede tener mas de 35 caracteres</span>
+
+          </div>
         </div>
         <div class="mb-3">
-          <label for="direccion" class="form-label">Dirección</label>
-          <input type="text" class="form-control" id="direccion" placeholder="Ingrese su dirección" formControlName="address" [disabled]="isDisabled">
+          <label for="direccion" class="form-label">Direccion</label>
+          <input type="text" class="form-control" id="direccion" placeholder="Ingrese su dirección" formControlName="address" [disabled]="isDisabled" [ngClass]="{ 'is-invalid': address?.invalid && address?.touched }">
+          <div *ngIf="address?.touched && address?.hasError" class="danger text-danger">
+            <span *ngIf="address?.getError('required')">Ingrese su direccion</span>
+            <span *ngIf="address?.getError('minlength')">Su direccion debe tener al menos 4 caracteres</span>
+            <span *ngIf="address?.getError('maxlength')">Su direccion no puede tener mas de 65 caracteres</span>
+          </div>
         </div>
       </div>
-      <!-- Segunda columna -->
       <div class="col-md-6">
         <div class="mb-3">
           <label for="email" class="form-label">Email</label>
-          <input type="email" class="form-control" id="email" placeholder="Ingrese su email" formControlName="email" [disabled]="isDisabled">
+          <input type="email" class="form-control" id="email" placeholder="Ingrese su email" formControlName="email" [disabled]="isDisabled" [ngClass]="{ 'is-invalid': email?.invalid && email?.touched }">
+          <div *ngIf="email?.touched && email?.hasError" class="danger text-danger">
+            <span *ngIf="email?.getError('required')">Ingrese su email</span>
+            <span *ngIf="email?.getError('email')">Formato no válido</span>
+          </div>
         </div>
         <div class="mb-3">
-          <label for="telefono" class="form-label">Teléfono</label>
-          <input type="tel" class="form-control" id="telefono" placeholder="Ingrese su teléfono" formControlName="phone" [disabled]="isDisabled">
+          <label for="telefono" class="form-label">Telefono</label>
+          <input type="tel" class="form-control" id="telefono" placeholder="Ingrese su teléfono" formControlName="phone" [disabled]="isDisabled" [ngClass]="{ 'is-invalid': phone?.invalid && phone?.touched }">
         </div>
         <div class="mb-3 text-center">
           <button type="button" class="btn btn-outline-light mx-2" (click)="goToVehicles()">Ver mis vehículos</button>
@@ -36,7 +54,7 @@
       </div>
     </div>
     <div class="mt-3">
-      <button type="button" class="btn btn-primary mx-2" (click)="toggleEdit()">{{ isDisabled ? 'Editar perfil' : 'Cancelar' }}</button>
+      <button type="button" class="btn btn-primary mx-2" (click)="!isDisabled ? cancelChanges() : toggleEdit()">{{ isDisabled ? 'Editar perfil' : 'Cancelar' }}</button>
       <button *ngIf="!isDisabled" type="submit" class="btn btn-primary mx-2" (click)="confirmChanges()">Confirmar</button>
     </div>
   </form>

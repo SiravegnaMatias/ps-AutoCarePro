@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Route, Router } from '@angular/router';
 import { userLogin } from 'src/app/models/UserLogin';
 import { AlertService } from 'src/app/services/alert.service';
@@ -16,39 +16,50 @@ export class LoginComponent {
     private fb: FormBuilder,
     private loginService: LoginService,
     private route: Router,
-    private notification:AlertService
+    private alertService:AlertService
   ) { }
 
 
   loginForm = this.fb.group({
-    email: [''],
-    password: ['']
+    email: ['',[Validators.required, Validators.email]],
+    password: ['', Validators.required]
   });
 
-  succesfulLogin(){
-    this.notification.success('Loggeo exitoso');
-  }
+ 
 
   sumbitForm() {
     const userLogin: userLogin = {
       email: this.loginForm.value.email || '',
       password: this.loginForm.value.password || ''
     }
-    this.loginService.login(userLogin).subscribe({
-      next: (response) => {
-        if (response) {
-          this.succesfulLogin();
-          this.route.navigate(['/home']);
-        } else {
-          alert('Login Failed');
+    if(this.loginForm.valid){
+     this.loginService.login(userLogin).subscribe({
+        next: (response) => {
+          if (response) {
+            this.alertService.succesfullLogin("Bienvenido a AutoCarePro");
+            this.route.navigate(['/home']);
+          } else {
+            this.alertService.somethingWentWrong('Error al iniciar sesion', 'No se ha podido iniciar sesion, por favor intente de nuevo');
+          }
+        },
+        error: (err) => {
+          console.error('Error logging in:', err);
+          this.alertService.somethingWentWrong('Error al iniciar sesion', 'No se ha podido iniciar sesion, por favor intente de nuevo');
         }
-      },
-      error: (err) => {
-        console.error('Error logging in:', err);
-        alert('Failed to login');
+  
       }
-
+      );
+    } else {
+      this.loginForm.markAllAsTouched();
     }
-    );
+  
+  }
+
+  get email(){
+    return this.loginForm.get('email');
+  }
+
+  get password(){
+    return this.loginForm.get('password');
   }
 }

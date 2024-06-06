@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "alertifyjs": "^1.14.0",
     "bootstrap-icons": "^1.11.3"
   }
 }

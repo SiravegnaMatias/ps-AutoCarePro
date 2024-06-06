@@ -7,33 +7,66 @@
           <h5 class="card-title text-center">Registrarse en AutoCarePro</h5>
 
           <label class="form-label">Nombre</label>
-          <input type="text" class="form-control" formControlName="firstName">
+          <input type="text" class="form-control" formControlName="firstName"
+            [ngClass]="{ 'is-invalid': firstName?.invalid && firstName?.touched }">
+          <div *ngIf="firstName?.touched && firstName?.hasError" class="danger text-danger">
+            <span *ngIf="firstName?.getError('required')">Ingrese su nombre</span>
+            <span *ngIf="firstName?.getError('minlength')">Su nombre debe tener al menos 4 caracteres</span>
+            <span *ngIf="firstName?.getError('maxlength')">Su nombre no puede tener mas de 35 caracteres</span>
+          </div>
 
           <label class="form-label">Apellido</label>
-          <input type="text" class="form-control" formControlName="lastName">
+          <input type="text" class="form-control" formControlName="lastName"
+            [ngClass]="{ 'is-invalid': lastName?.invalid && lastName?.touched }">
+          <div *ngIf="lastName?.touched && lastName?.hasError" class="danger text-danger">
+            <span *ngIf="lastName?.getError('required')">Ingrese su apellido</span>
+            <span *ngIf="lastName?.getError('minlength')">Su apellido debe tener al menos 4 caracteres</span>
+            <span *ngIf="lastName?.getError('maxlength')">Su apellido no puede tener mas de 35 caracteres</span>
+
+          </div>
 
 
           <label class="form-label">Direccion</label>
-          <input type="text" class="form-control" formControlName="address">
+          <input type="text" class="form-control" formControlName="address"
+            [ngClass]="{ 'is-invalid': address?.invalid && address?.touched }">
+          <div *ngIf="address?.touched && address?.hasError" class="danger text-danger">
+            <span *ngIf="address?.getError('required')">Ingrese su direccion</span>
+            <span *ngIf="address?.getError('minlength')">Su direccion debe tener al menos 4 caracteres</span>
+            <span *ngIf="address?.getError('maxlength')">Su direccion no puede tener mas de 65 caracteres</span>
+          </div>
 
           <label class="form-label">Email</label>
-          <input type="text" class="form-control" formControlName="email">
+          <input type="text" class="form-control" formControlName="email"
+            [ngClass]="{ 'is-invalid': email?.invalid && email?.touched }">
+          <div *ngIf="email?.touched && email?.hasError" class="danger text-danger">
+            <span *ngIf="email?.getError('required')">Ingrese su email</span>
+            <span *ngIf="email?.getError('email')">Formato no válido</span>
+          </div>
 
           <label class="form-label">Contraseña</label>
-          <input type="password" class="form-control" formControlName="password">
-          
+          <input type="password" class="form-control" formControlName="password"
+            [ngClass]="{ 'is-invalid': password?.invalid && password?.touched }">
+          <div *ngIf="password?.touched && password?.hasError" class="danger text-danger">
+            <span *ngIf="password?.getError('required')">Ingrese su contraseña</span>
+            <span *ngIf="password?.getError('minlength')">La contraseña debe tener al menos 8 caracteres</span>
+          </div>
+
+
+          <div class="mb-2 form-check">
+            <input type="checkbox" class="form-check-input" id="termsNConditionsCheck" formControlName="termsAndConditions">
+            <label class="form-check-label" for="termsNConditionsCheck">He leído y acepto 
+              <a data-bs-toggle="modal" data-bs-target="#exampleModal" id="terms">Terminos y condiciones</a>
+            </label>
+
+            <div *ngIf="termsAndConditions?.touched && termsAndConditions?.hasError" class="danger text-danger">
+            <span *ngIf="termsAndConditions?.getError('required')">Debe aceptar los terminos y condiciones</span>
+          </div>
+          </div>
 
 
 
           <div class="d-grid gap-2 mt-4">
-            <div class="mb-2 form-check">
-              <input type="checkbox" class="form-check-input" id="termsNConditionsCheck" formControlName= "termsAndConditions">
-              <label class="form-check-label" for="termsNConditionsCheck">He leído y acepto <a data-bs-toggle="modal"
-                  data-bs-target="#exampleModal" id="terms">Terminos y condiciones</a></label>
-            </div>
-            <div *ngIf="termsAndConditions?.touched && termsAndConditions?.hasError" class="danger text-danger">
-              <span>Debe aceptar los terminos y condiciones </span>
-            </div>
+
             <button class="btn btn-primary mt-2 " (click)="sumbitForm()">Registrarme</button>
             <h6 class="card-subtitle mb-2 text-body-secondary ">Ya sos cliente? <a routerLink="/login">Ingresa aqui</a>
             </h6>
