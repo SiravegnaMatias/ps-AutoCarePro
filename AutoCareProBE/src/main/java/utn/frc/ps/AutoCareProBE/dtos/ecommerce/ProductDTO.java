@@ -20,5 +20,6 @@ public class ProductDTO {
     private BigDecimal price;
     private Integer stock;
     private String category;
-
+    private String image;
+    private String supplier;
 }

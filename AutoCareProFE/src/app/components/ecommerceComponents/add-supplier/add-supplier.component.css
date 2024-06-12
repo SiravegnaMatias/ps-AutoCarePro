@@ -1,0 +1,28 @@
+input,
+textarea {
+    background-color: var(--black);
+    color: var(--white);
+}
+
+input:focus,
+textarea:focus {
+    background-color: var(--black);
+    color: var(--white);
+    box-shadow: 0 0 10px blue;
+}
+
+
+input:disabled,
+textarea:disabled {
+    background-color: var(--black);
+    color: var(--white);
+}
+
+
+
+input::placeholder,
+textarea::placeholder {
+    background-color: var(--black);
+    color: gray;
+}
+

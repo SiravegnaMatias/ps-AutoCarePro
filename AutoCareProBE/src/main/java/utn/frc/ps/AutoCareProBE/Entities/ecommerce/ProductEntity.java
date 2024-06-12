@@ -32,6 +32,7 @@ public class ProductEntity {
     private String description;
     private BigDecimal price;
     private Integer stock;
+    private String image;
 
     @ManyToOne
     @JoinColumn(name = "supplier_id")

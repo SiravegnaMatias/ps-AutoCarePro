@@ -1,3 +1,31 @@
-<p>admin-ecommerce works!</p>
-<app-admin-products></app-admin-products>
-<app-admin-sales></app-admin-sales>
+<div class="d-flex justify-content-between">
+    <div>
+        <a (click)="goToShop()">
+
+            <h1 class="h1-custom">Tienda AutoCarePro</h1>
+        </a>
+    </div>
+    <div>
+        <button class="btn btn-outline-light mx-2">
+            <i class="bi bi-search"></i>
+        </button>
+        <button class="btn btn-outline-light mx-2" routerLink="cart">
+            <i class="bi bi-cart"></i>
+        </button>
+
+    </div>
+</div>
+
+<hr>
+<ul class="nav nav-tabs ">
+    <li class="nav-item">
+      <a class="nav-link" aria-current="page" routerLink="products"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">Productos</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link"  routerLink="suppliers" routerLinkActive="active">Proveedores</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link"  routerLink="sales" routerLinkActive="active">Ventas</a>
+    </li>
+  </ul>
+    <router-outlet></router-outlet>

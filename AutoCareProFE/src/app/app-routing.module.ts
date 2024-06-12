@@ -21,6 +21,10 @@ import { ShoppingCartComponent } from './components/ecommerceComponents/shopping
 import { AdminProductsComponent } from './components/ecommerceComponents/admin-products/admin-products.component';
 import { AdminSalesComponent } from './components/ecommerceComponents/admin-sales/admin-sales.component';
 import { EditProductComponent } from './components/ecommerceComponents/edit-product/edit-product.component';
+import { AdminEcommerceComponent } from './components/ecommerceComponents/admin-ecommerce/admin-ecommerce.component';
+import { SuppliersComponent } from './components/ecommerceComponents/suppliers/suppliers.component';
+import { AddProductComponent } from './components/ecommerceComponents/add-product/add-product.component';
+import { AddSupplierComponent } from './components/ecommerceComponents/add-supplier/add-supplier.component';
 
 const routes: Routes = [
   {
@@ -93,23 +97,46 @@ const routes: Routes = [
       },
       {
         path: 'shop/admin',
-        component: AdminProductsComponent,
-        data: { allowedRoles: ['ADMIN'] }
-      },
-      {
-        path: 'shop/admin/products',
-        component: AdminProductsComponent,
-        data: { allowedRoles: [, 'ADMIN', 'DETAILER'] }
-      },
-      {
-        path: 'shop/admin/products/edit/:id',
-        component:EditProductComponent,
-        data: { allowedRoles: ['ADMIN'] }
-      },
-      {
-        path: 'shop/admin/sales',
-        component: AdminSalesComponent,
-        data: { allowedRoles: ['ADMIN'] }
+        component: AdminEcommerceComponent,
+        data: { allowedRoles: ['ADMIN'] },
+        children:
+          [
+            {
+              path: '',
+              redirectTo: 'products',
+              pathMatch: 'full'
+            },
+            {
+              path: 'products',
+              component: AdminProductsComponent,
+              data: { allowedRoles: [, 'ADMIN', 'DETAILER'] }
+            },
+            {
+              path: 'products/add',
+              component: AddProductComponent,
+              data: { allowedRoles: ['ADMIN'] }
+            },
+            {
+              path: 'products/edit/:id',
+              component: EditProductComponent,
+              data: { allowedRoles: ['ADMIN'] }
+            },
+            {
+              path: 'sales',
+              component: AdminSalesComponent,
+              data: { allowedRoles: ['ADMIN'] }
+            },
+            {
+              path: 'suppliers',
+              component: SuppliersComponent,
+              data: { allowedRoles: ['ADMIN'] }
+            },
+            {
+              path: 'suppliers/add',
+              component: AddSupplierComponent,
+              data: { allowedRoles: ['ADMIN'] }
+            }
+          ]
       },
       {
         path: 'frequent-questions',

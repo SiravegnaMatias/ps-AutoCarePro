@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-ecommerce',
@@ -7,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class AdminEcommerceComponent {
 
+  constructor(private router:Router) { }
+
+  goToShop(){
+    this.router.navigate(['/home/shop']);
+  }
 }

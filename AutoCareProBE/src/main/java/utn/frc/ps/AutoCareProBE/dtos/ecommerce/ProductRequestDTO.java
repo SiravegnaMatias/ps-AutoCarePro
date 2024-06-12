@@ -20,4 +20,6 @@ public class ProductRequestDTO {
     private BigDecimal price;
     private Integer stock;
     private Long idCategory;
+    private String image;
+    private Long idSupplier;
 }

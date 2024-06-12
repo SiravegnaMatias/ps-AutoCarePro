@@ -11,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/categorycontroller")
+@RequestMapping("/categories")
 @CrossOrigin("http://localhost:4200")
 public class CategoryController {
 
