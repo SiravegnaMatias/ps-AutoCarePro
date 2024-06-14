@@ -24,4 +24,8 @@ export class ProductService {
   getProduct(id:number):Observable<Product>{  
     return this.http.get<Product>(`${this.url}/${id}`);
   }
+
+  putProduct(product:Product):Observable<Product>{
+    return this.http.put<Product>(this.url, product);
+  }
 }

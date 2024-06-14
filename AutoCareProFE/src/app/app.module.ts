@@ -35,6 +35,7 @@ import { SuppliersComponent } from './components/ecommerceComponents/suppliers/s
 import { AddProductComponent } from './components/ecommerceComponents/add-product/add-product.component';
 import { AddSupplierComponent } from './components/ecommerceComponents/add-supplier/add-supplier.component';
 import { EditSupplierComponent } from './components/ecommerceComponents/edit-supplier/edit-supplier.component';
+import { ProductsComponent } from './components/ecommerceComponents/products/products.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import { EditSupplierComponent } from './components/ecommerceComponents/edit-sup
     AddProductComponent,
     AddSupplierComponent,
     EditSupplierComponent,
+    ProductsComponent,
 
   ],
   imports: [

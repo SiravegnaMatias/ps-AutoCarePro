@@ -56,9 +56,20 @@ export class EditProductComponent  implements OnInit{
   confirmChanges(){
     if(this.formProducts.valid){
       //tirar el update y si sale bien 
-      
-      // this.refreshSupplier();
-      //this.toggleEdit();
+      const product :Product = this.formProducts.value;
+      product.id = this.idProduct;
+      this.productService.putProduct(product).subscribe({
+        next: (data) => {
+          this.alertService.succesfullLogin('El producto ha sido actualizado con éxito');
+          this.refreshProduct();
+          this.toggleEdit();
+        },
+        error: (err) => {
+          console.error('Error updating product:', err);
+          this.alertService.somethingWentWrong('Error actualizando producto', 'No se ha podido actualizar el producto, por favor intente de nuevo');
+        }
+      });
+    
     }else {
       this.formProducts.markAllAsTouched();
     }

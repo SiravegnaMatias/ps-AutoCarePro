@@ -28,7 +28,7 @@
                         <select class="form-select" formControlName="category"
                             [ngClass]="{ 'is-invalid': category?.invalid && category?.touched }">
                             <option selected disabled>Seleccione una categoria</option>
-                            <option *ngFor="let category of categories" value="{{category.id}}"
+                            <option *ngFor="let category of categories" value="{{category.name}}"
                             [selected]="category.name === product.category">{{category.name}}
                             </option>
                         </select>
@@ -65,7 +65,7 @@
                         <select class="form-select" formControlName="supplier"
                             [ngClass]="{ 'is-invalid': supplier?.invalid && supplier?.touched }">
                             <option selected disabled>Seleccione una proveedor</option>
-                            <option *ngFor="let supplier of suppliers" value="{{supplier.id}}"
+                            <option *ngFor="let supplier of suppliers" value="{{supplier.name}}"
                             [selected] ="supplier.name === product.supplier"> {{supplier.name}}
                             </option>
                         </select>
@@ -102,7 +102,7 @@
                 </div>
             </div>
             <div class="mt-3">
-                <button type="button" class="btn btn-primary mx-2" (click)="!isDisabled ? cancelChanges() : toggleEdit()">{{ isDisabled ? 'Editar perfil' : 'Cancelar' }}</button>
+                <button type="button" class="btn btn-primary mx-2" (click)="!isDisabled ? cancelChanges() : toggleEdit()">{{ isDisabled ? 'Editar producto' : 'Cancelar' }}</button>
                 <button *ngIf="!isDisabled" type="submit" class="btn btn-primary mx-2" (click)="confirmChanges()">Confirmar</button>
               </div>
         </form>

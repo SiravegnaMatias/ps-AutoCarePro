@@ -26,6 +26,7 @@ import { SuppliersComponent } from './components/ecommerceComponents/suppliers/s
 import { AddProductComponent } from './components/ecommerceComponents/add-product/add-product.component';
 import { AddSupplierComponent } from './components/ecommerceComponents/add-supplier/add-supplier.component';
 import { EditSupplierComponent } from './components/ecommerceComponents/edit-supplier/edit-supplier.component';
+import { ProductsComponent } from './components/ecommerceComponents/products/products.component';
 
 const routes: Routes = [
   {
@@ -83,19 +84,33 @@ const routes: Routes = [
       {
         path: 'shop',
         component: EcommerceComponent,
-        data: { allowedRoles: ['CLIENT', 'ADMIN', 'DETAILER'] }
+        data: { allowedRoles: ['CLIENT', 'ADMIN', 'DETAILER'] },
+        children:
+        [ 
+          {
+            path: '',
+            redirectTo: 'products',
+            pathMatch: 'full'
+          },
+          {
+          path: 'product/:id',
+          component: ProductDetailComponent,
+          data: { allowedRoles: ['CLIENT', 'ADMIN', 'DETAILER'] }
+  
+        },
+        {
+          path: 'cart',
+          component: ShoppingCartComponent,
+          data: { allowedRoles: ['CLIENT', 'ADMIN', 'DETAILER'] }
+        },
+        {
+          path: 'products',
+          component:ProductsComponent,
+          data: { allowedRoles: ['CLIENT', 'ADMIN', 'DETAILER'] }
+      }
+      ]
       },
-      {
-        path: 'shop/product/:id',
-        component: ProductDetailComponent,
-        data: { allowedRoles: ['CLIENT', 'ADMIN', 'DETAILER'] }
-
-      },
-      {
-        path: 'shop/cart',
-        component: ShoppingCartComponent,
-        data: { allowedRoles: ['CLIENT', 'ADMIN', 'DETAILER'] }
-      },
+     
       {
         path: 'shop/admin',
         component: AdminEcommerceComponent,

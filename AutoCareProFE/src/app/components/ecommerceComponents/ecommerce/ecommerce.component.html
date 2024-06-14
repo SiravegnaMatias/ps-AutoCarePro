@@ -1,23 +1,26 @@
 <div class="d-flex justify-content-between">
- <div>
-   <h1>Tienda AutoCarePro</h1>
- </div> 
   <div>
-    <button class="btn btn-outline-light mx-2">
+    <a (click)="goToShop()">
+        <h1>Tienda AutoCarePro</h1>
+  
+       
+    </a>
+  </div>
+  <div>
+    <button class="btn btn-outline-light mx-2" routerLink="admin">
+      <i class="bi bi-gear"></i>
+    </button>
+    <button class="btn btn-outline-light ">
       <i class="bi bi-search"></i>
     </button>
     <button class="btn btn-outline-light mx-2" routerLink="cart">
       <i class="bi bi-cart"></i>
     </button>
-   
+
   </div>
 </div>
 <hr>
-<button class="btn btn-outline-light" routerLink="admin">
-  <i class="bi bi-gear"></i>
-</button>
-<div class="container">
-  
-</div>
 
 
+
+<router-outlet></router-outlet>
