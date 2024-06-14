@@ -1,10 +1,9 @@
 <div class="container mt-3">
-    <h2>Agregar Proveedor</h2>
+    <h2>Editar proveedor</h2>
     <div class="mt-3">
         <form [formGroup]="supplierForm">
             <div class="row">
-                <div class="col-md-12">
-
+                <div class="col-md-6">
                     <div class="mt-3">
                         <label class="form-label">Nombre</label>
                         <input type="text" class="form-control" formControlName="name"
@@ -12,7 +11,7 @@
                     </div>
                     <div *ngIf="name?.touched && name?.hasError" class="danger text-danger">
                         <span *ngIf="name?.getError('required')"> El nombre del proveedor es requerido</span>
-                        <span *ngIf="name?.getError('maxlength')"> El nombre no debe ser mayor a 35
+                        <span *ngIf="name?.getError('maxlength')"> El nombre no debe tener un nombre mayor a 35
                             caracteres</span>
                         <span *ngIf="name?.getError('minlength')"> El nombre debe tener un nombre de al menos 3
                             caracteres</span>
@@ -23,15 +22,15 @@
                         <label class="form-label">Informacion de Contacto (telefono)</label>
                         <input type="number" class="form-control" formControlName="contactInfo" [ngClass]="{ 'is-invalid': contactInfo?.invalid && contactInfo?.touched }">
                     </div>
-        
-                        <div *ngIf="contactInfo?.touched && contactInfo?.hasError" class="danger text-danger">
-                            <span *ngIf="contactInfo?.getError('required')"> La informacion de contacto es requerida</span>
-                        </div>
-                 
-
+                    <div *ngIf="contactInfo?.touched && contactInfo?.hasError" class="danger text-danger">
+                        <span *ngIf="contactInfo?.getError('required')"> La informacion de contacto es requerida</span>
+                    </div>
+             
+                </div>
+                <div class="col-md-6">
                     <div class="mt-3">
                         <label class="form-label">Email</label>
-                        <input type="number" class="form-control" formControlName="email" [ngClass]="{ 'is-invalid': email?.invalid && email?.touched }">
+                        <input type="text" class="form-control" formControlName="email" [ngClass]="{ 'is-invalid': email?.invalid && email?.touched }">
                     </div>
                     <div *ngIf="email?.touched && email?.hasError" class="danger text-danger">
                         <span *ngIf="email?.getError('required')"> El email del proveedor es requerido</span>
@@ -40,22 +39,19 @@
 
                     <div class="mt-3">
                         <label class="form-label">Direccion</label>
-                        <input type="number" class="form-control" formControlName="address" [ngClass]="{ 'is-invalid': address?.invalid && address?.touched }"> 
+                        <input type="text" class="form-control" formControlName="address" [ngClass]="{ 'is-invalid': address?.invalid && address?.touched }"> 
                     </div>
                     <div *ngIf="address?.touched && address?.hasError" class="danger text-danger">
                         <span *ngIf="address?.getError('required')"> La direccion del proveedor es requerida</span>
                         <span *ngIf="address?.getError('maxlength')"> La direccion no debe tener un nombre mayor a 35 caracteres</span>
                         <span *ngIf="address?.getError('minlength')"> La direccion debe tener un nombre de al menos 3 caracteres</span>
                     </div>
-
                 </div>
             </div>
+            <div class="mt-3">
+                <button type="button" class="btn btn-primary mx-2" (click)="!isDisabled ? cancelChanges() : toggleEdit()">{{ isDisabled ? 'Editar perfil' : 'Cancelar' }}</button>
+                <button *ngIf="!isDisabled" type="submit" class="btn btn-primary mx-2" (click)="confirmChanges()">Confirmar</button>
+              </div>
         </form>
-
-        <div class="text-end mt-3">
-            <button class="btn btn-secondary mx-2" (click)="backToProviders()">Volver</button>
-            <button class="btn btn-primary mx-2" (click)="sumbit()">Confirmar</button>
-        </div>
     </div>
-
 </div>

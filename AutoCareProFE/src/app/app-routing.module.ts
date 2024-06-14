@@ -25,6 +25,7 @@ import { AdminEcommerceComponent } from './components/ecommerceComponents/admin-
 import { SuppliersComponent } from './components/ecommerceComponents/suppliers/suppliers.component';
 import { AddProductComponent } from './components/ecommerceComponents/add-product/add-product.component';
 import { AddSupplierComponent } from './components/ecommerceComponents/add-supplier/add-supplier.component';
+import { EditSupplierComponent } from './components/ecommerceComponents/edit-supplier/edit-supplier.component';
 
 const routes: Routes = [
   {
@@ -129,6 +130,11 @@ const routes: Routes = [
             {
               path: 'suppliers',
               component: SuppliersComponent,
+              data: { allowedRoles: ['ADMIN'] }
+            },
+            {
+              path: 'suppliers/edit/:id',
+              component: EditSupplierComponent,
               data: { allowedRoles: ['ADMIN'] }
             },
             {

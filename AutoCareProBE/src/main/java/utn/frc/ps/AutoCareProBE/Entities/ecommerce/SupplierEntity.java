@@ -30,6 +30,7 @@ public class SupplierEntity {
     private String name;
     private String contactInfo;
     private String address;
+    private String email;
 
     @OneToMany(mappedBy = "supplier")
     private List<ProductEntity> products;

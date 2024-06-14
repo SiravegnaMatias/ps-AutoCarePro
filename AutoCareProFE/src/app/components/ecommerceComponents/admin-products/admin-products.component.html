@@ -11,20 +11,22 @@
             <th scope="col">Nombre</th>
             <th scope="col">Descripcion</th>
             <th scope="col">Precio</th>
-            <th scope="col">Categoria</th>
             <th scope="col">Stock (u)</th>
+            <th scope="col">Categoria</th>
+            <th scope="col">Proveedor</th>
             <th scope="col">Accion</th>
           </tr>
         </thead>
         <tbody class="table-group-divider">
-          <tr>
-            <td >1</td>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>mdo</td>
-            <td>mdo</td>
-            <td>mdo</td>
-            <td><button class="btn btn-outline-secondary">Editar</button></td>
+          <tr *ngFor="let product of products">
+            <td >{{product.id}}</td>
+            <td>{{product.name}}</td>
+            <td>{{product.description}}</td>
+            <td>{{product.price}}</td>
+            <td>{{product.stock}}</td>
+            <td>{{product.category}}</td>
+            <td>{{product.supplier}}</td>
+            <td><button class="btn btn-outline-secondary"(click)="editProduct(product.id)" >Editar</button></td>
           </tr>
         </tbody>
       </table>

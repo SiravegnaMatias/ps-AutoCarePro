@@ -1,7 +1,6 @@
 input,
 textarea,
-select,
-ngx-dropzone-preview  {
+select {
     background-color: var(--black);
     color: var(--white);
 }

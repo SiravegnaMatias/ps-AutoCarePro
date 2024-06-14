@@ -11,18 +11,21 @@
             <th scope="col">Nombre</th>
             <th scope="col">Direccion</th>
             <th scope="col">Contacto</th>
+            <th scope="col">Email</th>
        
             <th scope="col">Accion</th>
           </tr>
         </thead>
         <tbody class="table-group-divider">
-          <tr>
-            <td >1</td>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>mdo</td>
+          <tr *ngFor="let supplier of suppliers">
+            <td >{{supplier.id}}</td>
+            <td>{{supplier.name}}</td>
+            <td>{{supplier.address}}</td>
+            <td>{{supplier.contactInfo}}</td>
+            <td>{{supplier.email}}</td>
 
-            <td><button class="btn btn-outline-secondary">Editar</button></td>
+
+            <td><button class="btn btn-outline-secondary" (click)="editSupplier(supplier.id)">Editar</button></td>
           </tr>
         </tbody>
       </table>

@@ -25,6 +25,7 @@ public class SupplierService {
                                         .name(supplierEntity.getName())
                                         .contactInfo(supplierEntity.getContactInfo())
                                         .address(supplierEntity.getAddress())
+                                        .email(supplierEntity.getEmail())
                                         .build()).toList();
     }
 
@@ -39,6 +40,7 @@ public class SupplierService {
                             .name(supplierEntityOptional.get().getName())
                             .contactInfo(supplierEntityOptional.get().getContactInfo())
                             .address(supplierEntityOptional.get().getAddress())
+                            .email(supplierEntityOptional.get().getEmail()) 
                             .build();
     }
 
@@ -47,6 +49,7 @@ public class SupplierService {
         supplierEntity.setName(supplier.getName());
         supplierEntity.setContactInfo(supplier.getContactInfo());
         supplierEntity.setAddress(supplier.getAddress());
+        supplierEntity.setEmail(supplier.getEmail());
         supplierEntity = supplierJpaRepository.save(supplierEntity);
 
         return SupplierDTO.builder()
@@ -54,11 +57,12 @@ public class SupplierService {
                             .name(supplierEntity.getName())
                             .contactInfo(supplierEntity.getContactInfo())
                             .address(supplierEntity.getAddress())
+                            .email(supplierEntity.getEmail())
                             .build();
     }
 
-    public SupplierDTO updateSupplier(SupplierRequestDTO dto) {
-        Optional<SupplierEntity> supplierEntityOptional = supplierJpaRepository.findByName(dto.getName());
+    public SupplierDTO updateSupplier(Long id,SupplierRequestDTO dto) {
+        Optional<SupplierEntity> supplierEntityOptional = supplierJpaRepository.findById(id);
         if(supplierEntityOptional.isEmpty()) {
             throw new EntityNotFoundException("Supplier not found");
         }
@@ -67,6 +71,7 @@ public class SupplierService {
         supplierEntity.setName(dto.getName());
         supplierEntity.setContactInfo(dto.getContactInfo());
         supplierEntity.setAddress(dto.getAddress());
+        supplierEntity.setEmail(dto.getEmail()  );
         supplierEntity = supplierJpaRepository.save(supplierEntity);
 
         return SupplierDTO.builder()
@@ -74,6 +79,7 @@ public class SupplierService {
                             .name(supplierEntity.getName())
                             .contactInfo(supplierEntity.getContactInfo())
                             .address(supplierEntity.getAddress())
+                            .email(supplierEntity.getEmail())
                             .build();
     }
     

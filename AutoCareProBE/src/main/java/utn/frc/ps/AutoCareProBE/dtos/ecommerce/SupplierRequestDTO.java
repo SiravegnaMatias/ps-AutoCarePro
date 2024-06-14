@@ -15,4 +15,5 @@ public class SupplierRequestDTO {
     private String name;
     private String contactInfo;
     private String address;
+    private String email;
 }

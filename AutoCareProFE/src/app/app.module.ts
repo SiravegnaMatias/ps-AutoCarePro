@@ -34,6 +34,7 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { SuppliersComponent } from './components/ecommerceComponents/suppliers/suppliers.component';
 import { AddProductComponent } from './components/ecommerceComponents/add-product/add-product.component';
 import { AddSupplierComponent } from './components/ecommerceComponents/add-supplier/add-supplier.component';
+import { EditSupplierComponent } from './components/ecommerceComponents/edit-supplier/edit-supplier.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { AddSupplierComponent } from './components/ecommerceComponents/add-suppl
     SuppliersComponent,
     AddProductComponent,
     AddSupplierComponent,
+    EditSupplierComponent,
 
   ],
   imports: [

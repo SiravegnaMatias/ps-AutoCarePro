@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping("/suppliercontroller")
+@RequestMapping("/suppliers")
 @CrossOrigin("http://localhost:4200")
 
 public class SupplierController {
@@ -37,9 +37,9 @@ public class SupplierController {
        return ResponseEntity.ok(supplierService.newSupplier(supplier));
     }
 
-    @PutMapping()
-    public ResponseEntity<?> update(@RequestBody SupplierRequestDTO dto) {
-       return ResponseEntity.ok(supplierService.updateSupplier(dto));
+    @PutMapping("/{id}")
+    public ResponseEntity<?> update(@PathVariable Long id,@RequestBody SupplierRequestDTO dto) {
+       return ResponseEntity.ok(supplierService.updateSupplier(id,dto));
     }
 
   
