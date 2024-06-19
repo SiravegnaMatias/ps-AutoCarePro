@@ -6,5 +6,21 @@ h1{
     position: fixed;
     top: 0;
     right: 0;
-    left: 0;
+    left: 0;    
 }
+
+.badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0.5em 1em; 
+    margin: 4px;
+    border-radius: 50%;
+    font-weight: bold;
+
+  }
+  
+  .badge-danger {
+    background-color: red;
+    color: white;
+  }

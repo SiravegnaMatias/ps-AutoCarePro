@@ -15,13 +15,21 @@
             <span >${{product.price}}</span>
           </p>
           <p class="lead">{{product.description}}</p>
-          <div class="d-flex">
-            <input type="number" id="inputQuantity" class="form-control text-center me-3" value="1" style="max-width: 3rem">
-            <button type="button" class="btn btn-outline-light flex-shrink-0">
-              <i class="bi-cart-fill me-1"></i>
-              |  Añadir al carrito
-            </button>
-          </div>
+          <form [formGroup]="productForm">
+            <div class="d-flex">
+              <input type="number" id="inputQuantity" class="form-control text-center me-3" value="1" style="max-width: 4rem"
+                formControlName="quantity"  [ngClass]="{ 'is-invalid': quantity?.invalid && quantity?.touched }"
+              >
+              <button type="button" class="btn btn-outline-light flex-shrink-0" (click)="addToCart()">
+                <i class="bi-cart-fill me-1"></i>
+                |  Añadir al carrito
+              </button>
+            </div>
+            <div *ngIf="quantity?.touched && quantity?.hasError" class="danger text-danger">
+                <span *ngIf="quantity?.getError('required')">Ingrese la cantidad</span>
+                <span *ngIf="quantity?.getError('min')">Minimo 1 producto</span>
+            </div>
+          </form>
         </div>
       </div>
     </div>

@@ -11,6 +11,7 @@ import utn.frc.ps.AutoCareProBE.services.ecommerce.CartService;
 
 @RestController
 @RequestMapping("/cart")
+@CrossOrigin("http://localhost:4200")
 public class CartController {
     @Autowired
     private CartService cartService;

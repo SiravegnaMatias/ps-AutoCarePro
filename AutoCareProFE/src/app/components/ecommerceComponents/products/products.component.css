@@ -1,3 +1,32 @@
 .card-custom {
     cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card-custom:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.card-body {
+    background-color: var(--white);
+}
+
+.btn-custom {
+    background-color: #9b181e;
+    border-color: #9b181e;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.btn-custom:hover {
+    background-color: #bb2e2e;
+    border-color: #bb2e2e;
+}
+
+.card-img-top {
+    transition: opacity 0.2s;
+}
+
+.card-img-top:hover {
+    opacity: 0.8;
 }

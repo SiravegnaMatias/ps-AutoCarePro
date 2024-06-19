@@ -1,1 +1,37 @@
-<p>shopping-cart works!</p>
+<div class="container">
+    <h2>Mi Carrito</h2>
+    <div class="row">
+        <!-- Carrito de compras -->
+        <div class="col-lg-9 col-12 mb-3">
+            <table class="table table-striped table-responsive">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Precio</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of cart.items">
+                        <td>{{item.product.name}}</td>
+                        <td>
+                            <input type="number" id="inputQuantity"
+                                class="form-control text-center me-3" value="{{item.quantity}}" style="max-width: 4rem">
+                        </td>
+                        <td>{{item.product.price}}</td>
+                        <td>{{getTotalProduct(item)}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- Sección de pago -->
+        <div class="col-lg-3 col-12">
+            <div class="p-3">
+                <h4>Total a pagar</h4>
+                <p><strong>$ {{getTotalCart(cart)}}</strong></p>
+                <button class="btn btn-primary btn-block">Pagar</button>
+            </div>
+        </div>
+    </div>
+</div>
