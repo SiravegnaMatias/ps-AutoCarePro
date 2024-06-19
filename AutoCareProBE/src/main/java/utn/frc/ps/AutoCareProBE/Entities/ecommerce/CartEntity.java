@@ -2,8 +2,11 @@ package utn.frc.ps.AutoCareProBE.Entities.ecommerce;
 
 import java.util.List;
 
+
 import jakarta.persistence.CascadeType;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -11,6 +14,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,18 +26,19 @@ import utn.frc.ps.AutoCareProBE.Entities.User.UserEntity;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Entity
-@Table(name = "shopping_carts")
-public class ShoppingCartEntity {
+@Table(name = "cart")
+@Builder
+public class CartEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private UserEntity user;
 
-    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ShoppingCartItemEntity> items;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = CartItemEntity.class) //falta mappedBy?
+    @JoinColumn(name = "cart_id", referencedColumnName = "id")
+    private List<CartItemEntity> items;
 }
