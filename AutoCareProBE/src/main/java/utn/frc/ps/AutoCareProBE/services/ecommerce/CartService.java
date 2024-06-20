@@ -96,14 +96,7 @@ public CartDTO getCartByUser(Long id) {
   
 }
 
-    private ProductDTO getCartProductDTO(ProductEntity product) {
-       
-        return ProductDTO.builder()
-                .id(product.getId())
-                .name(product.getName())
-                .price(product.getPrice())
-                .build();
-    }
+ 
 
     public CartDTO removeItemFromCart(CartRequestDTO cartRequestDTO) {
        CartEntity cart = getCartByUserId(cartRequestDTO.getUserId());
@@ -118,6 +111,27 @@ public CartDTO getCartByUser(Long id) {
                 cart.getItems().remove(cartItem);
                 cartItemJpaRepository.delete(cartItem);
                saved = cartJpaRepository.save(cart);
+            }
+        } else{
+            throw new EntityNotFoundException("Cart not found");
+        }
+        return getCartDTO(saved);
+    }
+
+    
+    public CartDTO updateQuantityCart(CartRequestDTO cart, Integer quantity) {
+        CartEntity cartEntity = getCartByUserId(cart.getUserId());
+        CartEntity saved = null;
+        if (cartEntity != null) {
+            CartItemEntity cartItem = cartEntity.getItems().stream()
+                    .filter(item -> item.getProduct().getId().equals(cart.getProductId()))
+                    .findFirst()
+                    .orElse(null);
+
+            if (cartItem != null) {
+                cartItem.setQuantity(quantity);
+                cartItemJpaRepository.save(cartItem);
+                saved = cartJpaRepository.save(cartEntity);
             }
         } else{
             throw new EntityNotFoundException("Cart not found");
@@ -141,6 +155,15 @@ public CartDTO getCartByUser(Long id) {
                 .id(cart.getId())
                 .userId(cart.getUser().getId())
                 .items(items)
+                .build();
+    }
+
+    private ProductDTO getCartProductDTO(ProductEntity product) {
+       
+        return ProductDTO.builder()
+                .id(product.getId())
+                .name(product.getName())
+                .price(product.getPrice())
                 .build();
     }
 }

@@ -1,0 +1,63 @@
+<h1>Editar Servicio</h1>
+
+<div class="container mt-5">
+    <form [formGroup]="carForm">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label class="form-label">Modelo</label>
+                    <input type="text" class="form-control" formControlName = "model" [disabled]="isDisabled" [ngClass]="{ 'is-invalid': model?.invalid && model?.touched }">
+                    <div *ngIf="model?.touched && model?.hasError" class="danger text-danger">
+                        <span *ngIf="model?.getError('required')"> Ingrese el modelo del vehiculo</span>
+                        <span *ngIf="model?.getError('maxlength')"> El vehiculo no debe tener un nombre mayor a 35 caracteres</span>
+                        <span *ngIf="model?.getError('minlength')"> El Vehiculo debe tener un nombre de al menos 3 caracteres</span>
+                      </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Marca</label>
+                    <input type="text" class="form-control" formControlName="brand" [disabled]="isDisabled" [ngClass]="{ 'is-invalid': brand?.invalid && brand?.touched }">
+                    <div *ngIf="brand?.touched && brand?.hasError" class="danger text-danger">
+                        <span *ngIf="brand?.getError('required')"> Ingrese la marca del vehiculo</span>
+                        <span *ngIf="brand?.getError('maxlength')"> La marca no puede ser mayor a 35 caracteres</span>
+                        <span *ngIf="brand?.getError('minlength')"> La marca debe tener al menos 3 caracteres</span>
+                      </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Tipo</label>
+                    <select class="form-select" formControlName="carType">
+                        <option selected disabled>Seleccione un tipo</option>
+                        <option *ngFor="let car of carTypes" value="{{car}}">{{car}}</option>
+                    </select>
+                    <div *ngIf="carType?.touched && carType?.hasError" class="danger text-danger">
+                        <span *ngIf="carType?.getError('required')"> Seleccion un tipo de vehiculo</span>
+                      </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label class="form-label">Año</label>
+                    <input class="form-control"  formControlName="year" [disabled]="isDisabled" [ngClass]="{ 'is-invalid': year?.invalid && year?.touched }"/>
+                    <div *ngIf="year?.touched && year?.hasError" class="danger text-danger">
+                        <span *ngIf="year?.getError('required')"> El año del vehiculo es requerido</span>
+                        <span *ngIf="year?.getError('min')"> El año minimo es 1900</span>
+                      </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Patente</label>
+                    <input class="form-control"  formControlName="plate" [disabled]="isDisabled" [ngClass]="{ 'is-invalid': plate?.invalid && plate?.touched }"/>
+                    <div *ngIf="plate?.touched && plate?.hasError" class="danger text-danger">
+                        <span *ngIf="plate?.getError('required')"> La patente del vehiculo es requerida</span>
+                        <span *ngIf="plate?.getError('maxlength')"> La patente no debe ser mayor a 7 caracteres</span>
+                        <span *ngIf="plate?.getError('minlength')"> La patente debe tener minimo 6 caracters</span>
+                      </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="mt-3">
+            <button type="button" class="btn btn-primary mx-2" (click)=" !isDisabled ? cancelChanges(): toggleEdit()">{{ isDisabled ? 'Editar Vehiculo' : 'Cancelar' }}</button>
+            <button  *ngIf="!isDisabled" type="submit" class="btn btn-primary mx-2" (click)="confirmChanges()">Confirmar</button>
+        </div>
+
+    </form>
+</div>

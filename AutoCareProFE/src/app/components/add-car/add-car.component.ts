@@ -27,7 +27,7 @@ export class AddCarComponent implements OnInit {
   }
 
   carForm = this.fb.group({
-    model: ['',[Validators.required, Validators.maxLength(35),Validators.minLength(4)]],
+    model: ['',[Validators.required, Validators.maxLength(35),Validators.minLength(3)]],
     brand:['',[Validators.required, Validators.maxLength(35),Validators.minLength(1)]],
     year: [null,[Validators.required, Validators.min(1900)]],
     plate: ['',[Validators.required, Validators.maxLength(7),Validators.minLength(6)]],

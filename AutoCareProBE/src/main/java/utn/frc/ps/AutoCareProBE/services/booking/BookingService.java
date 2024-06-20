@@ -54,6 +54,7 @@ private StatusJpaRepository statusJpaRepository;
         bookingEntity.setStatus(getStatusRequested());
         bookingJpaRepository.save(bookingEntity);
 
+
     List<ServiceEntity> serviceEntities = getServices(booking.getServices());
     for(ServiceEntity service : serviceEntities){
         BookingDetailEntity bookingDetail = new BookingDetailEntity();

@@ -26,7 +26,7 @@
                 <div *ngIf="model?.touched && model?.hasError" class="danger text-danger">
                   <span *ngIf="model?.getError('required')"> El modelo del vehiculo es requerida</span>
                   <span *ngIf="model?.getError('maxlength')"> El modelo no puede tener un nombre mayor a 35 caracteres</span>
-                  <span *ngIf="model?.getError('minlength')"> El modelo debe tener un nombre de al menos 4 caracteres</span>
+                  <span *ngIf="model?.getError('minlength')"> El modelo debe tener un nombre de al menos 3 caracteres</span>
                 </div>
 
                 <label class="form-label">Año</label>

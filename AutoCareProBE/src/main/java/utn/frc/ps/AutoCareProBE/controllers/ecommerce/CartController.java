@@ -9,6 +9,7 @@ import utn.frc.ps.AutoCareProBE.dtos.ecommerce.CartDTO;
 import utn.frc.ps.AutoCareProBE.dtos.ecommerce.CartRequestDTO;
 import utn.frc.ps.AutoCareProBE.services.ecommerce.CartService;
 
+
 @RestController
 @RequestMapping("/cart")
 @CrossOrigin("http://localhost:4200")
@@ -30,8 +31,14 @@ public class CartController {
 
     
     @DeleteMapping("/remove")
-    public ResponseEntity<CartDTO> removeItemFromCart(@RequestBody CartRequestDTO cartRequestDTO) {
+    public ResponseEntity<CartDTO> removeItemFromCart(@RequestParam Long userId, @RequestParam Long productId) {
+        CartRequestDTO cartRequestDTO = new CartRequestDTO(userId, productId);
       return ResponseEntity.ok(cartService.removeItemFromCart(cartRequestDTO));
+    }
+
+    @PutMapping("update")
+    public ResponseEntity<CartDTO> updateQuantity(@RequestBody CartRequestDTO cart,@RequestParam Integer quantity ) {
+       return ResponseEntity.ok(cartService.updateQuantityCart(cart, quantity));
     }
 
     

@@ -10,6 +10,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+
 
 @RestController
 @RequestMapping("/vehicles")
@@ -29,6 +31,16 @@ public class VehicleController {
     @PostMapping()
     public ResponseEntity<Vehicle> create(@RequestBody VehicleRequestDTO vehicle) {
       return ResponseEntity.ok(vehicleService.createVehicle(vehicle));
+    }
+
+    @GetMapping("/get/{id}")
+    public ResponseEntity<VehicleResponseDTO> getCar(@PathVariable Long id) {
+       return ResponseEntity.ok(vehicleService.getCarById(id));
+    }
+    
+    @PutMapping("/edit/{id}")
+    public ResponseEntity<VehicleResponseDTO> update(@PathVariable Long id, @RequestBody VehicleRequestDTO vehicle) {
+        return ResponseEntity.ok(vehicleService.updateVehicle(id, vehicle));
     }
 
     

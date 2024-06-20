@@ -106,4 +106,36 @@ public class VehicleService {
 
         return vehicleEntity.get();
     }
+
+    public VehicleResponseDTO updateVehicle(Long id,VehicleRequestDTO vehicle) {
+        VehicleEntity vehicleEntity = getVehicleByEntity(id);
+        vehicleEntity.setBrand(vehicle.getBrand());
+        vehicleEntity.setCarType(vehicle.getCarType());
+        vehicleEntity.setModel(vehicle.getModel());
+        vehicleEntity.setPlate(vehicle.getPlate());
+        vehicleEntity.setYear(vehicle.getYear());
+        vehicleJpaRepository.save(vehicleEntity);
+        return getDto(vehicleEntity);
+    }
+
+    public VehicleResponseDTO getCarById(Long id) {
+
+        Optional<VehicleEntity> vehicleEntity = vehicleJpaRepository.findById(id);
+        if (vehicleEntity.isEmpty()) {
+            throw new EntityNotFoundException("Vehicle not found");
+        }
+
+        return getDto(vehicleEntity.get());
+    }
+
+    private VehicleResponseDTO getDto(VehicleEntity vehicleEntity) {
+        return VehicleResponseDTO.builder().id(vehicleEntity.getId())
+                .brand(vehicleEntity.getBrand())
+                .carType(vehicleEntity.getCarType())
+                .model(vehicleEntity.getModel())
+                .plate(vehicleEntity.getPlate())
+                .year(vehicleEntity.getYear())
+                .userId(vehicleEntity.getUser().getId())
+                .build();
+    }
 }

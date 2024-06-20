@@ -56,4 +56,12 @@ export class CarService {
   getCarsById(userId:number):Observable<CarResponse[]>{
     return this.http.get<CarResponse[]>(this.url+ '/'+userId);
   }
+
+  getCarById(carId:number):Observable<CarResponse>{
+    return this.http.get<CarResponse>(this.url+'/get/'+carId);
+  }
+
+  updateCar(id:number,car:CarRequest):Observable<CarRequest>{
+    return this.http.put<CarRequest>(this.url+'/edit/'+id, car);
+  }
 }

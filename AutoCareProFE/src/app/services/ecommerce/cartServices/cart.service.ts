@@ -35,4 +35,24 @@ export class CartService {
       })
     );
   }
+
+  updateProductQuantity(cartRequest: CartRequestDTO, quantity: number): Observable<Cart> {
+    return this.http.put<Cart>(`${this.url}/update?quantity=${quantity}`, cartRequest).pipe(
+      tap((cart: Cart) => {
+        this.cartItemCount.next(cart.items.length);
+        this.currentCartData.next(cart);
+      })
+    );
+  }
+
+  deleteProduct(cartRequest: CartRequestDTO): Observable<Cart> {
+    const { userId, productId } = cartRequest;
+    return this.http.delete<Cart>(`${this.url}/remove?userId=${userId}&productId=${productId}`).pipe(
+      tap((cart: Cart) => {
+        this.cartItemCount.next(cart.items.length);
+        this.currentCartData.next(cart);
+      })
+    );
+  }
+
 }
