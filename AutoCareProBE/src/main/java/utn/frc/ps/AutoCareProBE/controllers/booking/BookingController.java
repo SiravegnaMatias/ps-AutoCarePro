@@ -3,7 +3,9 @@ package utn.frc.ps.AutoCareProBE.controllers.booking;
 import utn.frc.ps.AutoCareProBE.Entities.booking.BookingEntity;
 import utn.frc.ps.AutoCareProBE.dtos.booking.BookingRequestDTO;
 import utn.frc.ps.AutoCareProBE.dtos.booking.BookingResponseDTO;
+import utn.frc.ps.AutoCareProBE.dtos.querys.serviceQueries.ServiceRequestedDTO;
 import utn.frc.ps.AutoCareProBE.services.booking.BookingService;
+import utn.frc.ps.AutoCareProBE.services.queryService.QueryService;
 
 import java.util.List;
 import java.util.Map;
@@ -17,6 +19,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/bookings")
 @CrossOrigin(origins = "*")
 public class BookingController {
+    @Autowired
+    private QueryService queryService;
+    
+    
 
     @Autowired
     private BookingService bookingService;
@@ -71,5 +77,10 @@ public class BookingController {
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @GetMapping("/most-requested-service")
+    public ResponseEntity<List<ServiceRequestedDTO>> getMostRequestedService() {
+        return ResponseEntity.ok(queryService.getMostRequestedService());
     }
 }

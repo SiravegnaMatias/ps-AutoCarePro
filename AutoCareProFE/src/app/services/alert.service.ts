@@ -8,7 +8,7 @@ export class AlertService {
 
   constructor() { }
 
-  succesfullLogin(message:String){
+  succesfullLogin(message: string){
 
     const Toast = Swal.mixin({
       toast: true,

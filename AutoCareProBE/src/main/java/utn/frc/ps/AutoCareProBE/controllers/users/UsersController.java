@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import utn.frc.ps.AutoCareProBE.dtos.querys.clientsQueries.ClientXVehiclesDTO;
 import utn.frc.ps.AutoCareProBE.dtos.user.UserResponse;
 import utn.frc.ps.AutoCareProBE.dtos.user.UserUpdateRequest;
 import utn.frc.ps.AutoCareProBE.services.User.UserService;
+import utn.frc.ps.AutoCareProBE.services.queryService.QueryService;
 
 @RestController
 @RequestMapping("/users")
@@ -24,6 +26,9 @@ public class UsersController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private QueryService queryService;
 
 
     @GetMapping("/{id}")
@@ -39,5 +44,10 @@ public class UsersController {
     @PutMapping("/{id}")
     public ResponseEntity<UserResponse> update(@PathVariable Long id, @RequestBody UserUpdateRequest user) {
         return ResponseEntity.ok(userService.updateUser(id,user));
+    }
+
+    @GetMapping("/vehicle-counts")
+    public ResponseEntity<List<ClientXVehiclesDTO>> getUserVehicleCounts() {
+        return ResponseEntity.ok(queryService.getUserVehicleCounts());
     }
 }

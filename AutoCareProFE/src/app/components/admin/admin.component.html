@@ -1,3 +1,17 @@
 <h1>Admin Site</h1>
 <hr>
 <app-add-services></app-add-services>
+
+<ul class="nav nav-tabs mt-2">
+    <li class="nav-item">
+        <a class="nav-link" aria-current="page" routerLink="charts/clients" routerLinkActive="active">Clientes</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" routerLink="charts/sales" routerLinkActive="active">Ventas</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" routerLink="charts/services" routerLinkActive="active">Servicios</a>
+    </li>
+</ul>
+<router-outlet></router-outlet>
+

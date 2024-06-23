@@ -29,6 +29,9 @@ import { EditSupplierComponent } from './components/ecommerceComponents/edit-sup
 import { ProductsComponent } from './components/ecommerceComponents/products/products.component';
 import { EditCarComponent } from './components/edit-car/edit-car.component';
 import { AdminSalesDetailComponent } from './components/ecommerceComponents/admin-sales-detail/admin-sales-detail.component';
+import { ClientChartComponent } from './components/charts/client-chart/client-chart.component';
+import { SalesChartComponent } from './components/charts/sales-chart/sales-chart.component';
+import { ServicesChartComponent } from './components/charts/services-chart/services-chart.component';
 
 const routes: Routes = [
   {
@@ -182,7 +185,24 @@ const routes: Routes = [
       {
         path: 'admin',
         component: AdminComponent,
-        data: { allowedRoles: ['ADMIN'] }
+        data: { allowedRoles: ['ADMIN'] },
+        children: [
+          {
+            path: 'charts/clients',
+            component: ClientChartComponent,
+            data: { allowedRoles: ['ADMIN'] }
+          },
+          {
+            path: 'charts/sales',
+            component: SalesChartComponent,
+            data: { allowedRoles: ['ADMIN'] }
+          },
+          {
+            path: 'charts/services',
+            component: ServicesChartComponent,
+            data: { allowedRoles: ['ADMIN']}
+          }
+        ]
       },
       {
         path: 'profile',
