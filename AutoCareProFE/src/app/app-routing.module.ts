@@ -28,6 +28,7 @@ import { AddSupplierComponent } from './components/ecommerceComponents/add-suppl
 import { EditSupplierComponent } from './components/ecommerceComponents/edit-supplier/edit-supplier.component';
 import { ProductsComponent } from './components/ecommerceComponents/products/products.component';
 import { EditCarComponent } from './components/edit-car/edit-car.component';
+import { AdminSalesDetailComponent } from './components/ecommerceComponents/admin-sales-detail/admin-sales-detail.component';
 
 const routes: Routes = [
   {
@@ -148,6 +149,11 @@ const routes: Routes = [
             {
               path: 'sales',
               component: AdminSalesComponent,
+              data: { allowedRoles: ['ADMIN'] }
+            },
+            {
+              path: 'sales/detail/:id',
+              component: AdminSalesDetailComponent,
               data: { allowedRoles: ['ADMIN'] }
             },
             {

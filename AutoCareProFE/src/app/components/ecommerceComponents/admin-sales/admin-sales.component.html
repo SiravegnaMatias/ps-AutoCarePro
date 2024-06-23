@@ -7,20 +7,24 @@
         <thead>
           <tr>
             <th scope="col">#</th>
-            <th scope="col">Fecha</th>
-            <th scope="col">Monto</th>
             <th scope="col">Cliente</th>
-            <th scope="col">Productos</th>
+            <th scope="col">Fecha</th>
+            <th scope="col">Total</th>
+            <th scope="col">Pago</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Accion</th>
       
           </tr>
         </thead>
         <tbody class="table-group-divider">
-          <tr>
-            <td >1</td>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>mdo</td>
-            <td>mdo</td>
+          <tr *ngFor="let order of orders">
+            <td >{{order.orderId}}</td>
+            <td>{{order.user.firstName}}  {{order.user.lastName}}</td>
+            <td>{{order.date}}</td>
+            <td>{{order.total | currency}}</td>
+            <td>{{order.payment}}</td>
+            <td>{{order.status}}</td>
+            <td><button class="btn btn-outline-secondary"(click)="seeDetail(order.orderId)">Ver</button></td>
           </tr>
         </tbody>
       </table>

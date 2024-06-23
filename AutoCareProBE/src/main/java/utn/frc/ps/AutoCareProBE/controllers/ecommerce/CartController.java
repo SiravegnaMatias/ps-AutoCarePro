@@ -41,7 +41,10 @@ public class CartController {
        return ResponseEntity.ok(cartService.updateQuantityCart(cart, quantity));
     }
 
-    
+    @DeleteMapping("/clear/{id}")
+    public ResponseEntity<CartDTO> clearCart(@PathVariable Long id) {
+        return ResponseEntity.ok(cartService.clearCart(id));
+    }
 
 //faltaria agregar el de modificar cantidad de un item en el carrito
 

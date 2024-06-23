@@ -37,6 +37,7 @@ import { AddSupplierComponent } from './components/ecommerceComponents/add-suppl
 import { EditSupplierComponent } from './components/ecommerceComponents/edit-supplier/edit-supplier.component';
 import { ProductsComponent } from './components/ecommerceComponents/products/products.component';
 import { EditCarComponent } from './components/edit-car/edit-car.component';
+import { AdminSalesDetailComponent } from './components/ecommerceComponents/admin-sales-detail/admin-sales-detail.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { EditCarComponent } from './components/edit-car/edit-car.component';
     EditSupplierComponent,
     ProductsComponent,
     EditCarComponent,
+    AdminSalesDetailComponent,
 
   ],
   imports: [

@@ -57,6 +57,7 @@ export class ProductDetailComponent implements OnInit{
       this.cartService.addProductToCart({userId:this.userId,productId:this.idProduct},quantity).subscribe({
         next: (cart) => {
           this.alertService.succesfullLogin('Producto agregado al carrito');
+          this.productForm.reset() ;
         }
       });
     }else {

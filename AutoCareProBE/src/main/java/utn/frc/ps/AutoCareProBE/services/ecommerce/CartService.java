@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import utn.frc.ps.AutoCareProBE.Entities.User.UserEntity;
 import utn.frc.ps.AutoCareProBE.Entities.ecommerce.CartEntity;
 import utn.frc.ps.AutoCareProBE.Entities.ecommerce.CartItemEntity;
@@ -136,6 +137,21 @@ public CartDTO getCartByUser(Long id) {
         } else{
             throw new EntityNotFoundException("Cart not found");
         }
+        return getCartDTO(saved);
+    }
+
+    @Transactional
+    public CartDTO clearCart(Long id){
+        CartEntity saved = new CartEntity();
+        CartEntity cart = getCartByUserId(id);
+        if (cart != null) {
+            cart.getItems().clear();
+            cartItemJpaRepository.deleteAllByCartId(cart.getId());
+           saved =cartJpaRepository.save(cart);
+        }else {
+            throw new EntityNotFoundException("Cart not found");
+        }
+
         return getCartDTO(saved);
     }
 

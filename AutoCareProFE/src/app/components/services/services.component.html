@@ -15,7 +15,7 @@
                 </div>
                 <div class="card-footer d-flex justify-content-between">
                     <div>
-                        ${{service.price}}
+                        {{service.price | currency}}
                     </div>
                     <div>
                         <button class="btn btn-primary btn-sm mx-1" (click)="addService(service)">Reservar</button>
@@ -40,7 +40,6 @@
         </div>
     </div>
 </ng-container>
-
 
 
 <!-- Modal -->

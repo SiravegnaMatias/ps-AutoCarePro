@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Cart, CartItem } from 'src/app/models/Cart';
+import { OrderRequestDTO } from 'src/app/models/order/OrderRequestDTO';
 import { AlertService } from 'src/app/services/alert.service';
+import { OrderService } from 'src/app/services/ecommerce/Orders/order.service';
 import { CartService } from 'src/app/services/ecommerce/cartServices/cart.service';
 
 @Component({
@@ -10,12 +14,15 @@ import { CartService } from 'src/app/services/ecommerce/cartServices/cart.servic
 })
 export class ShoppingCartComponent implements OnInit {
 
-
+  isChecked: boolean = false;
 
   cart!: Cart;
   constructor(
     private alertService: AlertService,
-    private cartService: CartService
+    private cartService: CartService,
+    private orderService: OrderService,
+    private router:Router
+
 
   ) { }
   ngOnInit(): void {
@@ -60,5 +67,45 @@ export class ShoppingCartComponent implements OnInit {
         this.alertService.somethingWentWrong('ERROR', 'Error al eliminar el producto');
       }
     });
+  }
+
+  toggleCheckboc(){
+    console.log(this.isChecked);
+  }
+
+  buy() {
+    let order: OrderRequestDTO = this.getOrder();
+
+    console.log(order);
+    this.orderService.addOrder(order).subscribe({
+      next: (res) => {
+        this.alertService.succesfullLogin('Compra realizada con éxito');
+         this.cartService.clearCart(this.cart.userId).subscribe({
+            next:(res) =>{
+              this.router.navigate(['/home/shop'])
+            } 
+            });
+          },
+      error: (err) => {
+        console.error(err);
+        this.alertService.somethingWentWrong('ERROR', 'Error al realizar la compra');
+      }
+    });
+  }
+
+
+  getOrder(): OrderRequestDTO {
+    let order: OrderRequestDTO = {
+      userId: this.cart.userId,
+      orderDetails: this.cart.items.map(item => {
+        return { productId: item.product.id, quantity: item.quantity }
+      }),
+      paymentMethod: this.isChecked ? 'PRESENCIAL' : 'MP'
+    }
+    return order;
+  }
+
+  seeProducts(){
+    this.router.navigate(['/home/shop/products']);
   }
 }
