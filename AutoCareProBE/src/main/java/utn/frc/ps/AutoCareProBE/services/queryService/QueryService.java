@@ -1,6 +1,7 @@
 package utn.frc.ps.AutoCareProBE.services.queryService;
 
 import java.math.BigInteger;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,6 +59,18 @@ public class QueryService {
         return productSales;
     }
 
+
+public List<ProductXSalesDTO> getMostSoldProductByStatusAndDateRange(LocalDate startDate, LocalDate endDate) {
+    List<Object[]> results = orderDetailEntityJpaRepository.findMostSoldProductByOrderStatusAndDateRange(startDate, endDate);
+    List<ProductXSalesDTO> productSales = new ArrayList<>();
+    for (Object[] result : results) {
+        String productName = (String) result[0];
+        Long quantitySold = (Long) result[1];
+        productSales.add(new ProductXSalesDTO(productName, quantitySold));
+    }
+    return productSales;
+}
+
     public List<ServiceRequestedDTO> getMostRequestedService() {
         List<Object[]> results = bookingDetailJpaRepository.findMostRequestedService();
         List<ServiceRequestedDTO> serviceRequests = new ArrayList<>();
@@ -68,5 +81,7 @@ public class QueryService {
         }
         return serviceRequests;
     }
+
+    
 
 }

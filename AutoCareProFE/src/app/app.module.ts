@@ -38,11 +38,10 @@ import { EditSupplierComponent } from './components/ecommerceComponents/edit-sup
 import { ProductsComponent } from './components/ecommerceComponents/products/products.component';
 import { EditCarComponent } from './components/edit-car/edit-car.component';
 import { AdminSalesDetailComponent } from './components/ecommerceComponents/admin-sales-detail/admin-sales-detail.component';
-import { ChartModule } from 'angular-highcharts';
+import { ChartModule, HIGHCHARTS_MODULES } from 'angular-highcharts';
 import { ClientChartComponent } from './components/charts/client-chart/client-chart.component';
 import { SalesChartComponent } from './components/charts/sales-chart/sales-chart.component';
 import { ServicesChartComponent } from './components/charts/services-chart/services-chart.component';
-
 
 @NgModule({
   declarations: [
@@ -80,6 +79,7 @@ import { ServicesChartComponent } from './components/charts/services-chart/servi
     SalesChartComponent,
     ServicesChartComponent,
 
+
   ],
   imports: [
     BrowserModule,
@@ -89,7 +89,9 @@ import { ServicesChartComponent } from './components/charts/services-chart/servi
     NgxDropzoneModule,
     FormsModule,
     SweetAlert2Module.forRoot(),
-    ChartModule
+    ChartModule,
+    
+    
 
   ],
   providers: [{

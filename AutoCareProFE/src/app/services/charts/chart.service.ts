@@ -28,4 +28,8 @@ export class ChartService {
   getproductsSalesCount():Observable<ProductXSale[]>{
     return this.http.get<ProductXSale[]>(this.productsSales);
   }
+
+  getMostSoldProdcutsBySales(from:string, to:string):Observable<ProductXSale[]>{
+    return this.http.get<ProductXSale[]>(`http://localhost:8080/orders/most-sold-product?startDate=${from}&endDate=${to}`);
+  }
 }
