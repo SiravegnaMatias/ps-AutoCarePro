@@ -26,4 +26,8 @@ export class EcommerceComponent implements OnInit{
   goToShop(){
     this.router.navigate(['home/shop']);
   }
+
+  goToShoppings(){
+    this.router.navigate(['home/shop/my-shopping']);
+  }
 }

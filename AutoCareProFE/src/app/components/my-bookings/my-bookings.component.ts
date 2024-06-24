@@ -7,6 +7,7 @@ import { LoginService } from 'src/app/services/login.service';
 import { BookingsComponent } from '../bookings/bookings.component';
 import { AlertService } from 'src/app/services/alert.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-my-bookings',
@@ -82,15 +83,40 @@ export class MyBookingsComponent implements OnInit {
     });
     return total.toFixed(2);
   }
-  cancelBooking(id:number){
-    // alertify.confirm('Are you sure you want to cancel this booking?',()=>{
-    //   this.bookingService.cancelBooking(id).subscribe({
-    //     next: (res) => {
-    //       alert('Booking cancelled successfully')
-    //       this.refreshBookings();
-    //     }
-    //   })
-    // })
+  cancelBooking(booking:Booking){
+   
+    if(booking.status === 'Solicitado'){
+     
+        Swal.fire({
+          title: 'Cancelar Reserva',
+          text: 'Esta seguro que desea cancelar la reserva?',
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: 'Si, cancelar',
+          cancelButtonText: 'cerrar'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.bookingService.cancelBooking(booking.id).subscribe({
+              next: (res) => {
+                this.refreshBookings();
+                this.alert.succesfullLogin('Reserva cancelada con exito');
+                
+              },
+              error: (err) => {
+                this.alert.somethingWentWrong('Error','Error al cancelar la reserva, por favor intente de nuevo.');
+              }
+            });
+           
+          }
+        });
+      
+      
+    }else {
+      this.alert.somethingWentWrong('Error','No se puede cancelar una reserva que ya ha sido aceptada o esta en proceso. Comunicate con la sucursal para mas informacion.');
+    
+    }
   }
 
   toggleFilter(){

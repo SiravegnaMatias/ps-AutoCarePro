@@ -21,7 +21,14 @@
                             </li>
                         </ul>
                         <p><strong>Forma de pago </strong> {{order.payment}}</p>
-                        <p><strong>Estado</strong> {{order.status}}</p>
+                        <div>   
+                            <label for="status-select" class="form-laber"><strong>Estado</strong></label>
+                            <select class="form-select" id="status-select" style="width: 18rem;" >
+                               <option *ngFor="let status of orderStatus" value="{{status.id}}" 
+                               [selected]= "status.name === order.status">{{status.name}}</option>
+                                
+                            </select>
+                        </div>
                     </div>
                     <div class="col-md-6">
                         <h4>Productos</h4>
@@ -40,7 +47,9 @@
 
             </div>
             <div class="card-footer text-end">
+
                 <button class="btn btn-secondary m-1" (click)="back()">Volver</button>
+                <button class="btn btn-primary 1" (click)="confirm()">Confirmar</button>
 
             </div>
         </div>

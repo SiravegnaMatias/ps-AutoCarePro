@@ -20,3 +20,8 @@ export interface OrderProduct{
     image: string;
     quantity:number;
 }
+
+export interface OrderStatus{
+    id:number;
+    name:string;
+}

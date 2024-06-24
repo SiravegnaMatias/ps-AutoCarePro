@@ -15,6 +15,7 @@
             <span >${{product.price}}</span>
           </p>
           <p class="lead">{{product.description}}</p>
+          <p class="lead-small">Stock disponible {{product.stock}}</p>
           <form [formGroup]="productForm">
             <div class="d-flex">
               <input type="number" id="inputQuantity" class="form-control text-center me-3" value="1" style="max-width: 4rem"

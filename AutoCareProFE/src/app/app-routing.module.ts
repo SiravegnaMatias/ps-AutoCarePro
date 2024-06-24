@@ -32,6 +32,7 @@ import { AdminSalesDetailComponent } from './components/ecommerceComponents/admi
 import { ClientChartComponent } from './components/charts/client-chart/client-chart.component';
 import { SalesChartComponent } from './components/charts/sales-chart/sales-chart.component';
 import { ServicesChartComponent } from './components/charts/services-chart/services-chart.component';
+import { PurchaseComponent } from './components/ecommerceComponents/purchase/purchase.component';
 
 const routes: Routes = [
   {
@@ -118,6 +119,11 @@ const routes: Routes = [
             {
               path: 'products',
               component: ProductsComponent,
+              data: { allowedRoles: ['CLIENT', 'ADMIN', 'DETAILER'] }
+            },
+            {
+              path: 'my-shopping',
+              component: PurchaseComponent,
               data: { allowedRoles: ['CLIENT', 'ADMIN', 'DETAILER'] }
             }
           ]

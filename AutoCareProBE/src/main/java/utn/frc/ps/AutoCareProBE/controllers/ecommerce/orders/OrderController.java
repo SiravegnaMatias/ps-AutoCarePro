@@ -10,14 +10,16 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import utn.frc.ps.AutoCareProBE.dtos.ecommerce.UpdateStatusDTO;
 import utn.frc.ps.AutoCareProBE.dtos.ecommerce.orders.OrderRequestDTO;
 import utn.frc.ps.AutoCareProBE.dtos.ecommerce.orders.OrderResponseDTO;
+import utn.frc.ps.AutoCareProBE.dtos.ecommerce.orders.OrderStatusDTO;
 import utn.frc.ps.AutoCareProBE.dtos.querys.products.ProductXSalesDTO;
 import utn.frc.ps.AutoCareProBE.services.ecommerce.orderServices.OrderService;
 import utn.frc.ps.AutoCareProBE.services.queryService.QueryService;
@@ -52,6 +54,16 @@ public class OrderController {
     public ResponseEntity<List<ProductXSalesDTO>> getProductSalesCount() {
         return ResponseEntity.ok(queryService.getProductSalesCount());
     }
+
+    @GetMapping("user/{id}")
+    public ResponseEntity<List<OrderResponseDTO>> getOrdersByUserId(@PathVariable Long id){
+        return ResponseEntity.ok(orderService.getOrderByUser(id));
+    }
+
+    @PutMapping("/update-status")
+    ResponseEntity<OrderResponseDTO> updateStatus(@RequestBody UpdateStatusDTO updateStatusDTO){
+        return ResponseEntity.ok(orderService.updateOrderStatus(updateStatusDTO.getOrderId(), updateStatusDTO.getStatusId()));
+    }
     
     @GetMapping("/most-sold-product")
 public ResponseEntity<List<ProductXSalesDTO>> getMostSoldProductByStatusAndDateRange(
@@ -66,5 +78,10 @@ public ResponseEntity<List<ProductXSalesDTO>> getMostSoldProductByStatusAndDateR
             @RequestParam(required = false) String email,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate purchaseDate) {
         return ResponseEntity.ok(orderService.getOrdersbyEmailPurchaseStatus(statusName, email, purchaseDate));
+    }
+
+    @GetMapping("/status")
+    public ResponseEntity<List<OrderStatusDTO>> getAllStatus(){
+        return ResponseEntity.ok(orderService.getStatus());
     }
 }

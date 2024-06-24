@@ -42,6 +42,7 @@ import { ChartModule, HIGHCHARTS_MODULES } from 'angular-highcharts';
 import { ClientChartComponent } from './components/charts/client-chart/client-chart.component';
 import { SalesChartComponent } from './components/charts/sales-chart/sales-chart.component';
 import { ServicesChartComponent } from './components/charts/services-chart/services-chart.component';
+import { PurchaseComponent } from './components/ecommerceComponents/purchase/purchase.component';
 
 @NgModule({
   declarations: [
@@ -78,6 +79,7 @@ import { ServicesChartComponent } from './components/charts/services-chart/servi
     ClientChartComponent,
     SalesChartComponent,
     ServicesChartComponent,
+    PurchaseComponent,
 
 
   ],

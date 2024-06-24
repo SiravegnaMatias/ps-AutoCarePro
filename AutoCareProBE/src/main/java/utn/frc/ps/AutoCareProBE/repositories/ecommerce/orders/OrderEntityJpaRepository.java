@@ -21,4 +21,7 @@ public interface OrderEntityJpaRepository extends JpaRepository<OrderEntity, Lon
             @Param("statusName") String statusName,
             @Param("email") String email,
             @Param("purchaseDate") LocalDate purchaseDate);
+
+
+      List<OrderEntity> findByUserId(Long userId);
 } 

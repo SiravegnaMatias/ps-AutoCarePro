@@ -15,7 +15,10 @@
           <input type="text" class="form-control" formControlName="payment" placeholder="Pago">
         </div>
         <div class="col-md-2">
-          <input type="text" class="form-control" formControlName="status" placeholder="Estado">
+          <select class="form-control" formControlName="status">
+            <option value="">Todos los estados</option>
+            <option *ngFor="let status of statusList" [value]="status">{{ status }}</option>
+          </select>
         </div>
         <div class="col-md-2">
           <button class="btn btn-outline-light" (click)="cleanFilters()">Limpiar Filtros</button>

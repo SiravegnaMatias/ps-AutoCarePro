@@ -48,5 +48,9 @@ export class ProductsComponent implements OnInit{
       }
     });
   }
+
+  isStock(product:Product){
+    return Number(product.stock) > 0;
+  }
 }
 

@@ -73,7 +73,7 @@ export class ServicesChartComponent implements OnInit{
       },
       series : [{
          type: 'pie',
-         name: 'Browser share',
+         name: 'servicios mas solicitados',
          data: this.dataChart
       }]
    });

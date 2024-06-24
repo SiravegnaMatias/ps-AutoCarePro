@@ -3,7 +3,7 @@ import { Service } from 'src/app/models/Service';
 import { ServiceManagmentService } from 'src/app/services/service-managment.service';
 import { ServiceUpdateService } from 'src/app/services/service-update.service';
 import flatpickr from 'flatpickr';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 import { LoginService } from 'src/app/services/login.service';
 import { CarRequest, CarResponse } from 'src/app/models/CarRequest';
@@ -28,6 +28,7 @@ export class ServicesComponent implements OnInit {
   currentUser!: User;
   cars: CarResponse[] = [];
   booking!: BookingRequest;
+  
   constructor(
     private service: ServiceManagmentService,
     private srvUpd: ServiceUpdateService,
@@ -37,7 +38,8 @@ export class ServicesComponent implements OnInit {
     private carService: CarService,
     private bookingService: BookingServiceService,
     private router: Router,
-    private notification: AlertService
+    private notification: AlertService,
+    
   ) {
     srvUpd.serviceAdded$.subscribe({
       next: () => {
@@ -51,10 +53,13 @@ export class ServicesComponent implements OnInit {
 
   formServices: any = this.fb.group({
     date: [''],
-    vehicle: [''],
+    vehicle: ['',Validators.required],
     additionalNotes: [''],
   });
 
+  get vehicle(){
+    return this.formServices.get('vehicle');
+  }
   ngAfterViewInit() {
     flatpickr('#datepicker', {
       enableTime: true,
@@ -94,6 +99,10 @@ export class ServicesComponent implements OnInit {
   }
 
   addService(service: Service) {
+    if(this.cars === null || this.cars.length === 0){
+      this.notification.somethingWentWrong('Error','No tiene vehiculos registrados, por favor registre un vehiculo antes de reservar un servicio');
+      return;
+    }
     this.servicesSelcted.push(service);
   }
   deleteService(index: number) {
@@ -119,17 +128,27 @@ export class ServicesComponent implements OnInit {
       additionalNotes: this.formServices.value.additionalNotes,
       services: this.servicesSelcted
     }
-    this.bookingService.addBooking(this.booking).subscribe({
-      next: (res) => {
-        alert('Booking added');
-        this.formServices.reset();
-        this.servicesSelcted = [];
-        this.router.navigate(['/my-bookings']);
-      },
-      error: (err) => {
-        console.error('Error adding booking:', err);
-      }
-    });
+
+    if(this.booking.date === '' || this.booking.date === null){
+      this.notification.somethingWentWrong('Error','Por favor seleccione una fecha y hora para su reserva');
+      return;
+    }
+    if(this.formServices.valid){
+      this.bookingService.addBooking(this.booking).subscribe({
+        next: (res) => {
+          this.notification.succesfullLogin('Su reserva ha sido realizada con exito');
+          this.formServices.reset();
+          this.servicesSelcted = [];
+          this.router.navigate(['/my-bookings']);
+        },
+        error: (err) => {
+          console.error('Error adding booking:', err);
+        }
+      });
+    } else {
+      this.formServices.markAllAsTouched();
+    }
+   
   }
 
   getTotal(): string {
@@ -144,6 +163,8 @@ export class ServicesComponent implements OnInit {
     this.router.navigate(['/home/services/edit', name]);
   }
 
-
+  isAuthorized(roles: string[]): boolean {
+    return roles.includes(this.currentUser.role.name);
+  }
 
 }

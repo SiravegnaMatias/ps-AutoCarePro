@@ -19,7 +19,7 @@
                     </div>
                     <div>
                         <button class="btn btn-primary btn-sm mx-1" (click)="addService(service)">Reservar</button>
-                        <button class="btn btn-warning btn-sm" (click)="editService(service.name)">Editar</button>
+                        <button class="btn btn-warning btn-sm" *ngIf="isAuthorized(['ADMIN'])" (click)="editService(service.name)">Editar</button>
 
                     </div>
                 </div>
@@ -48,7 +48,7 @@
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content" style="background-color: var(--black);">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Reserva</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
                     style="background-color: var(--white);"></button>
             </div>
@@ -59,7 +59,7 @@
                         <div class="row g-0">
                             <div class="col-md-8">
                                 <div class="card-body">
-                                    <h5 class="card-title">{{item.name}} - ${{item.price}}</h5>
+                                    <h5 class="card-title">{{item.name}} - {{item.price | currency}}</h5>
                                     <p class="card-text">{{item.description}}</p>
                                 </div>
                             </div>
@@ -75,16 +75,20 @@
                 <form style="display: block;" [formGroup]="formServices">
                     <div>
                         <label class="form-label">Total </label>
-                        <label class="form-label mx-2 "> {{getTotal()}}</label>
+                        <label class="form-label mx-2 "> {{getTotal() | currency}}</label>
                     </div>
                     <label class="form-label">Vehiculo</label>
-                    <select class="form-select" formControlName="carType" formControlName="vehicle">
+                    <select class="form-select"  formControlName="vehicle">
                         <option selected disabled>Seleccione su vehiculo</option>
                         <ng-container *ngFor="let car of cars">
 
                             <option value="{{car.id}}">{{car.brand}} - {{car.model}} - {{car.plate}}</option>
                         </ng-container>
                     </select>
+                    <div *ngIf="vehicle.hasError('required') && vehicle.touched" class="danger text-danger">
+                        Seleccione un vehiculo
+
+                    </div>
 
                     <div>
 
@@ -102,8 +106,8 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" (click)="sumbit()">Understood</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" (click)="sumbit()">Confirmar</button>
             </div>
         </div>
     </div>

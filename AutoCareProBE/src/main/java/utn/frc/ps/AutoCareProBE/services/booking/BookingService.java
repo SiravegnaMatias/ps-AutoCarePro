@@ -22,6 +22,7 @@ import utn.frc.ps.AutoCareProBE.repositories.booking.BookingDetailJpaRepository;
 import utn.frc.ps.AutoCareProBE.repositories.booking.BookingJpaRepository;
 import utn.frc.ps.AutoCareProBE.repositories.booking.StatusJpaRepository;
 import utn.frc.ps.AutoCareProBE.services.User.UserService;
+import utn.frc.ps.AutoCareProBE.services.email.EmailSenderService;
 import utn.frc.ps.AutoCareProBE.services.vehicles.VehicleService;
 
 @Service
@@ -39,6 +40,9 @@ private VehicleService vehicleService;
 private UserService userService;
 @Autowired
 private StatusJpaRepository statusJpaRepository;
+
+@Autowired
+private EmailSenderService emailSenderService;
 
 
     @Transactional
@@ -63,7 +67,14 @@ private StatusJpaRepository statusJpaRepository;
         bookingDetailJpaRepository.save(bookingDetail);
     }
 
-        
+    bookingEntity = bookingJpaRepository.findById(bookingEntity.getId()).orElseThrow(() -> new RuntimeException("Booking not found"));
+
+   String bookingDetails = getBookingDetailsForMail(bookingEntity,vehicle);
+
+    
+
+     emailSenderService.sendBookingConfirmationEmail(user.getEmail(), bookingDetails);
+
 
         return BookingResponseDTO.builder().date(bookingEntity.getDate())
                                         .services(booking.getServices()).
@@ -72,7 +83,7 @@ private StatusJpaRepository statusJpaRepository;
                                         .build();
     }
 
-    public List<BookingResponseDTO> findAllBookings() {
+        public List<BookingResponseDTO> findAllBookings() {
         List<BookingEntity> bookings = bookingJpaRepository.findAll();
         List<BookingResponseDTO> bookingResponseDTOs = new ArrayList<>();
         
@@ -144,6 +155,17 @@ private StatusJpaRepository statusJpaRepository;
         }
         booking.get().setStatus(statusEntity.get());
         bookingJpaRepository.save(booking.get());
+
+        String email = booking.get().getUser().getEmail();
+        
+        if(status == 2){
+            emailSenderService.sendBookingApprovedEmail(email, getBookingDetailsForMail(booking.get(), booking.get().getVehicle()));
+        }
+
+        if(status == 4){
+            emailSenderService.sendReadyForPickupEmail(email, getBookingDetailsForMail(booking.get(), booking.get().getVehicle()));
+        }
+
 
         List<BookingDetailEntity> bookingDetailEntities =  getBookingDetails(booking.get());
         List<DTOService> services = getServicesDTOs(bookingDetailEntities);
@@ -222,6 +244,25 @@ private StatusJpaRepository statusJpaRepository;
         return booking.getBookingDetails();
     }
 
+    private List<String> getStringDetails(BookingEntity booking) {
+        List<String> serviceDetails = new ArrayList<>();
+        for (BookingDetailEntity bookingDetailEntity : booking.getBookingDetails()) {
+            ServiceEntity service = bookingDetailEntity.getService();
+            String serviceDetail = "Servicio: " + service.getName() + " - Precio: $" + service.getPrice();
+            serviceDetails.add(serviceDetail);
+        }
+        return serviceDetails;
+    }
 
+    private String getBookingDetailsForMail(BookingEntity bookingEntity,VehicleEntity vehicle){
+        List<String> serviceDetails = getStringDetails(bookingEntity);
+        String bookingDetails = "ID de Reserva: " + bookingEntity.getId() + "\n" +
+                            "Fecha: " + bookingEntity.getDate() + "\n" +
+                            "Vehículo: " + vehicle.getBrand() + " " + vehicle.getModel() + "\n" +
+                            "Estado: " + bookingEntity.getStatus().getName() + "\n" +
+                            "Servicios: \n" + String.join("\n", serviceDetails);
+
+        return bookingDetails;
+    }
    
 }
