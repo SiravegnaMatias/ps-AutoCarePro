@@ -6,6 +6,7 @@ import { OrderRequestDTO } from 'src/app/models/order/OrderRequestDTO';
 import { AlertService } from 'src/app/services/alert.service';
 import { OrderService } from 'src/app/services/ecommerce/Orders/order.service';
 import { CartService } from 'src/app/services/ecommerce/cartServices/cart.service';
+import { MercadoPagoService } from 'src/app/services/ecommerce/mercadoPago/mercado-pago.service';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -21,7 +22,8 @@ export class ShoppingCartComponent implements OnInit {
     private alertService: AlertService,
     private cartService: CartService,
     private orderService: OrderService,
-    private router:Router
+    private router:Router,
+    private mercadoPagoService:MercadoPagoService
 
 
   ) { }
@@ -107,5 +109,30 @@ export class ShoppingCartComponent implements OnInit {
 
   seeProducts(){
     this.router.navigate(['/home/shop/products']);
+  }
+
+
+  async buyMp() {
+    try {
+      const item = this.createItemFromCart();
+      // const preferenceId = await this.mercadoPagoService.createPreference(item);
+      this.mercadoPagoService.createPreference(item).subscribe({
+        next: (preferenceId) => {
+          this.mercadoPagoService.createCheckoutButton(preferenceId);
+
+        }
+      });
+    } catch (e) {
+      console.error('Error processing purchase:', e);
+    }
+  }
+
+  createItemFromCart() {
+    // lógica para crear el objeto del artículo basado en los ítems del carrito
+    return {
+      title: 'Articulo de ejemplo',
+      quantity: 1,
+      unit_price: 100,
+    };
   }
 }

@@ -50,6 +50,8 @@
             <div class="p-3">
                 <h4>Total a pagar</h4>
                 <p><strong>{{getTotalCart(cart)|currency}}</strong></p>
+
+               
                 <div class="d-grid gap-2">
                     <button class="btn btn-primary btn-block" type="button"  data-bs-toggle="modal" data-bs-target="#purchaseModal">Confirmar Compra</button>
                 </div>
@@ -87,6 +89,10 @@
                 <input type="checkbox" class="form-check-input" id="sucursalCheck" [(ngModel)]="isChecked">
                 <label class="form-check-label" for="sucursalCheck" >Pagar en sucursal</label>
               </div>
+              <div class="d-grid gap-2 mb-2">
+                <button class="btn btn-secondary btn-block" type="button" (click)="buyMp()">Mercado Pago</button>
+                <div id="wallet_container"></div>
+            </div> 
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-primary" (click)="buy()">Comprar</button>
@@ -94,3 +100,5 @@
       </div>
     </div>
   </div>
+
+  
