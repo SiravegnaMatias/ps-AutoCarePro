@@ -1,8 +1,25 @@
 <div class="container m-2">
     <div class="d-flex justify-content-between mt-4">
-        <button class="btn btn-outline-light">Filtros</button>
+        <button class="btn btn-outline-light" (click)="toggleFilter()">Filtros</button>
         <button class="btn btn-outline-light" routerLink="add"> Agregar Proveedor</button>
     </div>
+    <div class="mt-4" *ngIf="isFilter">
+      <form [formGroup]="filterForm" class="row g-3">
+        <div class="col-md-3">
+          <input type="text" class="form-control" formControlName="id" placeholder="ID">
+        </div>
+        <div class="col-md-3">
+          <input type="text" class="form-control" formControlName="name" placeholder="Nombre">
+        </div>
+        <div class="col-md-3">
+          <input type="text" class="form-control" formControlName="email" placeholder="Correo Electrónico">
+        </div>
+        <div class="col-md-3">
+          <button class="btn btn-outline-light" (click)="cleanFilters()">Limpiar Filtros</button>
+        </div>
+      </form>
+    </div>
+
     <div class="table-responsive mt-2">
     <table class="table mt-2  ">
         <thead>
@@ -17,7 +34,7 @@
           </tr>
         </thead>
         <tbody class="table-group-divider">
-          <tr *ngFor="let supplier of suppliers">
+          <tr *ngFor="let supplier of filteredSuppliers">
             <td >{{supplier.id}}</td>
             <td>{{supplier.name}}</td>
             <td>{{supplier.address}}</td>

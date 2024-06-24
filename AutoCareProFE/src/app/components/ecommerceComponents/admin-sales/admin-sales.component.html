@@ -1,6 +1,26 @@
 <div class="container m-2">
-    <div class=" mt-4">
-        <button class="btn btn-outline-light">Filtros</button>
+  <button class="btn btn-outline-light" (click)="toggleFilter()">Filtros</button>
+    <div class=" mt-4" *ngIf="isFilter">
+      <form [formGroup]="filterForm" class="row g-3">
+        <div class="col-md-2">
+          <input type="text" class="form-control" formControlName="orderId" placeholder="ID Pedido">
+        </div>
+        <div class="col-md-2">
+          <input type="text" class="form-control" formControlName="clientName" placeholder="Cliente">
+        </div>
+        <div class="col-md-2">
+          <input type="date" class="form-control" formControlName="date" placeholder="Fecha">
+        </div>
+        <div class="col-md-2">
+          <input type="text" class="form-control" formControlName="payment" placeholder="Pago">
+        </div>
+        <div class="col-md-2">
+          <input type="text" class="form-control" formControlName="status" placeholder="Estado">
+        </div>
+        <div class="col-md-2">
+          <button class="btn btn-outline-light" (click)="cleanFilters()">Limpiar Filtros</button>
+        </div>
+      </form>
     </div>
     <div class="table-responsive mt-2">
     <table class="table mt-2  ">
@@ -17,7 +37,7 @@
           </tr>
         </thead>
         <tbody class="table-group-divider">
-          <tr *ngFor="let order of orders">
+          <tr *ngFor="let order of filteredOrders">
             <td >{{order.orderId}}</td>
             <td>{{order.user.firstName}}  {{order.user.lastName}}</td>
             <td>{{order.date}}</td>

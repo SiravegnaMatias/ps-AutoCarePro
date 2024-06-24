@@ -1,7 +1,31 @@
  <div class="container m-2">
     <div class="d-flex justify-content-between mt-4">
-        <button class="btn btn-outline-light">Filtros</button>
+        <button class="btn btn-outline-light" (click)="toggleFilter()">Filtros</button>
         <button class="btn btn-outline-light" routerLink="add"> Agregar Producto</button>
+    </div>
+    <div class="mt-4" *ngIf="isFilter">
+      <form [formGroup]="filterForm" class="row g-3">
+        <div class="col-md-2">
+          <input type="text" class="form-control" formControlName="id" placeholder="ID">
+        </div>
+        <div class="col-md-2">
+          <input type="text" class="form-control" formControlName="name" placeholder="Nombre">
+        </div>
+        <div class="col-md-2">
+          <select class="form-control" formControlName="category">
+            <option value="">Todas las categorías</option>
+            <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+          </select>
+        </div>
+        <div class="col-md-2">
+          <input type="text" class="form-control" formControlName="supplier" placeholder="Proveedor">
+
+        </div>
+        <div class="col-md-2">
+          <button class="btn btn-outline-light" (click)="cleanFilters()">Limpiar Filtros</button>
+
+        </div>
+      </form>
     </div>
     <div class="table-responsive mt-2">
     <table class="table mt-2  ">
@@ -18,7 +42,7 @@
           </tr>
         </thead>
         <tbody class="table-group-divider">
-          <tr *ngFor="let product of products">
+          <tr *ngFor="let product of filteredProducts">
             <td >{{product.id}}</td>
             <td>{{product.name}}</td>
             <td>{{product.description}}</td>

@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -155,8 +156,10 @@ public class OrderService {
         return total;
     }
 
-    
-
+        public List<OrderResponseDTO> getOrdersbyEmailPurchaseStatus(String email, String statusName, LocalDate purchaseDate) {
+        List<OrderEntity> orders = orderJpaRepository.findOrders(statusName, email, purchaseDate);
+        return orders.stream().map(this::getOrderResponseDTO).collect(Collectors.toList());
+        }
    
 }
 

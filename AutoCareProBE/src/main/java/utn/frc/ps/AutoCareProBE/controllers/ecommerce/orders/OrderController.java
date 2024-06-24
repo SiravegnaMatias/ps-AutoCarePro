@@ -59,4 +59,12 @@ public ResponseEntity<List<ProductXSalesDTO>> getMostSoldProductByStatusAndDateR
         @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
     return ResponseEntity.ok(queryService.getMostSoldProductByStatusAndDateRange(startDate, endDate));
 }
+
+    @GetMapping("/filter")
+    public ResponseEntity<List<OrderResponseDTO>> getOrdersByFilter(
+            @RequestParam(required = false) String statusName,
+            @RequestParam(required = false) String email,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate purchaseDate) {
+        return ResponseEntity.ok(orderService.getOrdersbyEmailPurchaseStatus(statusName, email, purchaseDate));
+    }
 }

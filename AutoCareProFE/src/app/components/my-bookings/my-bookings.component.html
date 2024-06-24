@@ -1,10 +1,33 @@
 <h1>Mis Reservas</h1>
 <hr>
-<div class="row">
+<div class="container">
+
+    <button class="btn btn-outline-light" (click)="toggleFilter()">Filtros</button>
+    <div class="row">
+        <form [formGroup]="filterForm" class="row g-3" *ngIf="isFilter">
+            <div class="col-md-3">
+                <input type="text" class="form-control" formControlName="bookingId" placeholder="ID Reserva">
+            </div>
+            <div class="col-md-3">
+                <input type="text" class="form-control" formControlName="vehicleName" placeholder="Nombre del Vehículo">
+            </div>
+            <div class="col-md-3">
+                <select class="form-control" formControlName="status">
+                    <option value="">Todos los estados</option>
+                    <option *ngFor="let status of statusOptions" [value]="status">{{ status }}</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <button class="btn btn-outline-light" (click)="cleanFilters()">Limpiar Filtros</button>
+              </div>
+        </form>
+    </div>
+</div>
     <div class="col-md-12">
-        <ng-container *ngFor="let booking of bookings">
+        <ng-container *ngFor="let booking of filteredBookings">
             <div class="card m-3 ">
-                <div class="card-header d-flex justify-content-between" style="background-color: var(--white); color: var(--black);">
+                <div class="card-header d-flex justify-content-between"
+                    style="background-color: var(--white); color: var(--black);">
                     <h5 class="card-text"> #{{booking.id}} - {{booking.date}}</h5>
                     <button class="btn btn-secondary" (click)="cancelBooking(booking.id)">
                         <i class="bi bi-x-octagon"></i>
@@ -39,4 +62,5 @@
                 </div>
             </div>
         </ng-container>
+        
     </div>

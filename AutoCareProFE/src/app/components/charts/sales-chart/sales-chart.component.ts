@@ -47,7 +47,7 @@ export class SalesChartComponent implements OnInit{
         type: 'column'
       },
       title: {
-        text: 'Clientes por vehículo'
+        text: 'Productos mas vendidos'
       },
       credits: {
         enabled: false
@@ -58,7 +58,7 @@ export class SalesChartComponent implements OnInit{
       },
       series: [
         {
-          name: 'Clientes',
+          name: 'Productos',
           data: this.productsCount,
           type: 'column'
         }
