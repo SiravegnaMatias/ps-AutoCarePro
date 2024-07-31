@@ -43,6 +43,7 @@ import { ClientChartComponent } from './components/charts/client-chart/client-ch
 import { SalesChartComponent } from './components/charts/sales-chart/sales-chart.component';
 import { ServicesChartComponent } from './components/charts/services-chart/services-chart.component';
 import { PurchaseComponent } from './components/ecommerceComponents/purchase/purchase.component';
+import { SuccessComponent } from './components/mp/success/success.component';
 
 @NgModule({
   declarations: [
@@ -80,6 +81,7 @@ import { PurchaseComponent } from './components/ecommerceComponents/purchase/pur
     SalesChartComponent,
     ServicesChartComponent,
     PurchaseComponent,
+    SuccessComponent,
 
 
   ],

@@ -1,6 +1,6 @@
 <div class="container" *ngIf="cart.items.length === 0">
     <h2>Mi Carrito</h2>
-    <div class="alert alert-warning d-flex justify-content-between"role="alert">
+    <div class="alert alert-warning d-flex justify-content-between" role="alert">
         <div>
             No hay productos en el carrito
         </div>
@@ -51,9 +51,10 @@
                 <h4>Total a pagar</h4>
                 <p><strong>{{getTotalCart(cart)|currency}}</strong></p>
 
-               
+
                 <div class="d-grid gap-2">
-                    <button class="btn btn-primary btn-block" type="button"  data-bs-toggle="modal" data-bs-target="#purchaseModal">Confirmar Compra</button>
+                    <button class="btn btn-primary btn-block" type="button" data-bs-toggle="modal"
+                        data-bs-target="#purchaseModal">Confirmar Compra</button>
                 </div>
 
             </div>
@@ -64,41 +65,42 @@
 
 <!-- Button trigger modal -->
 
-  
-  <!-- Modal -->
-  <div class="modal fade" id="purchaseModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" >
-      <div class="modal-content" style="background-color: var(--black);">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Mi compra</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="background-color: var(--white);"></button>
-        </div>
-        <div class="modal-body">
-          <h3>Productos</h3>
-          <ul *ngFor="let item of cart.items">
-            <li class="d-flex justify-content-between">
-                <div>
-                    {{item.product.name}}  {{item.product.price | currency}}
-                </div>   
-                <div>X({{item.quantity}})</div> 
-            </li>
-          </ul>
-            <hr>
-            <h4>Total a pagar: {{getTotalCart(cart)|currency}}</h4>
-            <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="sucursalCheck" [(ngModel)]="isChecked">
-                <label class="form-check-label" for="sucursalCheck" >Pagar en sucursal</label>
-              </div>
-              <div class="d-grid gap-2 mb-2">
-                <button class="btn btn-secondary btn-block" type="button" (click)="buyMp()">Mercado Pago</button>
-                <div id="wallet_container"></div>
-            </div> 
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" (click)="buy()">Comprar</button>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  
+<!-- Modal -->
+<div class="modal fade" id="purchaseModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="background-color: var(--black);">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Mi compra</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                    style="background-color: var(--white);"></button>
+            </div>
+            <div class="modal-body">
+                <h3>Productos</h3>
+                <ul *ngFor="let item of cart.items">
+                    <li class="d-flex justify-content-between">
+                        <div>
+                            {{item.product.name}} {{item.product.price | currency}}
+                        </div>
+                        <div>X({{item.quantity}})</div>
+                    </li>
+                </ul>
+                <hr>
+                <h4>Total a pagar: {{getTotalCart(cart)|currency}}</h4>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="sucursalCheck" [(ngModel)]="isChecked">
+                    <label class="form-check-label" for="sucursalCheck">Pagar en sucursal</label>
+
+                </div>
+                <div class="d-grid gap-2 mb-2">
+                    <div id="paymentBrick_container"></div>
+                    <div id="wallet_container"></div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" (click)="buy()">Comprar</button>
+            </div>
+        </div>
+    </div>
+</div>

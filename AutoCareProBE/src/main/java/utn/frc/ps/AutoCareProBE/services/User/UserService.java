@@ -46,15 +46,8 @@ public class UserService {
     Role role = Role.builder().id(roleEntity.get().getId()).name(roleEntity.get().getName()).build();
     userEntity.setRole(roleEntity.get());
     userEntity = userJpaRepository.save(userEntity);
-  //  emailSenderService.sendRegistrationEmail(userEntity.getEmail());
-    // return UserResponse.builder().id(userEntity.getId())
-    //     .email(userEntity.getEmail())
-    //     .firstName(userEntity.getFirstName())
-    //     .lastName(userEntity.getLastName())
-    //     .role(role)
-    //     .address(userEntity.getAddress())
-
-    //     .build();
+   emailSenderService.sendRegistrationEmail(userEntity.getEmail());
+    
 
     return AuthResponse.builder().token(JwtService.getToken(userEntity)).id(userEntity.getId()).build();
   }

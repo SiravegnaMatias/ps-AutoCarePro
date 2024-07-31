@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { Cart, CartRequestDTO } from 'src/app/models/Cart';
+import { MercadoPagoService } from '../mercadoPago/mercado-pago.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,11 +10,12 @@ import { Cart, CartRequestDTO } from 'src/app/models/Cart';
 export class CartService {
   //TENGO QUE VER SI EL CURRENT CAR SIGUE O NO DEPENDE EL DESLOGUEO DE USUARIO
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private mercadoPagoService:MercadoPagoService) { }
 
   private url: string = 'http://localhost:8080/cart';
   private cartItemCount = new BehaviorSubject<number>(0);
   currentCartData: BehaviorSubject<Cart> = new BehaviorSubject<Cart>({ id: 0, userId: 0, items: [] });
+  cartPreferences: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
   cartItemCount$ = this.cartItemCount.asObservable();
 
@@ -23,6 +25,7 @@ export class CartService {
       tap((cart: Cart) => {
         this.cartItemCount.next(cart.items.length);
         this.currentCartData.next(cart);
+        this.updatePreferences(cart);
       })
     );
   }
@@ -32,6 +35,7 @@ export class CartService {
       tap((cart: Cart) => {
         this.cartItemCount.next(cart.items.length);
         this.currentCartData.next(cart);
+        this.updatePreferences(cart);
       })
     );
   }
@@ -41,6 +45,7 @@ export class CartService {
       tap((cart: Cart) => {
         this.cartItemCount.next(cart.items.length);
         this.currentCartData.next(cart);
+        this.updatePreferences(cart);
       })
     );
   }
@@ -51,6 +56,7 @@ export class CartService {
       tap((cart: Cart) => {
         this.cartItemCount.next(cart.items.length);
         this.currentCartData.next(cart);
+        this.updatePreferences(cart);
       })
     );
   }
@@ -63,6 +69,18 @@ export class CartService {
         this.currentCartData.next(cart);
       })
     );
+  }
+
+  updatePreferences(cart: Cart) {
+    console.log('cart items desde el servicio de cart:', cart.items);
+    this.mercadoPagoService.createPreference(cart.items).subscribe({
+      next: (preferenceId) => {
+        this.cartPreferences.next(preferenceId);
+      },
+      error: (err) => {
+        console.error('Error creating preference:', err);
+      }
+    });
   }
 
 }

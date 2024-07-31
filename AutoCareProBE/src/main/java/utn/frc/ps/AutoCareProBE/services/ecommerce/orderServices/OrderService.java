@@ -65,6 +65,8 @@ public class OrderService {
 
     @Transactional
     public OrderResponseDTO createOrder(OrderRequestDTO orderRequestDTO) {
+
+        //actualizar esto cuando este la pasarela de pago
         UserEntity user = userService.findUserEntityById(orderRequestDTO.getUserId());
         OrderStatusEntity status = orderStatusJpaRepository.findByName("APROBADA");
 
