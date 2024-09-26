@@ -165,7 +165,12 @@ private EmailSenderService emailSenderService;
         if(status == 4){
             emailSenderService.sendReadyForPickupEmail(email, getBookingDetailsForMail(booking.get(), booking.get().getVehicle()));
         }
-
+        
+        if(status == 5){
+            emailSenderService.sendReadyForPickupEmail(email, getBookingDetailsForMail(booking.get(), booking.get().getVehicle()));
+        }
+        
+        
 
         List<BookingDetailEntity> bookingDetailEntities =  getBookingDetails(booking.get());
         List<DTOService> services = getServicesDTOs(bookingDetailEntities);

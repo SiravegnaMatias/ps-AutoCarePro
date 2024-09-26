@@ -25,7 +25,7 @@ import com.mercadopago.exceptions.MPException;
 import com.mercadopago.resources.preference.Preference;
 
 import utn.frc.ps.AutoCareProBE.dtos.ecommerce.CartItemDTO;
-import utn.frc.ps.AutoCareProBE.dtos.ecommerce.userBuyer.UserBuyerDTO;
+import utn.frc.ps.AutoCareProBE.dtos.ecommerce.mp.MpResponse;
 import utn.frc.ps.AutoCareProBE.services.mp.MercadoPagoService;
 
 @RestController
@@ -39,8 +39,11 @@ public class MercadoPagoController {
     private String mpToken;
 
     @RequestMapping(value = "/mp", method = RequestMethod.POST)
-    public String getList(@RequestBody List<CartItemDTO> items) {
-       return mercadoPagoService.createPreference(items);
+    public MpResponse getList(@RequestBody List<CartItemDTO> items) {
+       String preference = mercadoPagoService.createPreference(items);
+        MpResponse response =  new MpResponse(preference);
+        return response;
+
     }
 
     // if(userBuyer == null) {throw new IllegalArgumentException("UserBuyer is

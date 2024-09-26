@@ -15,7 +15,6 @@ export class CartService {
   private url: string = 'http://localhost:8080/cart';
   private cartItemCount = new BehaviorSubject<number>(0);
   currentCartData: BehaviorSubject<Cart> = new BehaviorSubject<Cart>({ id: 0, userId: 0, items: [] });
-  cartPreferences: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
   cartItemCount$ = this.cartItemCount.asObservable();
 
@@ -25,7 +24,6 @@ export class CartService {
       tap((cart: Cart) => {
         this.cartItemCount.next(cart.items.length);
         this.currentCartData.next(cart);
-        this.updatePreferences(cart);
       })
     );
   }
@@ -35,7 +33,6 @@ export class CartService {
       tap((cart: Cart) => {
         this.cartItemCount.next(cart.items.length);
         this.currentCartData.next(cart);
-        this.updatePreferences(cart);
       })
     );
   }
@@ -45,7 +42,6 @@ export class CartService {
       tap((cart: Cart) => {
         this.cartItemCount.next(cart.items.length);
         this.currentCartData.next(cart);
-        this.updatePreferences(cart);
       })
     );
   }
@@ -56,7 +52,6 @@ export class CartService {
       tap((cart: Cart) => {
         this.cartItemCount.next(cart.items.length);
         this.currentCartData.next(cart);
-        this.updatePreferences(cart);
       })
     );
   }
@@ -71,16 +66,6 @@ export class CartService {
     );
   }
 
-  updatePreferences(cart: Cart) {
-    console.log('cart items desde el servicio de cart:', cart.items);
-    this.mercadoPagoService.createPreference(cart.items).subscribe({
-      next: (preferenceId) => {
-        this.cartPreferences.next(preferenceId);
-      },
-      error: (err) => {
-        console.error('Error creating preference:', err);
-      }
-    });
-  }
+ 
 
 }

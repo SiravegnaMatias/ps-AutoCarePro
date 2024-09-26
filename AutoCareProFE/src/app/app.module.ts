@@ -94,14 +94,16 @@ import { SuccessComponent } from './components/mp/success/success.component';
     FormsModule,
     SweetAlert2Module.forRoot(),
     ChartModule,
-    
-    
+
+
 
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true
   },
-  {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorService, multi: true}],
+  { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorService, multi: true },
+  { provide: Window, useValue: window },
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

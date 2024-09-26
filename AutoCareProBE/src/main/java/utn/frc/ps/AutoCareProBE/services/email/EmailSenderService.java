@@ -46,6 +46,16 @@ public class EmailSenderService {
         mailSender.send(message);
     }
 
+    public void sendBookingCanceled(String toEmail, String bookingDetails) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom("demomsbiz@gmail.com");
+        message.setTo(toEmail);
+        message.setSubject("Su resera ha sido cancelada - AutoCarePro");
+        message.setText("Por el momento no podemos concretar esta reserva, por favor intente en otra fecha/horariol:\n" + bookingDetails);
+        System.out.println("Sending booking cancelled: " + toEmail);
+        mailSender.send(message);
+    }
+
     public void sendReadyForPickupEmail(String toEmail, String bookingDetails) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("demomsbiz@gmail.com");

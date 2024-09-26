@@ -22,6 +22,7 @@
     "@sweetalert2/ngx-sweetalert2": "^12.3.0",
     "@types/mercadopago-sdk-js": "^2.0.15",
     "angular-highcharts": "^16.0.0",
+    "auto-care-pro-fe": "file:",
     "bootstrap-icons": "^1.11.3",
     "flatpickr": "^4.6.13",
     "highcharts": "^11.4.3",
