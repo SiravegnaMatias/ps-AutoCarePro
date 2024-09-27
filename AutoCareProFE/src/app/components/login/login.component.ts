@@ -12,11 +12,15 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+
+
+  showPassword: boolean = false;
   constructor(
     private fb: FormBuilder,
     private loginService: LoginService,
     private route: Router,
     private alertService:AlertService
+    
   ) { }
 
 
@@ -54,7 +58,9 @@ export class LoginComponent {
     }
   
   }
-
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;  // Alterna la visibilidad de la contraseña
+  }
   get email(){
     return this.loginForm.get('email');
   }

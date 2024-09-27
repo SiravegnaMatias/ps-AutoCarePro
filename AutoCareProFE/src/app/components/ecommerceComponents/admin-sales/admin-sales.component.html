@@ -44,7 +44,7 @@
             <td >{{order.orderId}}</td>
             <td>{{order.user.firstName}}  {{order.user.lastName}}</td>
             <td>{{order.date}}</td>
-            <td>{{order.total | currency}}</td>
+            <td>{{order.total | currency: 'AR$'}}</td>
             <td>{{order.payment}}</td>
             <td>{{order.status}}</td>
             <td><button class="btn btn-outline-secondary"(click)="seeDetail(order.orderId)">Ver</button></td>

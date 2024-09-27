@@ -39,8 +39,8 @@
                                 value="{{item.quantity}}" style="max-width: 4rem" [(ngModel)]="item.quantity"
                                 (ngModelChange)="onQuantityChange(item)">
                         </td>
-                        <td>{{item.product.price|currency}}</td>
-                        <td>{{getTotalProduct(item)|currency}}</td>
+                        <td>{{item.product.price|currency: 'AR$'}}</td>
+                        <td>{{getTotalProduct(item)|currency: 'AR$'}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -49,7 +49,7 @@
         <div class="col-lg-3 col-12">
             <div class="p-3">
                 <h4>Total a pagar</h4>
-                <p><strong>{{getTotalCart(cart)|currency}}</strong></p>
+                <p><strong>{{getTotalCart(cart)|currency: 'AR$'}}</strong></p>
 
 
                 <div class="d-grid gap-2">
@@ -80,13 +80,13 @@
                 <ul *ngFor="let item of cart.items">
                     <li class="d-flex justify-content-between">
                         <div>
-                            {{item.product.name}} {{item.product.price | currency}}
+                            {{item.product.name}} {{item.product.price | currency: 'AR$'}}
                         </div>
                         <div>X({{item.quantity}})</div>
                     </li>
                 </ul>
                 <hr>
-                <h4>Total a pagar: {{getTotalCart(cart)|currency}}</h4>
+                <h4>Total a pagar: {{getTotalCart(cart)|currency: 'AR$'}}</h4>
                 <div class="form-check">
                     <input type="checkbox" class="form-check-input" id="sucursalCheck" [(ngModel)]="isChecked">
 

@@ -12,6 +12,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class RegisterComponent implements OnInit {
 
+  showPassword: boolean = false;
   constructor(private fb: FormBuilder,
               private userService: UserService, 
                 private route: ActivatedRoute,
@@ -36,6 +37,10 @@ export class RegisterComponent implements OnInit {
     password: ['',[Validators.required, Validators.minLength(8)]],
     termsAndConditions: [false,Validators.requiredTrue]
   });
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword
+  }
 
   get address() {
     return this.registerForm.get('address');

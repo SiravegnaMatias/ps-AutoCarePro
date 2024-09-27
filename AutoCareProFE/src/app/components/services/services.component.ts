@@ -103,6 +103,12 @@ export class ServicesComponent implements OnInit {
       this.notification.somethingWentWrong('Error','No tiene vehiculos registrados, por favor registre un vehiculo antes de reservar un servicio');
       return;
     }
+    for (let index = 0; index < this.servicesSelcted.length; index++) {
+      if (this.servicesSelcted[index].name === service.name) {
+        return;
+      }
+      
+    }
     this.servicesSelcted.push(service);
   }
   deleteService(index: number) {
@@ -131,6 +137,10 @@ export class ServicesComponent implements OnInit {
 
     if(this.booking.date === '' || this.booking.date === null){
       this.notification.somethingWentWrong('Error','Por favor seleccione una fecha y hora para su reserva');
+      return;
+    }
+    if(this.servicesSelcted.length === 0){
+      this.notification.somethingWentWrong('Error','Por favor seleccione al menos un servicio');
       return;
     }
     if(this.formServices.valid){

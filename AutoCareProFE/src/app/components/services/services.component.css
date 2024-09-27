@@ -17,12 +17,16 @@
 .widget-icon {
     position: relative;
     display: inline-block;
+    background: url('../../../assets/images/acpWBlueLogo.png') ;
     width: 5rem;
     height: 5rem;
     background-color: #fff;
     border-radius: 25%;
-    border: 2px solid #fff;
+    border: 1px solid #fff;
     text-align: center;
+    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.89);
+    background-size: cover; /* La imagen cubre todo el widget */
+    background-position: center;
 }
 .icon-badget {
     position: absolute;
@@ -30,10 +34,10 @@
     left: -8px;
     background-color: red;
     color: #fff;
-    font-size: 1.25rem;
+    font-size: 1.10rem;
     font-weight: bold;
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 2rem;
+    height: 2rem;
     line-height: 18px;
     border-radius: 50%;
     text-align: center;

@@ -44,12 +44,12 @@
                 <tr *ngFor="let order of filteredOrders">
                   <td >{{order.orderId}}</td>
                   <td>{{order.date}}</td>
-                  <td>{{order.total | currency}}</td>
+                  <td>{{order.total | currency: 'AR$'}}</td>
                   <td>{{order.payment}}</td>
                   <td>{{order.status}}</td>
                   <td>
                     <ul>
-                        <li *ngFor="let product of order.products">{{product.name}}  {{product.price | currency}}</li>
+                        <li *ngFor="let product of order.products">{{product.name}}  {{product.price | currency: 'AR$'}}</li>
                     </ul>
                   </td>
                 </tr>

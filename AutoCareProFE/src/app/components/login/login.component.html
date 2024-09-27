@@ -15,8 +15,12 @@
 
 
           <label class="form-label">Contraseña</label>
-          <input type="password" class="form-control" formControlName="password"  [ngClass]="{ 'is-invalid': password?.invalid && password?.touched }">
-
+          <div class="d-flex">
+            <input [type]="showPassword ? 'text' : 'password'" class="form-control" formControlName="password"  [ngClass]="{ 'is-invalid': password?.invalid && password?.touched }">
+              <i [class]="showPassword ? 'bi bi-eye-fill' : 'bi bi-eye-slash-fill'" class="btn" (click)="togglePasswordVisibility()"></i>
+            
+          </div>
+         
           <div *ngIf="password?.touched && password?.hasError" class="danger text-danger">
             <span *ngIf="password?.getError('required')">Ingrese su contraseña</span>
           </div>

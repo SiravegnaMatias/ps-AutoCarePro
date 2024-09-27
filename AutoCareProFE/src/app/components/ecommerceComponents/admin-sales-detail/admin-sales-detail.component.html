@@ -34,14 +34,14 @@
                         <h4>Productos</h4>
                         <ul>
                             <li *ngFor="let product of order.products">
-                                <p>{{product.name}}  X({{product.quantity}})  {{product.price | currency}}</p>
+                                <p>{{product.name}}  X({{product.quantity}})  {{product.price | currency: 'AR$'}}</p>
                                 
                             </li>
                         </ul>
                     </div>
                     
                     <div class="text-end ">
-                        <p><strong>Total a pagar:</strong> {{order.total | currency}}</p>
+                        <p><strong>Total a pagar:</strong> {{order.total | currency: 'AR$'}}</p>
                     </div>
                 </div>
 

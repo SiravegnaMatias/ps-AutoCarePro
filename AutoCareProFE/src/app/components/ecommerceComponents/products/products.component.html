@@ -10,7 +10,7 @@
                        <a  class="btn btn-primary btn-custom"   (click)="addProductToCart($event, product.id)"
                        > <i class="bi bi-cart-plus"></i>
                            
-                           ${{product.price}}</a>
+                           {{product.price | currency: 'AR$'}}</a>
                    </div>
                </div>
            </div>

@@ -15,7 +15,7 @@
                 </div>
                 <div class="card-footer d-flex justify-content-between">
                     <div>
-                        {{service.price | currency}}
+                        {{service.price | currency: 'AR$'}}
                     </div>
                     <div>
                         <button class="btn btn-primary btn-sm mx-1" (click)="addService(service)">Reservar</button>
@@ -33,7 +33,7 @@
     <div class="widget-container" data-bs-toggle="modal" data-bs-target="#staticBackdropServicesSelected">
         <div class="widget">
             <span class="widget-icon">
-                <span class="icon-badget">
+                <span class="icon-badget" >
                     <div>{{servicesSelcted.length}}</div>
                 </span>
             </span>
@@ -59,8 +59,8 @@
                         <div class="row g-0">
                             <div class="col-md-8">
                                 <div class="card-body">
-                                    <h5 class="card-title">{{item.name}} - {{item.price | currency}}</h5>
-                                    <p class="card-text">{{item.description}}</p>
+                                    <h5 class="card-title">{{item.name}} - {{item.price | currency: 'AR$'}}</h5>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -75,7 +75,7 @@
                 <form style="display: block;" [formGroup]="formServices">
                     <div>
                         <label class="form-label">Total </label>
-                        <label class="form-label mx-2 "> {{getTotal() | currency}}</label>
+                        <label class="form-label mx-2 "> {{getTotal() | currency: 'AR$'}}</label>
                     </div>
                     <label class="form-label">Vehiculo</label>
                     <select class="form-select"  formControlName="vehicle">
