@@ -1,4 +1,4 @@
-<h1>Editar Servicio</h1>
+<h1>Editar Mi Vehiculo</h1>
 
 <div class="container mt-5">
     <form [formGroup]="carForm">
@@ -10,7 +10,7 @@
                     <div *ngIf="model?.touched && model?.hasError" class="danger text-danger">
                         <span *ngIf="model?.getError('required')"> Ingrese el modelo del vehiculo</span>
                         <span *ngIf="model?.getError('maxlength')"> El vehiculo no debe tener un nombre mayor a 35 caracteres</span>
-                        <span *ngIf="model?.getError('minlength')"> El Vehiculo debe tener un nombre de al menos 3 caracteres</span>
+                        <span *ngIf="model?.getError('minlength')"> El Vehiculo debe tener un nombre de al menos 2 caracteres</span>
                       </div>
                 </div>
                 <div class="mb-3">

@@ -21,9 +21,7 @@ export class ShoppingCartComponent implements OnInit {
   isChecked: boolean = true;
   cart!: Cart;
   userId!: number;
-  cartPreferences: string = ''; // Preferencia de MercadoPago
-
-  preference: string = "257122215-d885efae-d580-4274-b74e-f4e46e301d41"
+ 
   constructor(
     private alertService: AlertService,
     private cartService: CartService,
@@ -31,13 +29,13 @@ export class ShoppingCartComponent implements OnInit {
     private router: Router,
    private mercadoPagoService: MercadoPagoService,
     private loginService: LoginService
-
-
   ) { }
   ngOnInit(): void {
-
-   
     this.userId = this.loginService.currentUserData.value.id;
+    this.getCart();
+  }
+
+  getCart(){
     this.cartService.getCartByUserId(this.userId).subscribe({
       next: (cart) => {
         this.cart = cart;
@@ -46,13 +44,10 @@ export class ShoppingCartComponent implements OnInit {
         }
       },
       error: (err) => {
-
         this.alertService.somethingWentWrong('ERROR', 'Error al cargar el carrito');
       }
     });
-
   }
-
 
   getTotalProduct(item: CartItem): number {
     return item.product.price * item.quantity;
@@ -64,7 +59,6 @@ export class ShoppingCartComponent implements OnInit {
     for (let item of cart.items) {
       total += this.getTotalProduct(item);
     }
-
     return total
   }
 
@@ -72,7 +66,6 @@ export class ShoppingCartComponent implements OnInit {
     const cartRequest = { userId: this.cart.userId, productId: item.product.id };
     this.cartService.updateProductQuantity(cartRequest, item.quantity).subscribe({
       next: (cart) => {
-
       },
       error: (err) => {
         this.alertService.somethingWentWrong('ERROR', 'Error al actualizar la cantidad');
@@ -85,6 +78,7 @@ export class ShoppingCartComponent implements OnInit {
     this.cartService.deleteProduct(cartRequest).subscribe({
       next: (cart) => {
         this.alertService.succesfullLogin('Producto eliminado del carrito');
+        this.getCart();
       },
       error: (err) => {
         console.error(err);
@@ -156,57 +150,10 @@ export class ShoppingCartComponent implements OnInit {
       return;
     }
 
-    // console.log('items del carrito: ' + JSON.stringify(cartItems));
-    // this.mercadoPagoService.createPreference(cartItems).subscribe({
-    //   next: (preferenceId) => {
-
-    //     this.initMP("257122215-d885efae-d580-4274-b74e-f4e46e301d41");
-    //   },
-    //   error: (err) => {
-    //     console.error('Error processing purchase a:', err);
-    //   }
-    // });
+  
   }
 
 
-  initMP(preferenceId: string) {
-    console.log('Inicializando MercadoPago con preferenceId:', preferenceId);
-    let container = document.getElementById('wallet_container');
-    if (!container) {
-      console.error('El contenedor wallet_container no existe en el DOM.');
-      return;
-    }
-
-    let node = document.createElement('script');
-    node.src = 'https://sdk.mercadopago.com/js/v2';
-    node.onload = () => {
-      let script = document.createElement('script');
-      script.type = 'text/javascript';
-      script.text = `
-        const mp = new MercadoPago('APP_USR-2e0d0f93-83b0-42df-bace-f6be084fb036', {
-          locale: "es-AR"
-        });
-        const bricksBuilder = mp.bricks();
-
-        bricksBuilder.create("wallet", "wallet_container", {
-          initialization: {
-            preferenceId: "${this.preference}",
-            redirectMode: "blank"
-          },
-          customization: {
-            texts: {
-              valueProp: 'smart_option',
-            },
-          },
-        });
-      `;
-      document.getElementsByTagName('head')[0].appendChild(script);
-    }
-    node.onerror = (err) => {
-      console.error('Error loading MercadoPago SDK', err);
-    }
-    document.getElementsByTagName('head')[0].appendChild(node);
-  }
 
   getItems(cart: Cart): CartItem[] {
     return cart.items.map(item => {

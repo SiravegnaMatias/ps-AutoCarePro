@@ -27,7 +27,15 @@ h1{
   align-items: center;
   }
   
+
+  .cart-icon{
+    position: relative;
+  }
+  
   .badge-danger {
+    position: absolute;
+    top: -8px;
+    right: -8px;
     background-color: red;
     color: white;
   }

@@ -38,7 +38,7 @@ export class EditCarComponent implements OnInit{
 
   initForm() {
     this.carForm = this.fb.group({
-      model: ['',[Validators.required, Validators.maxLength(35),Validators.minLength(3)]],
+      model: ['',[Validators.required, Validators.maxLength(35),Validators.minLength(2)]],
       brand:['',[Validators.required, Validators.maxLength(35),Validators.minLength(1)]],
       year: [null,[Validators.required, Validators.min(1900)]],
       plate: ['',[Validators.required, Validators.maxLength(7),Validators.minLength(6)]],
