@@ -81,13 +81,6 @@ public class OrderService {
             productJpaRepository.save(productEntity);
         }
 
-        for (OrderDetailDTO detail : orderRequestDTO.getOrderDetails()) {
-            ProductEntity product = productJpaRepository.findById(detail.getProductId())
-                    .orElseThrow(() -> new RuntimeException("Product not found"));
-            product.setStock(product.getStock() - detail.getQuantity());
-            productJpaRepository.save(product);
-        }
-
         // Cambiar al implementar mp
         OrderEntity finalOrder = OrderEntity.builder()
                 .user(user)

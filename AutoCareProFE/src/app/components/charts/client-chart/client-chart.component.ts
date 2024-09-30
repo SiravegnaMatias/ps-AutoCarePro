@@ -45,7 +45,7 @@ export class ClientChartComponent implements OnInit{
         type: 'column'
       },
       title: {
-        text: 'Clientes por vehículo'
+        text: 'Cantidad de Vehiculos por cliente'
       },
       credits: {
         enabled: false
@@ -56,7 +56,7 @@ export class ClientChartComponent implements OnInit{
       },
       series: [
         {
-          name: 'Clientes',
+          name: 'Vehiculos',
           data: this.vehiclesCount,
           type: 'column'
         }

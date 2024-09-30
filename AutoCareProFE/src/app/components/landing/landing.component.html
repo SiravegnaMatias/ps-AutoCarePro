@@ -1,0 +1,92 @@
+<nav class="navbar navbar-expand-lg custom-navbar">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            AutoCarePro            
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#services" (click)="scrollToSection($event, 'services')">Servicios</a>
+                </li>
+                <li class="nav-item ">
+                   
+                    <a class="btn btn-primary pl-3" (click)="goToLogin()" style="background-color: #071950;">LogIn</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Welcome Section -->
+<section class="vh-100 d-flex align-items-center fst-screen" id="welcome">
+    <div class="container">
+        <div class="row">
+            <!-- Contenido de texto a la izquierda (o arriba en pantallas pequeñas) -->
+            <div class="col-12 col-lg-6 d-flex flex-column justify-content-center text-center " style="background-color: rgba(255, 255, 255, 0.8); padding: 20px; border-radius: 10px;">
+                <h1 class="display-4">Bienvenido a AutocarePro</h1>
+                <p>Servicio integral de estética para vehículos. Cuidamos cada detalle y garantizamos un acabado profesional que realza la apariencia del automóvil, devolviéndole su brillo y protegiéndolo contra los daños del tiempo y uso diario.</p>
+                <a (click)="goToRegister()" class="btn btn-lg btn-success" style="background-color: #071950;">Registrarse</a>
+            </div>
+            <!-- Imagen a la derecha en pantallas grandes y abajo en pantallas pequeñas -->
+            <div class="col-12 col-lg-6 d-flex justify-content-center order-1 order-lg-2">
+                <div class="image-container">
+                    <!-- Aquí va tu imagen -->
+                    <img src="../../../assets/images/acpWLogo.png" alt="Imagen de AutoCarePro" class="img-fluid" >
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Services Section --><!-- Services Section -->
+<section class="py-5 bg-light mb-5" id="services">
+    <div class="container">
+        <h2 class="text-center mb-4">Nuestros Servicios</h2>
+        <div class="row">
+            <!-- Card 1: Interior -->
+            <div class="col-12 col-md-4 mb-4">
+                <div class="card card-custom">
+                    <img src="../../../assets/images/interior.jpg" class="card-img-top" alt="Servicio Interior">
+                    <div class="card-body">
+                        <h5 class="card-title">Servicio Interior</h5>
+                        <p class="card-text">Limpieza y mantenimiento completo del interior de su vehículo.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 2: Exterior -->
+            <div class="col-12 col-md-4 mb-4">
+                <div class="card card-custom">
+                    <img src="../../../assets/images/exterior,jpg.jpeg" class="card-img-top" alt="Servicio Exterior">
+                    <div class="card-body">
+                        <h5 class="card-title">Servicio Exterior</h5>
+                        <p class="card-text">Cuidado y detallado exterior con productos de alta calidad.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 3: Motor -->
+            <div class="col-12 col-md-4 mb-4">
+                <div class="card card-custom">
+                    <img src="../../../assets/images/motor.jpeg" class="card-img-top" alt="Servicio Motor">
+                    <div class="card-body">
+                        <h5 class="card-title">Servicio Motor</h5>
+                        <p class="card-text">Revisión y mantenimiento preventivo del motor de su auto.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Footer -->
+<footer class="bg-dark text-light py-4">
+    <div class="container text-center">
+        <p>&copy; 2024 AutocarePro. Todos los derechos reservados.</p>
+    </div>
+</footer>
+

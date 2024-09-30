@@ -33,6 +33,7 @@ import { ClientChartComponent } from './components/charts/client-chart/client-ch
 import { SalesChartComponent } from './components/charts/sales-chart/sales-chart.component';
 import { ServicesChartComponent } from './components/charts/services-chart/services-chart.component';
 import { PurchaseComponent } from './components/ecommerceComponents/purchase/purchase.component';
+import { LandingComponent } from './components/landing/landing.component';
 
 const routes: Routes = [
   {
@@ -223,6 +224,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   // Puedes tener rutas adicionales aquí si es necesario
   { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'landing', component: LandingComponent}
 ];
 
 @NgModule({

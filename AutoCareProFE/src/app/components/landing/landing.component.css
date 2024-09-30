@@ -1,0 +1,38 @@
+.fst-screen {
+    background: url('../../../assets/images/acpWLogo.png') no-repeat center right; 
+    background-size: contain;
+}
+
+h1{
+    color: #000; /* Texto oscuro para contraste */
+}
+
+.custom-navbar {
+    background-color: #8a1218
+; /* Color verde personalizado */
+    color: white; /* Color del texto */
+}
+.custom-navbar .navbar-brand, .custom-navbar .nav-link, .custom-navbar .btn {
+    color: white; /* Color de los enlaces y botones */
+}
+.custom-navbar .nav-link:hover, .custom-navbar .btn:hover {
+    color: #f1f1f1; /* Color cuando se pasa el cursor */
+}
+
+h1 {
+    font-size: 3.5em;
+    font-weight: 700;
+    color: #000000;
+}
+
+
+.card-custom {
+    background-color: #2f3e4cce;
+    color: #ffffff;
+}
+
+@media (max-width: 767.98px) {
+    h1 {
+        font-size: 2rem; /* Ajusta el tamaño del título en pantallas pequeñas */
+    }
+}

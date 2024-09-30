@@ -1,34 +1,26 @@
 <h1>Mis Vehiculos</h1>
 <hr>
-<app-add-car></app-add-car>
 
-<ng-container *ngFor="let car of cars">
-    <div class="card m-3" style="background-color: var(--white); color: var(--black);">
-        <div class="card-header">
-
-            <h5 class="card-title">{{car.brand}} {{car.model}} {{car.year}}</h5>
-        </div>
-        <div class="card-body">
-            <div class="d-flex justify-content-between">
-
-                <p class="card-text">Patente: {{car.plate}}</p>
-                <p class="card-text">Tipo: {{car.carType}}</p>
-                <div class="btn btn-danger" (click)="editCar(car.id)">Editar</div>
+<div>
+    <div class="text-end container ">
+         <span class="m-3">Nuevo vehiculo</span>
+        <app-add-car></app-add-car>
+    </div>
+    
+    <ng-container *ngFor="let car of cars">
+        <div class="card m-3" style="background-color: var(--white); color: var(--black);">
+            <div class="card-header">
+    
+                <h5 class="card-title">{{car.brand}} {{car.model}} {{car.year}}</h5>
+            </div>
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+    
+                    <p class="card-text">Patente: {{car.plate}}</p>
+                    <p class="card-text">Tipo: {{car.carType}}</p>
+                    <div class="btn btn-danger" (click)="editCar(car.id)">Editar</div>
+                </div>
             </div>
         </div>
-    </div>
-</ng-container>
-<div class="card" style="width: 18rem; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 15px;">
-    <!-- Imagen del auto -->
-    <img src="https://via.placeholder.com/150" class="card-img-top" alt="Auto Detallado" style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
-    
-    <!-- Contenido de la tarjeta -->
-    <div class="card-body text-center">
-      <h5 class="card-title">Premium Car Detailing</h5>
-      <p class="card-text">El servicio más completo para mantener tu auto en las mejores condiciones.</p>
-      <h6 class="card-price mb-3">$99.99</h6>
-      <!-- Botones de acción -->
-      <a href="#" class="btn btn-primary mb-2" style="width: 100%;">Reservar Ahora</a>
-      <a href="#" class="btn btn-outline-secondary" style="width: 100%;">Más Detalles</a>
-    </div>
-  </div>
+    </ng-container>
+</div>

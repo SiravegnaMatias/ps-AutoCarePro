@@ -44,6 +44,7 @@ import { SalesChartComponent } from './components/charts/sales-chart/sales-chart
 import { ServicesChartComponent } from './components/charts/services-chart/services-chart.component';
 import { PurchaseComponent } from './components/ecommerceComponents/purchase/purchase.component';
 import { SuccessComponent } from './components/mp/success/success.component';
+import { LandingComponent } from './components/landing/landing.component';
 
 @NgModule({
   declarations: [
@@ -82,6 +83,7 @@ import { SuccessComponent } from './components/mp/success/success.component';
     ServicesChartComponent,
     PurchaseComponent,
     SuccessComponent,
+    LandingComponent,
 
 
   ],

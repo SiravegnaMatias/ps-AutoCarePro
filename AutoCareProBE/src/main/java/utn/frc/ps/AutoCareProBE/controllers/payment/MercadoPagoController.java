@@ -46,48 +46,5 @@ public class MercadoPagoController {
 
     }
 
-    // if(userBuyer == null) {throw new IllegalArgumentException("UserBuyer is
-    // required");}
-    // String title = userBuyer.getTitle();
-    // int quantity = userBuyer.getQuantity();
-    // int price = userBuyer.getUnit_price();
-
-    // try{
-    // MercadoPagoConfig.setAccessToken(mpToken);
-
-    // //1. PREFRENCIA DE VENTA
-    // PreferenceItemRequest itemRequest = PreferenceItemRequest.builder().
-    // title(title)
-    // .quantity(quantity)
-    // .unitPrice(new BigDecimal(price))
-    // .currencyId("ARS")
-    // .build();
-    // List<PreferenceItemRequest> items = new ArrayList<>();
-    // items.add(itemRequest);
-
-    // //2. Preferencia de control de sucesos
-    // PreferenceBackUrlsRequest backUrls = PreferenceBackUrlsRequest.builder()
-    // .success("http://localhost:4200/success")
-    // .failure("http://localhost:4200/failure")
-    // .pending("http://localhost:4200/pending")
-    // .build();
-
-    // //ENSAMBLE DE PREFERENCIA
-
-    // PreferenceRequest preferenceRequest = PreferenceRequest.builder()
-    // .items(items)
-    // .backUrls(backUrls)
-    // .autoReturn("approved")
-    // .build();
-
-    // //3. CREO OBJETO CLIENTE PARA COMUNICAR CON MP
-    // PreferenceClient client = new PreferenceClient();
-    // Preference preference = client.create(preferenceRequest);
-
-    // return preference.getId();
-    // }catch(MPException | MPApiException e) { System.out.println(e); return
-    // ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al crear
-    // la preferencia").toString();
-
-    // }
+   
 }

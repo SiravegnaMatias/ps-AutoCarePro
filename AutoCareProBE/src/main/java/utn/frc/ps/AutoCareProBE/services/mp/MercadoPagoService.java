@@ -52,9 +52,9 @@ public class MercadoPagoService {
 
             // 2. Preferencia de control de sucesos
             PreferenceBackUrlsRequest backUrls = PreferenceBackUrlsRequest.builder()
-                    .success("http://localhost:4200/success")
-                    .failure("http://localhost:4200/failure")
-                    .pending("http://localhost:4200/pending")
+                    .success("https://www.youtube.com/watch?v=45A_9y1ClAQ")
+                    .failure("https://www.youtube.com/watch?v=xvhcjLM9dgY")
+                    .pending("https://www.youtube.com/watch?v=vJJEVBMtOEQ")
                     .build();
 
             // ENSAMBLE DE PREFERENCIA
