@@ -1,6 +1,7 @@
 package utn.frc.ps.AutoCareProBE.services.booking;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -83,8 +84,9 @@ private EmailSenderService emailSenderService;
                                         .build();
     }
 
-        public List<BookingResponseDTO> findAllBookings() {
+    public List<BookingResponseDTO> findAllBookings() {
         List<BookingEntity> bookings = bookingJpaRepository.findAll();
+        bookings.sort(Comparator.comparing(BookingEntity::getId).reversed());
         List<BookingResponseDTO> bookingResponseDTOs = new ArrayList<>();
         
         
@@ -110,6 +112,8 @@ private EmailSenderService emailSenderService;
 
     public List<BookingResponseDTO> findAllBookingsByUserId(Long userId) {
         List<BookingEntity> bookings = bookingJpaRepository.findByUserId(userId);
+        bookings.sort(Comparator.comparing(BookingEntity::getId).reversed());
+
         List<BookingResponseDTO> bookingResponseDTOs = new ArrayList<>();
         for(BookingEntity booking : bookings){
             List<BookingDetailEntity> bookingDetailEntities =  getBookingDetails(booking);

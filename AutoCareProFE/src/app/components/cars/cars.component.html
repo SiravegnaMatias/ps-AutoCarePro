@@ -6,21 +6,37 @@
          <span class="m-3">Nuevo vehiculo</span>
         <app-add-car></app-add-car>
     </div>
-    
     <ng-container *ngFor="let car of cars">
-        <div class="card m-3" style="background-color: var(--white); color: var(--black);">
-            <div class="card-header">
-    
-                <h5 class="card-title">{{car.brand}} {{car.model}} {{car.year}}</h5>
-            </div>
-            <div class="card-body">
-                <div class="d-flex justify-content-between">
-    
-                    <p class="card-text">Patente: {{car.plate}}</p>
-                    <p class="card-text">Tipo: {{car.carType}}</p>
-                    <div class="btn btn-danger" (click)="editCar(car.id)">Editar</div>
+        <div class="card mb-3 container" style="background-color: var(--white); color: var(--black);">
+            <div class="row g-0">
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">{{car.brand}} {{car.model}} {{car.year}}</h5>
+                  <p class="card-text">Patente: {{car.plate}}</p>
+                  <p class="card-text">Tipo: {{car.carType}}</p>
+                  <div class="btn btn-danger" (click)="editCar(car.id)">Editar</div>
                 </div>
+              </div>
+              
+            </div>
+          </div>
+    </ng-container>
+    
+</div>
+<!-- 
+<ng-container *ngFor="let car of cars">
+       
+    <div class="card m-3" style="background-color: var(--white); color: var(--black);">
+        <div class="card-header">
+            <h5 class="card-title">{{car.brand}} {{car.model}} {{car.year}}</h5>
+        </div>
+        <div class="card-body">
+            <div class="d-flex justify-content-between">
+    
+                <p class="card-text">Patente: {{car.plate}}</p>
+                <p class="card-text">Tipo: {{car.carType}}</p>
+                <div class="btn btn-danger" (click)="editCar(car.id)">Editar</div>
             </div>
         </div>
-    </ng-container>
-</div>
+    </div>
+</ng-container> -->
