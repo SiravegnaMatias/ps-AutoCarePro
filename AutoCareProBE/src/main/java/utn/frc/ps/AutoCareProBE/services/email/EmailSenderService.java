@@ -2,6 +2,7 @@ package utn.frc.ps.AutoCareProBE.services.email;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import utn.frc.ps.AutoCareProBE.dtos.ecommerce.orders.OrderProductDTO;
@@ -15,6 +16,7 @@ public class EmailSenderService {
     @Autowired
     private JavaMailSender mailSender;
 
+    @Async
     public void sendRegistrationEmail(String toEmail) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("demomsbiz@gmail.com");
@@ -25,6 +27,7 @@ public class EmailSenderService {
         mailSender.send(message);
     }
 
+    @Async
     public void sendBookingConfirmationEmail(String toEmail, String bookingDetails) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("demomsbiz@gmail.com");
@@ -35,6 +38,7 @@ public class EmailSenderService {
         mailSender.send(message);
     }
 
+    @Async
     public void sendBookingApprovedEmail(String toEmail, String bookingDetails) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("demomsbiz@gmail.com");
@@ -46,6 +50,7 @@ public class EmailSenderService {
         mailSender.send(message);
     }
 
+    @Async
     public void sendBookingCanceled(String toEmail, String bookingDetails) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("demomsbiz@gmail.com");
@@ -56,6 +61,7 @@ public class EmailSenderService {
         mailSender.send(message);
     }
 
+    @Async
     public void sendReadyForPickupEmail(String toEmail, String bookingDetails) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("demomsbiz@gmail.com");
@@ -66,6 +72,7 @@ public class EmailSenderService {
         mailSender.send(message);
     }
 
+    @Async
     public void sendOrderConfirmationEmail(String toEmail, OrderResponseDTO orderResponseDTO) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("demomsbiz@gmail.com");
