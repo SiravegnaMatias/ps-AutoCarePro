@@ -11,6 +11,7 @@ import { CartService } from 'src/app/services/ecommerce/cartServices/cart.servic
 import { MercadoPagoService } from 'src/app/services/ecommerce/mercadoPago/mercado-pago.service';
 import { LoginService } from 'src/app/services/login.service';
 
+
 @Component({
   selector: 'app-shopping-cart',
   templateUrl: './shopping-cart.component.html',
@@ -21,13 +22,13 @@ export class ShoppingCartComponent implements OnInit {
   isChecked: boolean = true;
   cart!: Cart;
   userId!: number;
- 
+
   constructor(
     private alertService: AlertService,
     private cartService: CartService,
     private orderService: OrderService,
     private router: Router,
-   private mercadoPagoService: MercadoPagoService,
+    private mercadoPagoService: MercadoPagoService,
     private loginService: LoginService
   ) { }
   ngOnInit(): void {
@@ -35,11 +36,11 @@ export class ShoppingCartComponent implements OnInit {
     this.getCart();
   }
 
-  getCart(){
+  getCart() {
     this.cartService.getCartByUserId(this.userId).subscribe({
       next: (cart) => {
         this.cart = cart;
-        if(cart.items.length > 0){
+        if (cart.items.length > 0) {
           this.createPreference();
         }
       },
@@ -95,13 +96,17 @@ export class ShoppingCartComponent implements OnInit {
   buy() {
     let order: OrderRequestDTO = this.getOrder();
 
-    console.log(order);
+
     this.orderService.addOrder(order).subscribe({
       next: (res) => {
         this.alertService.succesfullLogin('Compra realizada con éxito');
         this.cartService.clearCart(this.cart.userId).subscribe({
           next: (res) => {
-            this.router.navigate(['/home/shop'])
+            this.router.navigate(['/home/shop/products']).then(() => {
+              const backdrop = document.querySelector('.modal-backdrop');
+              backdrop?.parentElement?.removeChild(backdrop);
+            });
+           
           }
         });
       },
@@ -130,7 +135,7 @@ export class ShoppingCartComponent implements OnInit {
 
   createPreference() {
     const cartItems: CartItem[] = this.cart.items;
-    console.log('estos son los cartitems'+ JSON.stringify(cartItems, null, 2))
+
     if (cartItems.length === 0) {
       console.error('El carrito está vacío. No se pueden crear preferencias sin items.');
       this.alertService.somethingWentWrong('ERROR', 'El carrito está vacío. Añade items antes de proceder.');
@@ -150,7 +155,7 @@ export class ShoppingCartComponent implements OnInit {
       return;
     }
 
-  
+
   }
 
 
