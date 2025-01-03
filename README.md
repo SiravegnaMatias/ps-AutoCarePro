@@ -1,5 +1,5 @@
 # AutoCarePro
-![Logo](autocareprofe/src/assets/images/acpLogo.png)
+![Logo](https://res.cloudinary.com/dhozqpfox/image/upload/v1735940475/acpLogo_dgwzxk.png)
 ## Descripción
 
 AutoCarePro es una aplicación web diseñada para la gestión integral de servicios de estética vehicular y una tienda en línea. Este sistema permite a los usuarios reservar servicios y realizar compras de productos. Por otro lado, proporciona herramientas eficientes para que los administradores gestionen el negocio, monitoreen reservas, analicen datos y mejoren la comunicación con los clientes. 
