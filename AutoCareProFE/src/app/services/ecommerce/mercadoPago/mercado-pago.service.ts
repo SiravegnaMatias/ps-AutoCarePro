@@ -75,7 +75,6 @@ export class MercadoPagoService {
       });
     }catch(error) {
       console.error(error);
-      this.sAlert.somethingWentWrong('ERROR', 'No se ha podido renderizar el boton')
     }
   }
 

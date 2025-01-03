@@ -8,7 +8,7 @@
   </div>
   <div>
   
-    <button class="btn btn-outline-light mx-2" routerLink="admin" *ngIf="isAuthorized(['ADMIN'])">
+    <button class="btn btn-outline-light mx-2" routerLink="admin" *ngIf="isAuthorized(['ADMIN','DETAILER'])">
       <i class="bi bi-gear"></i>
     </button>
     <button class="btn btn-outline-light " (click)="goToShoppings()">

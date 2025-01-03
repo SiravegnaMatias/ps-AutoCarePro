@@ -1,0 +1,75 @@
+# Archivos y directorios comunes
+.idea/
+*.iml
+*.log
+*.swp
+*.tmp
+*.out
+.DS_Store
+Thumbs.db
+
+# Java y Maven
+target/
+*.class
+*.jar
+*.war
+*.ear
+.mvn/
+!**/src/main/**  # Asegura no ignorar el código fuente
+
+# Configuración y archivos sensibles
+application.properties
+application.yml
+.env
+secrets.env
+config/
+
+# IntelliJ IDEA
+*.ipr
+*.iws
+.idea/
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# Sistema operativo
+*.swp
+*.swo
+*~
+
+# Archivos de Angular
+node_modules/
+dist/
+.angular/
+*.tsbuildinfo
+
+# Configuración específica de Angular
+*.env
+src/environments/environment*.ts
+
+# Logs y errores
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependencias de frontend
+package-lock.json
+yarn.lock
+
+# Archivos de build y configuración
+.build/
+out/
+coverage/
+
+# Configuración del sistema operativo
+.DS_Store
+Thumbs.db
+
+# Otros archivos innecesarios
+*.bak
+*.tmp
+*.swp
+*.swo
