@@ -43,13 +43,13 @@ Mira el video de presentación del proyecto aquí: [Video AutoCarePro](https://w
 ## Imágenes del Proyecto
 
 ### Landing
-![Landing](autocareprofe/src/assets/images/landing.png)
+![Landing](https://res.cloudinary.com/dhozqpfox/image/upload/v1735940314/landing_k5bpm3.png)
 
 ### Home services admin
-![Home services admin](autocareprofe/src/assets/images/homeservices.png)
+![Home services admin](https://res.cloudinary.com/dhozqpfox/image/upload/v1735940315/homeservices_einek4.png)
 
 ### AutoCareShop
-![AutoCareShop](autocareprofe/src/assets/images/tienda.png)
+![AutoCareShop](https://res.cloudinary.com/dhozqpfox/image/upload/v1735940315/tienda_ce55rz.png)
 
 ---
 
